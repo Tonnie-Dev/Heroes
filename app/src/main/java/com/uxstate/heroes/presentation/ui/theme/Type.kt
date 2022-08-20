@@ -1,4 +1,4 @@
-package com.uxstate.heroes.ui.theme
+package com.uxstate.heroes.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
