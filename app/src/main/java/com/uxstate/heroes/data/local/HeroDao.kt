@@ -31,4 +31,8 @@ interface HeroDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addHeroes(heroes:List<Hero>)
+
+
+    @Query("DELETE FROM hero_table")
+    suspend fun deleteAllHeroes()
 }
