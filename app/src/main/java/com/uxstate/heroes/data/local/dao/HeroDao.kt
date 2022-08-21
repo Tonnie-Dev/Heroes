@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.uxstate.heroes.data.local.entity.HeroEntity
 import com.uxstate.heroes.domain.model.Hero
 
 interface HeroDao {
@@ -22,11 +23,11 @@ interface HeroDao {
 
 */
     @Query("SELECT * FROM hero_table ORDER BY id ASC")
-    fun getAllHeroes(): PagingSource<Int, Hero>
+    fun getAllHeroes(): PagingSource<Int, HeroEntity>
 
 
     @Query("SELECT * FROM hero_table WHERE id=:id")
-    fun getSelectedHero(id:Int):Hero
+    fun getSelectedHero(id:Int):HeroEntity
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
