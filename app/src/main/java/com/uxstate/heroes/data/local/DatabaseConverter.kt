@@ -4,11 +4,13 @@ import androidx.room.TypeConverter
 
 class DatabaseConverter {
 
+
+    private val separator = ","
     //list to ROOM String
     @TypeConverter
-    fun listToRoomString(list: List<String>): String{
+    fun convertListToString(list: List<String>): String{
 
-        return list.joinToString(separator = ",")
+        return list.joinToString(separator = separator)
     }
 
            // ROOM String to list
