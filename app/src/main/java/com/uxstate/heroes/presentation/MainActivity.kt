@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.ramcosta.composedestinations.DestinationsNavHost
+import com.uxstate.heroes.presentation.screens.NavGraphs
 import com.uxstate.heroes.presentation.ui.theme.HeroesTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colors.background
                 ) {
-                    DestinationsNavHost(navGraph = NavGraphs.root)
+                   
                 }
 
 
