@@ -1,12 +1,13 @@
 package com.uxstate.heroes.data.local.dao
 
 import androidx.paging.PagingSource
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.uxstate.heroes.data.local.entity.HeroEntity
 import com.uxstate.heroes.domain.model.Hero
-
+@Dao
 interface HeroDao {
 /*The key represents the actual page number, hero will be the actual
  object which we want to receive from ROOM Database

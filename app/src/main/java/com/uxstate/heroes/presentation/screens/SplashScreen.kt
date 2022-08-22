@@ -9,13 +9,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.uxstate.heroes.R
 import com.uxstate.heroes.presentation.ui.theme.Purple500
 import com.uxstate.heroes.presentation.ui.theme.Purple700
 
+@RootNavGraph(start = true)
+@Destination
 @Composable
 fun SplashScreen() {
-
+Splash()
 }
 
 @Composable
@@ -32,11 +38,23 @@ fun Splash() {
                             )
                     )
                     .fillMaxSize(),
-            
+
             contentAlignment = Alignment.Center
-    ){
-        
-        Image(painter = painterResource(id = R.drawable.ic_logo), contentDescription = )
-        
+    ) {
+
+        Image(
+                painter = painterResource(id = R.drawable.ic_logo),
+                contentDescription = stringResource(
+                        R.string.app_logo
+                )
+        )
+
     }
+}
+
+
+@Preview(name = "SplashScreen")
+@Composable
+fun SplashScreenPreview() {
+
 }
