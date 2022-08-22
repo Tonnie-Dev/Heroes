@@ -2,6 +2,7 @@ package com.uxstate.heroes.presentation.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.uxstate.heroes.R
+import com.uxstate.heroes.presentation.ui.theme.Purple200
 import com.uxstate.heroes.presentation.ui.theme.Purple500
 import com.uxstate.heroes.presentation.ui.theme.Purple700
 
@@ -27,13 +29,15 @@ Splash()
 @Composable
 fun Splash() {
 
+    if (isSystemInDarkTheme()){} else{}
+
     Box(
             modifier = Modifier
                     .background(
                             brush = Brush.verticalGradient(
                                     listOf(
                                             Purple700,
-                                            Purple500
+                                            Purple200
                                     )
                             )
                     )
@@ -53,7 +57,7 @@ fun Splash() {
 }
 
 
-@Preview(name = "SplashScreen")
+@Preview()
 @Composable
 fun SplashScreenPreview() {
 
