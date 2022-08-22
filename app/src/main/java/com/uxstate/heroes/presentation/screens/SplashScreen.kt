@@ -1,5 +1,7 @@
 package com.uxstate.heroes.presentation.screens
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.window.SplashScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -84,8 +86,17 @@ fun Splash() {
 }
 
 
-@Preview()
+@Preview(name ="Light")
 @Composable
-fun SplashScreenPreview() {
-
+fun SplashScreenPreviewLight() {
+SplashScreen()
 }
+
+@Preview(name = "Dark", uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun SplashScreenPreviewDark() {
+    SplashScreen()
+}
+
+
+
