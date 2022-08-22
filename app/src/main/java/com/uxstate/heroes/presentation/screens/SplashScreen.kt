@@ -2,14 +2,19 @@ package com.uxstate.heroes.presentation.screens
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.window.SplashScreen
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -25,11 +30,21 @@ import com.uxstate.heroes.presentation.ui.theme.Purple700
 @Destination
 @Composable
 fun SplashScreen() {
-    Splash()
+
+    //create animatable rotation
+
+    val rotation = remember{ Animatable(initialValue = 0f)}
+
+    //launched effect with true key to trigger once
+    LaunchedEffect(key1 = true, block = {
+
+        rotation.animateTo(targetValue = 360f, animationSpec = tween(durationMillis = 1000, delayMillis = 200))
+    })
+    Splash(rotation.value)
 }
 
 @Composable
-fun Splash() {
+fun Splash(rotation:Float) {
 
     if (isSystemInDarkTheme()) {
         //Light Theme
@@ -42,7 +57,7 @@ fun Splash() {
                 contentAlignment = Alignment.Center
         ) {
 
-            Image(
+            Image(modifier = Modifier.rotate(rotation),
                     painter = painterResource(id = R.drawable.ic_logo),
                     contentDescription = stringResource(
                             R.string.app_logo
@@ -56,6 +71,7 @@ fun Splash() {
 
         //Dark Theme
         Box(
+
                 modifier = Modifier
                         .background(
                                 brush = Brush.verticalGradient(
@@ -65,7 +81,7 @@ fun Splash() {
                                         )
                                 )
                         )
-                        .fillMaxSize(),
+                        .fillMaxSize().rotate(rotation),
 
                 contentAlignment = Alignment.Center
         ) {
