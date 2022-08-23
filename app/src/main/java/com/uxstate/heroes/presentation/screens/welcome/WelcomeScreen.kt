@@ -130,3 +130,16 @@ fun SecondOnboardingScreenPreview() {
     }
 
 }
+
+
+@Preview(name = "Third")
+@Composable
+fun ThirdOnboardingScreenPreview() {
+
+    Column(modifier = Modifier.fillMaxSize()) {
+
+        PagerScreen(onboardingPage = OnboardingPage.ThirdPage)
+
+    }
+
+}
