@@ -48,7 +48,7 @@ fun WelcomeScreen() {
         HorizontalPager(
                 count = Constants.ON_BOARDING_PAGE_COUNT,
                 state = state,
-                verticalAlignment = Alignment.Top
+                verticalAlignment = Alignment.Bottom
         ) {
             /*whenever we scroll sideways the page variable changes
             displaying the corresponding page */
@@ -66,11 +66,12 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
     Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Top
     ) {
 
 
         Image(
+                modifier = Modifier.fillMaxWidth(.5f).fillMaxHeight(.7f),
                 painter = painterResource(id = onboardingPage.image),
                 contentDescription = stringResource(
                         R.string.onboarding_image
@@ -80,8 +81,7 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
 
         //Title
         Text( modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = spacing.spaceLarge),
+                .fillMaxWidth(),
                 text = onboardingPage.title,
                 color = MaterialTheme.colors.titleColor,
                 fontSize = MaterialTheme.typography.h4.fontSize,
