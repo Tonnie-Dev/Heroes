@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +24,7 @@ import com.uxstate.heroes.presentation.ui.theme.descriptionColor
 import com.uxstate.heroes.presentation.ui.theme.titleColor
 import com.uxstate.heroes.presentation.ui.theme.welcomeScreenBackgroundColor
 import com.uxstate.heroes.util.Constants
+import com.uxstate.heroes.util.LocalSpacing
 
 @OptIn(ExperimentalPagerApi::class)
 @RootNavGraph(start = true)
@@ -60,9 +62,10 @@ fun WelcomeScreen() {
 @Composable
 fun PagerScreen(onboardingPage: OnboardingPage) {
 
+    val spacing = LocalSpacing.current
 
     Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(spacing.medium),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
     ) {
