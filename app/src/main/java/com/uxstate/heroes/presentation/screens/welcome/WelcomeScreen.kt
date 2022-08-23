@@ -6,15 +6,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.uxstate.heroes.R
+import com.uxstate.heroes.presentation.ui.theme.titleColor
 import com.uxstate.heroes.presentation.ui.theme.welcomeScreenBackgroundColor
 import com.uxstate.heroes.util.Constants
 
@@ -62,7 +67,14 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
     ) {
 
 
-        Image(painter = painterResource(id = onboardingPage.) , contentDescription = )
+        Image(
+                painter = painterResource(id = onboardingPage.image),
+                contentDescription = stringResource(
+                        R.string.onboarding_image
+                )
+        )
+
+       
     }
 
 }
