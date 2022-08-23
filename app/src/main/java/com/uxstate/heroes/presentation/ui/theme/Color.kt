@@ -39,3 +39,7 @@ get() = if (this.isLight) Purple500 else Purple700
 
 val Colors.inactiveColorIndicator
 get() = if (this.isLight) LightGray else DarkGray
+
+
+val Colors.buttonBackgroundColor
+get() = if (this.isLight) Purple700 else Purple500

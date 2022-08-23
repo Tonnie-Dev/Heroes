@@ -51,7 +51,7 @@ fun WelcomeScreen() {
                 count = Constants.ON_BOARDING_PAGE_COUNT,
                 state = state,
                 verticalAlignment = Alignment.Bottom,
-                modifier = Modifier.weight(.9f)
+                modifier = Modifier.weight(.8f)
         ) {
             /*whenever we scroll sideways the page variable changes
             displaying the corresponding page */
@@ -70,6 +70,12 @@ fun WelcomeScreen() {
                         .weight(.1f)
                         .align(CenterHorizontally)
         )
+        
+        //Finish Button
+        
+        FinishButton(pagerState = state, modifier = Modifier.weight(.1f)) {
+            
+        }
     }
 }
 
@@ -80,7 +86,7 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
 
     Column(
             modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = CenterHorizontally,
             verticalArrangement = Arrangement.Top
     ) {
 
@@ -130,14 +136,14 @@ fun FinishButton(modifier: Modifier = Modifier, pagerState: PagerState, onClick:
 
     val spacing = LocalSpacing.current
     Row(
-            modifier = modifier.padding(horizontal = spacing.spaceExtraLarge),
+            modifier = modifier,
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Top
     ) {
 
         //set boolean to the last page
-       AnimatedVisibility(visible = pagerState.currentPage ==2, modifier = Modifier.padding(spacing.spaceExtraLarge)) {
-           Button(onClick = onClick) {
+       AnimatedVisibility(visible = pagerState.currentPage ==2, ) {
+           Button(onClick = onClick, modifier = Modifier.fillMaxWidth().padding(horizontal = spacing.spaceExtraLarge)) {
 
                Text(text = "Finish")
            }
