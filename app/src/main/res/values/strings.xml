@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Heroes</string>
     <string name="app_logo">App Logo</string>
+    <string name="greetings_title">Greetings</string>
 </resources>
