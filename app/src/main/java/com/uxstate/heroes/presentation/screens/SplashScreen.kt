@@ -1,7 +1,6 @@
 package com.uxstate.heroes.presentation.screens
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.window.SplashScreen
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -33,18 +32,21 @@ fun SplashScreen() {
 
     //create animatable rotation
 
-    val rotation = remember{ Animatable(initialValue = 0f)}
+    val rotation = remember { Animatable(initialValue = 0f) }
 
     //launched effect with true key to trigger once
     LaunchedEffect(key1 = true, block = {
 
-        rotation.animateTo(targetValue = 360f, animationSpec = tween(durationMillis = 1000, delayMillis = 200))
+        rotation.animateTo(
+                targetValue = 360f,
+                animationSpec = tween(durationMillis = 1000, delayMillis = 200)
+        )
     })
     Splash(rotation.value)
 }
 
 @Composable
-fun Splash(rotation:Float) {
+fun Splash(rotation: Float) {
 
     if (isSystemInDarkTheme()) {
         //Light Theme
@@ -57,7 +59,8 @@ fun Splash(rotation:Float) {
                 contentAlignment = Alignment.Center
         ) {
 
-            Image(modifier = Modifier.rotate(rotation),
+            Image(
+                    modifier = Modifier.rotate(rotation),
                     painter = painterResource(id = R.drawable.ic_logo),
                     contentDescription = stringResource(
                             R.string.app_logo
@@ -81,7 +84,8 @@ fun Splash(rotation:Float) {
                                         )
                                 )
                         )
-                        .fillMaxSize().rotate(rotation),
+                        .fillMaxSize()
+                        .rotate(rotation),
 
                 contentAlignment = Alignment.Center
         ) {
@@ -102,10 +106,10 @@ fun Splash(rotation:Float) {
 }
 
 
-@Preview(name ="Light")
+@Preview(name = "Light")
 @Composable
 fun SplashScreenPreviewLight() {
-SplashScreen()
+    SplashScreen()
 }
 
 @Preview(name = "Dark", uiMode = UI_MODE_NIGHT_YES)
