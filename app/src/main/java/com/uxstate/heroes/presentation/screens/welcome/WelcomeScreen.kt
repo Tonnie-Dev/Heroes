@@ -12,6 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -78,7 +79,9 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
 
 
         //Title
-        Text( modifier = Modifier.fillMaxWidth().padding(top = spacing.spaceLarge),
+        Text( modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = spacing.spaceLarge),
                 text = onboardingPage.title,
                 color = MaterialTheme.colors.titleColor,
                 fontSize = MaterialTheme.typography.h4.fontSize,
@@ -88,7 +91,10 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
 
         //Description
         Text(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = spacing.spaceLarge).padding(top = spacing.spaceSmall),
+                modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = spacing.spaceLarge)
+                        .padding(top = spacing.spaceSmall),
                 text = onboardingPage.description,
                 color = MaterialTheme.colors.descriptionColor,
                 fontSize = MaterialTheme.typography.subtitle1.fontSize,
@@ -97,4 +103,17 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
         )
     }
 
+}
+
+
+@Preview(name = "First")
+@Composable
+fun FirstOnboardingScreenPreview() {
+    
+    Column(modifier = Modifier.fillMaxSize()) {
+        
+        PagerScreen(onboardingPage = OnboardingPage.FirstPage)
+        
+    }
+    
 }
