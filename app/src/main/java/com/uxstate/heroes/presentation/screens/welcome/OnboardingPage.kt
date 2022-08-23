@@ -3,7 +3,7 @@ package com.uxstate.heroes.presentation.screens.welcome
 import androidx.annotation.DrawableRes
 import com.uxstate.heroes.R
 
-sealed class OnboardingPage(@DrawableRes image: Int, title: String, description: String){
+sealed class OnboardingPage(@DrawableRes val image: Int, val title: String, val description: String){
 
 
     object FirstPage : OnboardingPage(R.drawable.greetings,"Greetings", "Are you a Boruto Fan? Because if you are we have great news for you!")
