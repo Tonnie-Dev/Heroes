@@ -1,5 +1,6 @@
 package com.uxstate.heroes.presentation.screens.welcome
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -134,10 +135,13 @@ fun FinishButton(modifier: Modifier = Modifier, pagerState: PagerState, onClick:
             verticalAlignment = Top
     ) {
 
-        Button(onClick = onClick) {
-            
-            Text(text = "Finish")
-        }
+        //set boolean to the last page
+       AnimatedVisibility(visible = pagerState.currentPage ==2, modifier = Modifier.padding(spacing.spaceExtraLarge)) {
+           Button(onClick = onClick) {
+
+               Text(text = "Finish")
+           }
+       }
     }
 }
 
