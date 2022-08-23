@@ -78,11 +78,12 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
 
 
         //Title
-        Text(
+        Text( modifier = Modifier.fillMaxWidth().padding(top = spacing.spaceLarge),
                 text = onboardingPage.title,
                 color = MaterialTheme.colors.titleColor,
                 fontSize = MaterialTheme.typography.h4.fontSize,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
         )
 
         //Description
