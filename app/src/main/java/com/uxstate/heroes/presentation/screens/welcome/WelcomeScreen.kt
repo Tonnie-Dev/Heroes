@@ -40,3 +40,8 @@ fun WelcomeScreen() {
         }
     }
 }
+
+@Composable
+fun PagerScreen(onboardingPage: OnboardingPage) {
+    
+}
