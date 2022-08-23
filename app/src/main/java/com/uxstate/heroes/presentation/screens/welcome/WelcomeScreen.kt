@@ -2,10 +2,7 @@ package com.uxstate.heroes.presentation.screens.welcome
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -65,7 +63,7 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
     val spacing = LocalSpacing.current
 
     Column(
-            modifier = Modifier.fillMaxSize().padding(spacing.medium),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
     ) {
@@ -89,10 +87,12 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
 
         //Description
         Text(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = spacing.spaceLarge).padding(top = spacing.spaceSmall),
                 text = onboardingPage.description,
                 color = MaterialTheme.colors.descriptionColor,
                 fontSize = MaterialTheme.typography.subtitle1.fontSize,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
+                textAlign = TextAlign.Center
         )
     }
 
