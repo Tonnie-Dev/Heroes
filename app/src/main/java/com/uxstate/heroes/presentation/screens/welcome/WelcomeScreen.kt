@@ -74,7 +74,12 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
                 )
         )
 
-       
+        Text(
+                text = onboardingPage.title,
+                color = MaterialTheme.colors.titleColor,
+                fontSize = MaterialTheme.typography.h4.fontSize,
+                fontWeight = FontWeight.Bold
+        )
     }
 
 }
