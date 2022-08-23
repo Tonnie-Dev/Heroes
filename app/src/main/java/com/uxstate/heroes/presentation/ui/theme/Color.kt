@@ -36,3 +36,6 @@ val Colors.descriptionColor
 val Colors.activeColorIndicator
 get() = if (this.isLight) Purple500 else Purple700
 
+
+val Colors.inactiveColorIndicator
+get() = if (this.isLight) LightGray else DarkGray
