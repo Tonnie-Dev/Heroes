@@ -19,6 +19,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.uxstate.heroes.R
+import com.uxstate.heroes.presentation.ui.theme.descriptionColor
 import com.uxstate.heroes.presentation.ui.theme.titleColor
 import com.uxstate.heroes.presentation.ui.theme.welcomeScreenBackgroundColor
 import com.uxstate.heroes.util.Constants
@@ -74,11 +75,21 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
                 )
         )
 
+
+        //Title
         Text(
                 text = onboardingPage.title,
                 color = MaterialTheme.colors.titleColor,
                 fontSize = MaterialTheme.typography.h4.fontSize,
                 fontWeight = FontWeight.Bold
+        )
+
+        //Description
+        Text(
+                text = onboardingPage.description,
+                color = MaterialTheme.colors.descriptionColor,
+                fontSize = MaterialTheme.typography.subtitle1.fontSize,
+                fontWeight = FontWeight.Medium
         )
     }
 
