@@ -117,3 +117,16 @@ fun FirstOnboardingScreenPreview() {
     }
     
 }
+
+
+@Preview(name = "Second")
+@Composable
+fun SecondOnboardingScreenPreview() {
+
+    Column(modifier = Modifier.fillMaxSize()) {
+
+        PagerScreen(onboardingPage = OnboardingPage.SecondPage)
+
+    }
+
+}
