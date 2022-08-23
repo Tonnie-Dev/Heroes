@@ -3,21 +3,20 @@ package com.uxstate.heroes.presentation.screens.welcome
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.Top
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.HorizontalPagerIndicator
-import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.pager.*
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.uxstate.heroes.R
@@ -66,7 +65,9 @@ fun WelcomeScreen() {
                 inactiveColor = MaterialTheme.colors.inactiveColorIndicator,
                 indicatorWidth = spacing.spaceMedium,
                 spacing = spacing.spaceSmall,
-                modifier = Modifier.weight(.1f).align(CenterHorizontally)
+                modifier = Modifier
+                        .weight(.1f)
+                        .align(CenterHorizontally)
         )
     }
 }
@@ -95,8 +96,9 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
 
 
         //Title
-        Text( modifier = Modifier
-                .fillMaxWidth(),
+        Text(
+                modifier = Modifier
+                        .fillMaxWidth(),
                 text = onboardingPage.title,
                 color = MaterialTheme.colors.titleColor,
                 fontSize = MaterialTheme.typography.h4.fontSize,
@@ -121,16 +123,34 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
 }
 
 
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun FinishButton(modifier: Modifier = Modifier, pagerState: PagerState, onClick: () -> Unit) {
+
+    val spacing = LocalSpacing.current
+    Row(
+            modifier = modifier.padding(horizontal = spacing.spaceExtraLarge),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Top
+    ) {
+
+        Button(onClick = onClick) {
+            
+            Text(text = "Finish")
+        }
+    }
+}
+
 @Preview(name = "First")
 @Composable
 fun FirstOnboardingScreenPreview() {
-    
+
     Column(modifier = Modifier.fillMaxSize()) {
-        
+
         PagerScreen(onboardingPage = OnboardingPage.FirstPage)
-        
+
     }
-    
+
 }
 
 
