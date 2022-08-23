@@ -30,3 +30,9 @@ val Colors.descriptionColor
     @Composable
     get() = if (isLight) DarkGray.copy(alpha = 0.5f)
     else LightGray.copy(alpha = 0.5f)
+
+
+
+val Colors.activeColorIndicator
+get() = if (this.isLight) Purple500 else Purple700
+
