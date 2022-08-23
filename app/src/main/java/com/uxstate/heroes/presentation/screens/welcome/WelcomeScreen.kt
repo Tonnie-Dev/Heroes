@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.Top
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -70,11 +72,11 @@ fun WelcomeScreen() {
                         .weight(.1f)
                         .align(CenterHorizontally)
         )
-        
+
         //Finish Button
-        
+
         FinishButton(pagerState = state, modifier = Modifier.weight(.1f)) {
-            
+
         }
     }
 }
@@ -142,12 +144,19 @@ fun FinishButton(modifier: Modifier = Modifier, pagerState: PagerState, onClick:
     ) {
 
         //set boolean to the last page
-       AnimatedVisibility(visible = pagerState.currentPage ==2, ) {
-           Button(onClick = onClick, modifier = Modifier.fillMaxWidth().padding(horizontal = spacing.spaceExtraLarge)) {
+        AnimatedVisibility(visible = pagerState.currentPage == 2) {
+            Button(
+                    onClick = onClick,
+                    colors = ButtonDefaults.buttonColors(
+                            backgroundColor = MaterialTheme.colors.buttonBackgroundColor,
+                            contentColor = Color.White
+                    ),
+                            modifier = Modifier . fillMaxWidth ().padding(horizontal = spacing.spaceExtraLarge)
+            ) {
 
-               Text(text = "Finish")
-           }
-       }
+                Text(text = "Finish")
+            }
+        }
     }
 }
 
