@@ -15,13 +15,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.uxstate.heroes.R
-import com.uxstate.heroes.presentation.ui.theme.descriptionColor
-import com.uxstate.heroes.presentation.ui.theme.titleColor
-import com.uxstate.heroes.presentation.ui.theme.welcomeScreenBackgroundColor
+import com.uxstate.heroes.presentation.ui.theme.*
 import com.uxstate.heroes.util.Constants
 import com.uxstate.heroes.util.LocalSpacing
 
@@ -30,6 +29,8 @@ import com.uxstate.heroes.util.LocalSpacing
 @Destination
 @Composable
 fun WelcomeScreen() {
+
+    val spacing = LocalSpacing.current
 
     // the state object to be used to control or observe the pager's state.
     val state = rememberPagerState()
@@ -55,6 +56,15 @@ fun WelcomeScreen() {
             page ->
             PagerScreen(onboardingPage = pages[page])
         }
+
+        //HorizontalPagerIndicator which is part of Accompanist Lib
+        HorizontalPagerIndicator(
+                pagerState = state,
+                activeColor = MaterialTheme.colors.activeColorIndicator,
+                inactiveColor = MaterialTheme.colors.inactiveColorIndicator,
+                indicatorWidth = spacing.spaceMedium,
+                spacing = spacing.spaceSmall
+        )
     }
 }
 
@@ -71,7 +81,9 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
 
 
         Image(
-                modifier = Modifier.fillMaxWidth(.5f).fillMaxHeight(.7f),
+                modifier = Modifier
+                        .fillMaxWidth(.5f)
+                        .fillMaxHeight(.7f),
                 painter = painterResource(id = onboardingPage.image),
                 contentDescription = stringResource(
                         R.string.onboarding_image
