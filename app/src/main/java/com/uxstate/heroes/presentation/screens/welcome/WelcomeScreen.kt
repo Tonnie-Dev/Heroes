@@ -7,6 +7,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -49,7 +50,8 @@ fun WelcomeScreen() {
         HorizontalPager(
                 count = Constants.ON_BOARDING_PAGE_COUNT,
                 state = state,
-                verticalAlignment = Alignment.Bottom
+                verticalAlignment = Alignment.Bottom,
+                modifier = Modifier.weight(.9f)
         ) {
             /*whenever we scroll sideways the page variable changes
             displaying the corresponding page */
@@ -63,7 +65,8 @@ fun WelcomeScreen() {
                 activeColor = MaterialTheme.colors.activeColorIndicator,
                 inactiveColor = MaterialTheme.colors.inactiveColorIndicator,
                 indicatorWidth = spacing.spaceMedium,
-                spacing = spacing.spaceSmall
+                spacing = spacing.spaceSmall,
+                modifier = Modifier.weight(.1f).align(CenterHorizontally)
         )
     }
 }
