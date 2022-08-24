@@ -8,6 +8,7 @@ object Constants {
     const val ONBOARDING_PAGE_COUNT = 3
     const val LAST_ONBOARDING_PAGE = 2
     const val PREFERENCES_NAME= "hero_prefs"
+    const val COMPLETED_ONBOARDING_PREF_KEY ="onboarding_completed"
 
 
 }
