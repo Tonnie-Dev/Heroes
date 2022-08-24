@@ -50,7 +50,7 @@ fun WelcomeScreen() {
         //A horizontally scrolling layout that allows users to
         // flip between items to the left and right.
         HorizontalPager(
-                count = Constants.ON_BOARDING_PAGE_COUNT,
+                count = Constants.ONBOARDING_PAGE_COUNT,
                 state = state,
                 verticalAlignment = Alignment.Bottom,
                 modifier = Modifier.weight(.8f)
