@@ -144,7 +144,7 @@ fun FinishButton(modifier: Modifier = Modifier, pagerState: PagerState, onClick:
     ) {
 
         //set boolean to the last page
-        AnimatedVisibility(visible = pagerState.currentPage == 2) {
+        AnimatedVisibility(visible = pagerState.currentPage == Constants.LAST_ONBOARDING_PAGE) {
             Button(
                     onClick = onClick,
                     colors = ButtonDefaults.buttonColors(
