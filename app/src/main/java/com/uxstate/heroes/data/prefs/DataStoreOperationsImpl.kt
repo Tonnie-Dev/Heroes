@@ -1,34 +1,43 @@
 package com.uxstate.heroes.data.prefs
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import com.uxstate.heroes.domain.repository.DataStoreOperations
 import com.uxstate.heroes.util.Constants
 import kotlinx.coroutines.flow.Flow
-
-
-
-
+import kotlinx.coroutines.flow.map
 
 
 //extension variable from DataStore
-val Context.dataStore by preferencesDataStore(name =
-Constants.PREFERENCES_NAME)
+val Context.dataStore by preferencesDataStore(
+        name =
+        Constants.PREFERENCES_NAME
+)
 
+//pass context to the impl class
+class DataStoreOperationsImpl(context: Context) : DataStoreOperations {
 
-private val COUNTER_KEY = intPreferencesKey("counter_key")
+    //create a private key object
+    private object PrefKeysObject {
 
-
-
-class DataStoreOperationsImpl : DataStoreOperations {
-    override suspend fun saveOnBoardingState(isCompleted: Boolean) {
-        TODO("Not yet implemented")
+        val onboardingKey =
+            booleanPreferencesKey(Constants.COMPLETED_ONBOARDING_PREF_KEY)
     }
 
+    //create an instance of the DataStore
+    private val dataStore = context.dataStore
+
+
+    override suspend fun saveOnBoardingState(isCompleted: Boolean) {
+        dataStore.edit { prefs -> prefs[PrefKeysObject.onboardingKey] = isCompleted }
+    }
+
+
     override fun readOnBoardingState(): Flow<Boolean> {
-        TODO("Not yet implemented")
+        //to read data by accessing the data property from database instance
+        return dataStore.data.map { prefs -> prefs[onboardingke] }
+
     }
 }

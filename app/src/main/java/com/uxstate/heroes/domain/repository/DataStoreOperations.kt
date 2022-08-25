@@ -5,6 +5,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface DataStoreOperations {
 
-    suspend fun saveOnBoardingState(isCompleted:Boolean)
+
+    //2 functions to interact with DataStore
+    suspend fun saveOnBoardingState(isCompleted: Boolean)
     fun readOnBoardingState(): Flow<Boolean>
+
 }
+
+
+
+
