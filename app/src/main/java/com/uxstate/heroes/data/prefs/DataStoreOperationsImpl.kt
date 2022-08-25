@@ -3,11 +3,14 @@ package com.uxstate.heroes.data.prefs
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.uxstate.heroes.domain.repository.DataStoreOperations
 import com.uxstate.heroes.util.Constants
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import java.io.IOException
 
 
 //extension variable from DataStore
@@ -31,13 +34,36 @@ class DataStoreOperationsImpl(context: Context) : DataStoreOperations {
 
 
     override suspend fun saveOnBoardingState(isCompleted: Boolean) {
-        dataStore.edit { prefs -> prefs[PrefKeysObject.onboardingKey] = isCompleted }
+        dataStore.edit { prefs ->
+
+            prefs[PrefKeysObject.onboardingKey] = isCompleted
+
+        }
     }
 
 
+
+
     override fun readOnBoardingState(): Flow<Boolean> {
-        //to read data by accessing the data property from database instance
-        return dataStore.data.map { prefs -> prefs[onboardingke] }
+
+       // read data by accessing the data property from datastore instance
+        return dataStore.data.
+        //catch exception
+        catch { exception ->
+
+            if (exception is IOException){emit(emptyPreferences())}else {
+                throw exception
+            }
+
+            //map Flow<Preferences>
+        }.map {  prefs ->
+
+            //map and retrieve the saved value from preferences flow
+            val onboardingStatus = prefs[PrefKeysObject.onboardingKey] ?: false
+
+            //map return value
+            onboardingStatus
+        }
 
     }
 }
