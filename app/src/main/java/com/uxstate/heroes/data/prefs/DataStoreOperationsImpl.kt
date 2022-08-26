@@ -1,11 +1,10 @@
-package com.uxstate.heroes.data.repository
+package com.uxstate.heroes.data.prefs
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.uxstate.heroes.domain.repository.DataStoreOperations
 import com.uxstate.heroes.util.Constants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

@@ -1,4 +1,4 @@
-package com.uxstate.heroes.domain.repository
+package com.uxstate.heroes.data.prefs
 
 import kotlinx.coroutines.flow.Flow
 
