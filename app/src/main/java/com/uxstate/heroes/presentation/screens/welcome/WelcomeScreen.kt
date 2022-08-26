@@ -20,11 +20,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.*
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.R
+import com.uxstate.heroes.presentation.screens.destinations.HomeScreenDestination
 import com.uxstate.heroes.presentation.ui.theme.*
 import com.uxstate.heroes.util.Constants
 import com.uxstate.heroes.util.LocalSpacing
@@ -32,7 +32,7 @@ import com.uxstate.heroes.util.LocalSpacing
 @OptIn(ExperimentalPagerApi::class)
 @Destination
 @Composable
-fun WelcomeScreen(viewModel: WelcomeViewModel = hiltViewModel()) {
+fun WelcomeScreen(viewModel: WelcomeViewModel = hiltViewModel(), navigator: DestinationsNavigator) {
 
     val spacing = LocalSpacing.current
 
@@ -79,7 +79,8 @@ fun WelcomeScreen(viewModel: WelcomeViewModel = hiltViewModel()) {
         FinishButton(pagerState = state, modifier = Modifier.weight(.1f)) {
 
             viewModel.saveOnboardingState(true)
-
+            navigator.popBackStack()
+            navigator.navigate(HomeScreenDestination)
         }
     }
 }
@@ -154,9 +155,9 @@ fun FinishButton(modifier: Modifier = Modifier, pagerState: PagerState, onClick:
                             backgroundColor = MaterialTheme.colors.buttonBackgroundColor,
                             contentColor = Color.White
                     ),
-                            modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = spacing.spaceExtraLarge)
+                    modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = spacing.spaceExtraLarge)
             ) {
 
                 Text(text = "Finish")

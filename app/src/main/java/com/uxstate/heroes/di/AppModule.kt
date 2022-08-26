@@ -30,7 +30,6 @@ object AppModule {
 
     @Provides
     @Singleton
-
     fun provideUseCaseWrapperClass(repository: HeroRepository): UseCaseWrapper {
 
 

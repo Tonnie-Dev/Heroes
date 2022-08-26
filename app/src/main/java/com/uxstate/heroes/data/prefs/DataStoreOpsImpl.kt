@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.uxstate.heroes.util.Constants
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -20,7 +21,7 @@ val Context.dataStore by preferencesDataStore(
 )
 
 //pass context to the impl class
-class DataStoreOpsImpl @Inject constructor(context: Context) : DataStoreOps {
+class DataStoreOpsImpl @Inject constructor(@ApplicationContext context: Context) : DataStoreOps {
 
     //create a private key object
     private object PrefKeysObject {
