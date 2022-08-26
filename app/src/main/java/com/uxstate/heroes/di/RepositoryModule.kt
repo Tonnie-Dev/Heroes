@@ -24,6 +24,14 @@ abstract class RepositoryModule {
 
     abstract fun provideDataStoreOperations(dataStoreOperationsImpl:DataStoreOpsImpl): DataStoreOps
 
+
+    //REPOSITORY
+    @Binds //@Binds used for 1-to-1 interface-implementation mapping
+    @Singleton
+
+    /*The abstract function takes only a single parameter which
+    is the interface implementation and the return type is the
+    interface implemented by the given parameter object.*/
     abstract fun provideHeroRepository(heroRepositoryImpl: HeroRepositoryImpl):HeroRepository
 
 }
