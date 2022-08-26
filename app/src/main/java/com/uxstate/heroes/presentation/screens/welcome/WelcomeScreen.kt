@@ -19,6 +19,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.*
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
@@ -28,10 +30,9 @@ import com.uxstate.heroes.util.Constants
 import com.uxstate.heroes.util.LocalSpacing
 
 @OptIn(ExperimentalPagerApi::class)
-@RootNavGraph(start = true)
 @Destination
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(viewModel: WelcomeViewModel = hiltViewModel()) {
 
     val spacing = LocalSpacing.current
 
@@ -76,6 +77,8 @@ fun WelcomeScreen() {
         //Finish Button
 
         FinishButton(pagerState = state, modifier = Modifier.weight(.1f)) {
+
+            viewModel.saveOnboardingState(true)
 
         }
     }
@@ -151,7 +154,9 @@ fun FinishButton(modifier: Modifier = Modifier, pagerState: PagerState, onClick:
                             backgroundColor = MaterialTheme.colors.buttonBackgroundColor,
                             contentColor = Color.White
                     ),
-                            modifier = Modifier . fillMaxWidth ().padding(horizontal = spacing.spaceExtraLarge)
+                            modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = spacing.spaceExtraLarge)
             ) {
 
                 Text(text = "Finish")

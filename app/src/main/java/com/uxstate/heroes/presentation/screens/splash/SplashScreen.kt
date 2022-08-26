@@ -25,7 +25,7 @@ import com.uxstate.heroes.R
 import com.uxstate.heroes.presentation.ui.theme.Purple200
 import com.uxstate.heroes.presentation.ui.theme.Purple700
 
-
+@RootNavGraph(start = true)
 @Destination
 @Composable
 fun SplashScreen() {
