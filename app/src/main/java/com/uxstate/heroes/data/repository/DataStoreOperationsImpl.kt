@@ -1,4 +1,4 @@
-package com.uxstate.heroes.data.prefs
+package com.uxstate.heroes.data.repository
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
+import javax.inject.Inject
 
 
 //extension variable from DataStore
@@ -20,7 +21,7 @@ val Context.dataStore by preferencesDataStore(
 )
 
 //pass context to the impl class
-class DataStoreOperationsImpl(context: Context) : DataStoreOperations {
+class DataStoreOperationsImpl @Inject constructor(context: Context) : DataStoreOperations {
 
     //create a private key object
     private object PrefKeysObject {
