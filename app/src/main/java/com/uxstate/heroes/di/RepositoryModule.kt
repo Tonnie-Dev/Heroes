@@ -1,7 +1,7 @@
 package com.uxstate.heroes.di
 
-import com.uxstate.heroes.data.prefs.DataStoreOperationsImpl
-import com.uxstate.heroes.data.prefs.DataStoreOperations
+import com.uxstate.heroes.data.prefs.DataStoreOpsImpl
+import com.uxstate.heroes.data.prefs.DataStoreOps
 import com.uxstate.heroes.data.repository.HeroRepositoryImpl
 import com.uxstate.heroes.domain.repository.HeroRepository
 import dagger.Binds
@@ -22,7 +22,7 @@ abstract class RepositoryModule {
     is the interface implementation and the return type is the
     interface implemented by the given parameter object.*/
 
-    abstract fun provideDataStoreOperations(dataStoreOperationsImpl:DataStoreOperationsImpl): DataStoreOperations
+    abstract fun provideDataStoreOperations(dataStoreOperationsImpl:DataStoreOpsImpl): DataStoreOps
 
     abstract fun provideHeroRepository(heroRepositoryImpl: HeroRepositoryImpl):HeroRepository
 

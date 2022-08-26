@@ -3,7 +3,7 @@ package com.uxstate.heroes.data.prefs
 import kotlinx.coroutines.flow.Flow
 
 
-interface DataStoreOperations {
+interface DataStoreOps {
 
 
     //2 functions to interact with DataStore

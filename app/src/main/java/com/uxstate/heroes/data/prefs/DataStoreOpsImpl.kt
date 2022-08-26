@@ -20,7 +20,7 @@ val Context.dataStore by preferencesDataStore(
 )
 
 //pass context to the impl class
-class DataStoreOperationsImpl @Inject constructor(context: Context) : DataStoreOperations {
+class DataStoreOpsImpl @Inject constructor(context: Context) : DataStoreOps {
 
     //create a private key object
     private object PrefKeysObject {
