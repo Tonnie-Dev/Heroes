@@ -19,16 +19,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.R
+import com.uxstate.heroes.presentation.screens.destinations.HomeScreenDestination
+import com.uxstate.heroes.presentation.screens.destinations.WelcomeScreenDestination
+import com.uxstate.heroes.presentation.screens.splash.SplashViewModel
 import com.uxstate.heroes.presentation.ui.theme.Purple200
 import com.uxstate.heroes.presentation.ui.theme.Purple700
 
 @RootNavGraph(start = true)
 @Destination
 @Composable
-fun SplashScreen() {
+fun SplashScreen(navigator: DestinationsNavigator, viewModel: SplashViewModel = hiltViewModel()) {
 
     //create animatable rotation
 
@@ -41,6 +46,17 @@ fun SplashScreen() {
                 targetValue = 360f,
                 animationSpec = tween(durationMillis = 1000, delayMillis = 200)
         )
+
+
+        if (viewModel.isOnboardingCompleted){
+
+            navigator.navigate(HomeScreenDestination)
+        }else{
+
+            navigator.navigate(WelcomeScreenDestination)
+
+        }
+
     })
     Splash(rotation.value)
 }
@@ -109,13 +125,13 @@ fun Splash(rotation: Float) {
 @Preview(name = "Light")
 @Composable
 fun SplashScreenPreviewLight() {
-    SplashScreen()
+    //SplashScreen()
 }
 
 @Preview(name = "Dark", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun SplashScreenPreviewDark() {
-    SplashScreen()
+    //SplashScreen()
 }
 
 
