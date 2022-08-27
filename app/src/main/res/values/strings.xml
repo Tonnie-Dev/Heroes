@@ -3,4 +3,6 @@
     <string name="app_logo">App Logo</string>
     <string name="greetings_title">Greetings</string>
     <string name="onboarding_image">Onboarding Image</string>
+    <string name="search_icon">Search</string>
+    <string name="explore_label">Explore</string>
 </resources>
