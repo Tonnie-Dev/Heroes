@@ -43,3 +43,6 @@ get() = if (this.isLight) LightGray else DarkGray
 
 val Colors.buttonBackgroundColor
 get() = if (this.isLight) Purple500 else Purple700
+
+val Colors.topAppBarContentColor
+get() = if (this.isLight) Color.White else LightGray
