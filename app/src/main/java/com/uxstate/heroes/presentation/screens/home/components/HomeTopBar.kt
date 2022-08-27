@@ -32,6 +32,10 @@ fun HomeTopBar(onSearch: () -> Unit) {
 
 @Preview(name = "HomeTopBar")
 @Composable
-fun HomeTopBarPreview() {
+fun HomeTopBarPreviewLight() {
+
+    HomeTopBar {
+
+    }
 
 }
