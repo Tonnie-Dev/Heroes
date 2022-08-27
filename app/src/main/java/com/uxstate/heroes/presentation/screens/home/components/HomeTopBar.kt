@@ -1,5 +1,6 @@
 package com.uxstate.heroes.presentation.screens.home.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -30,12 +31,21 @@ fun HomeTopBar(onSearch: () -> Unit) {
 }
 
 
-@Preview(name = "HomeTopBar")
+@Preview(name = "HomeTopBar - Light")
 @Composable
 fun HomeTopBarPreviewLight() {
 
-    HomeTopBar {
+    HomeTopBar {}
 
-    }
+
+
+}
+
+
+@Preview(name ="HomeTopBar - Dark", uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun HomeTopBarPreviewDark() {
+    HomeTopBar {}
+
 
 }
