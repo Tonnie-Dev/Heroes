@@ -8,9 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -35,6 +33,19 @@ import com.uxstate.heroes.presentation.ui.theme.Purple700
 @Composable
 fun SplashScreen(navigator: DestinationsNavigator, viewModel: SplashViewModel = hiltViewModel()) {
 
+    //observe onBoardingStatus from the viewModel
+
+    /*
+
+    Collects values from this Flow and represents its latest value
+     via State. Every time there would be new value posted into the
+      Flow the returned State will be updated causing recomposition
+       of every State.value usage.
+
+
+     */
+
+    val isOnboardingCompleted by viewModel.isOnboardingCompleted.collectAsState()
     //create animatable rotation
 
     val rotation = remember { Animatable(initialValue = 0f) }
@@ -47,11 +58,13 @@ fun SplashScreen(navigator: DestinationsNavigator, viewModel: SplashViewModel = 
                 animationSpec = tween(durationMillis = 1000, delayMillis = 200)
         )
 
+        //pop-up splash screen from back  stack
+        navigator.popBackStack()
 
-        if (viewModel.isOnboardingCompleted){
+        if (isOnboardingCompleted) {
 
             navigator.navigate(HomeScreenDestination)
-        }else{
+        } else {
 
             navigator.navigate(WelcomeScreenDestination)
 

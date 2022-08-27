@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
@@ -19,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.*
 import com.ramcosta.composedestinations.annotation.Destination
@@ -78,7 +80,9 @@ fun WelcomeScreen(viewModel: WelcomeViewModel = hiltViewModel(), navigator: Dest
 
         FinishButton(pagerState = state, modifier = Modifier.weight(.1f)) {
 
-            viewModel.saveOnboardingState(true)
+            viewModel.saveOnboardingState(isCompleted = true)
+
+            //pop-up the current screen(Welcome from back stack)
             navigator.popBackStack()
             navigator.navigate(HomeScreenDestination)
         }
@@ -200,6 +204,64 @@ fun ThirdOnboardingScreenPreview() {
 
         PagerScreen(onboardingPage = OnboardingPage.ThirdPage)
 
+    }
+
+}
+
+sealed class CustomDisplayItem(val text1: String, val text2: String) {
+
+    object FirstItem : CustomDisplayItem("Hi", "World")
+    object SecondItem : CustomDisplayItem("Hello", "I'm John")
+
+}
+
+@Composable
+fun DisplayItemTemplate(item: CustomDisplayItem) {
+    Column() {
+        Text(text = item.text2)
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(text = item.text2)
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+ fun ImagesDotsIndicator(
+    modifier: Modifier,
+
+    ) {
+    //list of pages to display
+    val displayItems = listOf(CustomDisplayItem.FirstItem, CustomDisplayItem.SecondItem)
+    val state = rememberPagerState()
+
+    Column(modifier = modifier.fillMaxSize()) {
+        //A horizontally scrolling layout that allows users to
+        // flip between items to the left and right.
+        HorizontalPager(
+                count = 6,
+                state = state,
+
+                ) {
+            /*whenever we scroll sideways the page variable changes
+            displaying the corresponding page */
+            item ->
+
+            //call template item and add the data
+            DisplayItemTemplate(item = displayItems[item])
+        }
+
+        //HorizontalPagerIndicator dots
+        HorizontalPagerIndicator(
+                pagerState = state,
+                activeColor = MaterialTheme.colors.primary,
+                inactiveColor = Color.Gray,
+                indicatorWidth = 16.dp,
+                indicatorShape = CircleShape,
+                spacing = 8.dp,
+                modifier = Modifier
+                        .weight(.1f)
+                        .align(CenterHorizontally)
+        )
     }
 
 }
