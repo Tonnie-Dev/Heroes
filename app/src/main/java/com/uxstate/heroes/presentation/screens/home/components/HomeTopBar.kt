@@ -41,7 +41,8 @@ fun HomeTopBarPreviewLight() {
 
 }
 
-
+//TopAppBar Background color calculated only during runtime
+//and cannot be previewed
 @Preview(name ="HomeTopBar - Dark", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun HomeTopBarPreviewDark() {
