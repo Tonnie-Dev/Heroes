@@ -48,10 +48,17 @@ object AppModule {
     }
 
 
+
     @Provides
     @Singleton
-
     fun provideHttpClient(): OkHttpClient {
+        /* connect timeout defines a time period in which our
+     client should establish a connection with a target host.
+By default, for the OkHttpClient, this timeout is set to 10 seconds.   */
+
+
+        /*maximum time of inactivity between two data packets when waiting for the
+        server's response.The default timeout of 10 seconds */
 
 
         return OkHttpClient.Builder()
@@ -62,7 +69,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideHeroAPI(): HeroAPI {
+    fun provideHeroAPI(okHttpClient: OkHttpClient): HeroAPI {
 
         val moshi = Moshi.Builder()
                 .addLast(KotlinJsonAdapterFactory())
@@ -71,6 +78,7 @@ object AppModule {
         return Retrofit.Builder()
                 .baseUrl(HeroAPI.BASE_URL)
                 .addConverterFactory(MoshiConverterFactory.create())
+                .client(okHttpClient)
                 .build()
                 .create()
     }
