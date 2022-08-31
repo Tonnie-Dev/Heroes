@@ -12,7 +12,7 @@ interface HeroRemoteKeyDao {
     //get specific remote key
 
     @Query("SELECT * FROM hero_remote_key_table WHERE id=:id")
-    suspend fun getRemoteKey(id:Int):HeroRemoteKeysEntity?
+    suspend fun getRemoteKeys(id:Int):HeroRemoteKeysEntity?
 
     //add all remote keys to the database
     @Insert(onConflict = OnConflictStrategy.REPLACE)
