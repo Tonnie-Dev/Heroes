@@ -13,5 +13,5 @@ import com.uxstate.heroes.data.local.entity.HeroRemoteKeysEntity
 abstract class HeroDatabase:RoomDatabase() {
 
     abstract val heroDao: HeroDao
-    abstract val heroRemoteKeyDao:HeroRemoteKeysDao
+    abstract val heroRemoteKeysDao:HeroRemoteKeysDao
 }

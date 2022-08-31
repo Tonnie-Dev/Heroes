@@ -10,8 +10,19 @@ import com.uxstate.heroes.domain.model.Hero
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class HeroRemoteMediator @Inject constructor(api:HeroAPI, database: HeroDatabase): RemoteMediator<Int, Hero>() {
+class HeroRemoteMediator @Inject constructor(
+    api: HeroAPI,
+    database: HeroDatabase
+) : RemoteMediator<Int, Hero>() {
+
+    //get daos
+    val heroDao = database.heroDao
+    val heroRemoteKeysDao = database.heroRemoteKeysDao
+
+
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Hero>): MediatorResult {
         TODO("Not yet implemented")
     }
+
+
 }
