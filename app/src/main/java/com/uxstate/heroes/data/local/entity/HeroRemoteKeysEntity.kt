@@ -29,7 +29,7 @@ nextPage
 
 
 @Entity(tableName = HERO_REMOTE_KEY_DATABASE_TABLE)
-data class HeroRemoteKeyEntity(
+data class HeroRemoteKeysEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val prevPage: Int?,
