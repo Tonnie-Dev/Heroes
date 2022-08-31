@@ -8,6 +8,7 @@ import androidx.room.withTransaction
 import com.uxstate.heroes.data.local.HeroDatabase
 import com.uxstate.heroes.data.remote.HeroAPI
 import com.uxstate.heroes.domain.model.Hero
+import com.uxstate.heroes.domain.model.HeroRemoteKeys
 import javax.inject.Inject
 
 
@@ -16,57 +17,63 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 class HeroRemoteMediator @Inject constructor(
     private val api: HeroAPI,
-   private val database: HeroDatabase
+    private val database: HeroDatabase
 ) : RemoteMediator<Int, Hero>() {
 
     //get daos
-   private val heroDao = database.heroDao
-   private val heroRemoteKeysDao = database.heroRemoteKeysDao
+    private val heroDao = database.heroDao
+    private val heroRemoteKeysDao = database.heroRemoteKeysDao
 
-/*responsible for updating the backing dataset and invalidating the paging source*/
+    /*responsible for updating the backing dataset and invalidating the paging source*/
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Hero>): MediatorResult {
-       try {
+        try {
 
-           val response = api.getAllHeroes()
-           //check the heroes list from api is not empty
-           if (response.heroes.isNotEmpty()){
+            val response = api.getAllHeroes()
+            //check the heroes list from api is not empty
+            if (response.heroes.isNotEmpty()) {
 
-               //if not empty save items into database
+                //if not empty save items into database
 
-               database.withTransaction {
+                database.withTransaction {
 
-                 /* LoadType.Refresh is triggered the 1st time app is installed
-                 * or when the data is invalidated*/
-
-
-                   if (loadType ==LoadType.REFRESH){
-
-                       //clear tables
-                       heroDao.deleteAllHeroes()
-                       heroRemoteKeysDao.deleteAllRemoteKeys()
-
-                   }
-
-                   val prevPage = response.prevPage
-                   val nextPage = response.nextPage
-
-                   //retrieve ids from heroes
-                   val keys = response.heroes.map {
-
-                       it.id
+                    /* LoadType.Refresh is triggered the 1st time app is installed
+                    * or when the data is invalidated*/
 
 
-                   }
-               }
+                    if (loadType == LoadType.REFRESH) {
 
-               }}
-               catch (e:Exception){
+                        //clear tables
+                        heroDao.deleteAllHeroes()
+                        heroRemoteKeysDao.deleteAllRemoteKeys()
 
-                   return MediatorResult.Error(e)
-               }
+                    }
+
+                    val prevPage = response.prevPage
+                    val nextPage = response.nextPage
+
+                    //retrieve ids from heroes
+                    val keys = response.heroes.map {
+                        HeroRemoteKeys(
+                                id = it.id,
+                                prevPage = prevPage,
+                                nextKey = nextPage
+                        )
 
 
+                    }
 
-}
+                    //Add keys into database
+                    heroRemoteKeysDao.addAllKeys(keys)
+
+                }
+
+            }
+        } catch (e: Exception) {
+
+            return MediatorResult.Error(e)
+        }
+
+
+    }
 
 }
