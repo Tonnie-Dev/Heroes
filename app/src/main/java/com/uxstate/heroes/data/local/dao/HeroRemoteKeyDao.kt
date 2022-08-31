@@ -11,7 +11,7 @@ interface HeroRemoteKeyDao {
 
     //get specific remote key
 
-    @Query("SELECT * FROM hero_remote_key_table WHERE id=:id")
+    @Query("SELECT * FROM hero_remote_keys_table WHERE id=:id")
     suspend fun getRemoteKeys(id:Int):HeroRemoteKeysEntity?
 
     //add all remote keys to the database
@@ -20,6 +20,6 @@ interface HeroRemoteKeyDao {
 
 
     //remove all remote keys
-    @Query("DELETE FROM hero_remote_key_table")
+    @Query("DELETE FROM hero_remote_keys_table")
     suspend fun deleteAllRemoteKeys()
 }
