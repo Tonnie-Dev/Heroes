@@ -16,8 +16,8 @@ class HeroRemoteMediator @Inject constructor(
 ) : RemoteMediator<Int, Hero>() {
 
     //get daos
-    val heroDao = database.heroDao
-    val heroRemoteKeysDao = database.heroRemoteKeysDao
+   private val heroDao = database.heroDao
+   private val heroRemoteKeysDao = database.heroRemoteKeysDao
 
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Hero>): MediatorResult {
