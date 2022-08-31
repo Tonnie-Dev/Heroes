@@ -2,7 +2,7 @@ package com.uxstate.heroes.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.uxstate.heroes.util.Constants.HERO_REMOTE_KEY_DATABASE_TABLE
+import com.uxstate.heroes.util.Constants.HERO_REMOTE_KEYS_DATABASE_TABLE
 
 /*Whenever we fetch some data from the API and in order to
 paginate that data properly and cache it in a a local
@@ -28,7 +28,7 @@ nextPage
 */
 
 
-@Entity(tableName = HERO_REMOTE_KEY_DATABASE_TABLE)
+@Entity(tableName = HERO_REMOTE_KEYS_DATABASE_TABLE)
 data class HeroRemoteKeysEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
