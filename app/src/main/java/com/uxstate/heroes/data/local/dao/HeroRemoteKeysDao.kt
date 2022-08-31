@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.uxstate.heroes.data.local.entity.HeroRemoteKeysEntity
 
 @Dao
-interface HeroRemoteKeyDao {
+interface HeroRemoteKeysDao {
 
     //get specific remote key
 
