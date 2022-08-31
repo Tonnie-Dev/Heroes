@@ -7,6 +7,7 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.uxstate.heroes.data.local.HeroDatabase
 import com.uxstate.heroes.data.mapper.toEntity
+import com.uxstate.heroes.data.mapper.toModel
 import com.uxstate.heroes.data.remote.HeroAPI
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.domain.model.HeroRemoteKeys
@@ -79,6 +80,18 @@ class HeroRemoteMediator @Inject constructor(
         }
 
 
+    }
+
+
+    private suspend fun getRemoteKeyClosetToCurrentPosition(state: PagingState<Int, Hero>): HeroRemoteKeys? {
+
+        return state.anchorPosition?.let { position ->
+            state.closestItemToPosition(position)?.id?.let { id ->
+                heroRemoteKeysDao.getRemoteKeys(
+                        id
+                )?.toModel()
+            }
+        }
     }
 
 }

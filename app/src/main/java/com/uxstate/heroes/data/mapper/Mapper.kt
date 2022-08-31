@@ -15,7 +15,7 @@ fun HeroRemoteKeys.toEntity(): HeroRemoteKeysEntity {
             nextKey = this.nextKey
     )
 }
-
+//Hero to HeroEntity
 fun Hero.toEntity(): HeroEntity {
 
     return HeroEntity(
@@ -30,5 +30,17 @@ fun Hero.toEntity(): HeroEntity {
             family = this.family,
             abilities = this.abilities,
             natureTypes = this.natureTypes
+    )
+}
+
+
+//HeroRemoteKeysEntity to HeroRemoteKeys
+
+fun HeroRemoteKeysEntity.toModel(): HeroRemoteKeys{
+
+    return HeroRemoteKeys(
+            id = this.id,
+            prevPage = this.prevPage,
+            nextKey = this.nextKey
     )
 }
