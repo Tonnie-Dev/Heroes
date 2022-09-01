@@ -30,8 +30,15 @@ class HeroRemoteMediator @Inject constructor(
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Hero>): MediatorResult {
         return try {
 
+
+            val page = when (loadType) {
+                //is over enum entry is not allowed
+                LoadType.REFRESH -> {}
+                LoadType.APPEND -> {}
+                LoadType.PREPEND -> {}
+            }
             //Make API response
-            val response = api.getAllHeroes()
+            val response = api.getAllHeroes(page = page)
 
             //check the heroes list from api is not empty
             if (response.heroes.isNotEmpty()) {
@@ -84,12 +91,17 @@ class HeroRemoteMediator @Inject constructor(
 
 
     private suspend fun getRemoteKeyClosetToCurrentPosition(state: PagingState<Int, Hero>): HeroRemoteKeys? {
-
+        //anchor position is the most recently accessed index in the list
         return state.anchorPosition?.let { position ->
+
+            //fetch the loaded item that is closest to the last accessed index in the list.
             state.closestItemToPosition(position)?.id?.let { id ->
+
+                //make dao query
                 heroRemoteKeysDao.getRemoteKeys(
                         id
-                )?.toModel()
+                )
+                        ?.toModel()
             }
         }
     }
