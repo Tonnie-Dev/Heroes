@@ -33,7 +33,11 @@ class HeroRemoteMediator @Inject constructor(
 
             val page = when (loadType) {
                 //is over enum entry is not allowed
-                LoadType.REFRESH -> {}
+                LoadType.REFRESH -> {
+
+                    val remoteKeys =getRemoteKeyClosetToCurrentPosition(state=state)
+                    remoteKeys?.
+                }
                 LoadType.APPEND -> {}
                 LoadType.PREPEND -> {}
             }
@@ -64,7 +68,7 @@ class HeroRemoteMediator @Inject constructor(
                         HeroRemoteKeys(
                                 id = it.id,
                                 prevPage = prevPage,
-                                nextKey = nextPage
+                                nextPage = nextPage
                         )
                     }
 
