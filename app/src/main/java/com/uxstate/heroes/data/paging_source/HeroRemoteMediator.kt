@@ -49,12 +49,21 @@ class HeroRemoteMediator @Inject constructor(
                 LoadType.PREPEND -> {
 
                     val remoteKeys = getRemoteKeyForFirstItem(state = state)
-                    val prevPage = remoteKeys?.prevPage
+                    val prevPage = remoteKeys?.prevPage ?: return MediatorResult.Success(
+                            endOfPaginationReached = remoteKeys != null
+                    )
                     prevPage
                 }
 
                 /*Load at the end of a PagingData.*/
-                LoadType.APPEND -> {}
+                LoadType.APPEND -> {
+
+                    val remoteKeys = getRemoteKeyForLastItem(state)
+                    val nextPage = remoteKeys?.nextPage ?: return MediatorResult.Success(
+                            endOfPaginationReached = remoteKeys != null
+                    )
+                    nextPage
+                }
 
             }
             //Make API response
@@ -129,7 +138,6 @@ class HeroRemoteMediator @Inject constructor(
 
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Hero>): HeroRemoteKeys? {
 
-
         //get the first pages then check if it is empty
         return state.pages.firstOrNull {
             it.data.isNotEmpty()
@@ -138,6 +146,18 @@ class HeroRemoteMediator @Inject constructor(
         }?.data?.firstOrNull()
                 ?.let { hero ->
                     heroRemoteKeysDao.getRemoteKeys(hero.id)
+                            ?.toModel()
+                }
+    }
+
+
+    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Hero>): HeroRemoteKeys? {
+
+
+        return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
+                ?.let {
+
+                    heroRemoteKeysDao.getRemoteKeys(it.id)
                             ?.toModel()
                 }
     }
