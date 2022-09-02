@@ -33,13 +33,24 @@ class HeroRemoteMediator @Inject constructor(
 
             val page = when (loadType) {
                 //is over enum entry is not allowed
+
+
+                /*PagingData content being refreshed, which can be a result of
+                PagingSource invalidation, refresh that may contain content
+                updates, or the initial load.*/
+
                 LoadType.REFRESH -> {
 
-                    val remoteKeys =getRemoteKeyClosetToCurrentPosition(state=state)
-                    remoteKeys?.
+                    val remoteKeys = getRemoteKeyClosetToCurrentPosition(state = state)
+                    remoteKeys?.nextPage?.minus(1) ?: 1
                 }
-                LoadType.APPEND -> {}
+
+                /*Load at the start of a PagingData. i.e. load from the db*/
                 LoadType.PREPEND -> {}
+
+                /*Load at the end of a PagingData.*/
+                LoadType.APPEND -> {}
+
             }
             //Make API response
             val response = api.getAllHeroes(page = page)
@@ -108,6 +119,20 @@ class HeroRemoteMediator @Inject constructor(
                         ?.toModel()
             }
         }
+    }
+
+
+    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Hero>): HeroRemoteKeys? {
+
+
+        //get the first pages then check if it is empty
+        return state.pages.firstOrNull {
+            it.data.isNotEmpty()
+        }?.data?.firstOrNull()
+                ?.let { hero ->
+                    heroRemoteKeysDao.getRemoteKeys(hero.id)
+                            ?.toModel()
+                }
     }
 
 }
