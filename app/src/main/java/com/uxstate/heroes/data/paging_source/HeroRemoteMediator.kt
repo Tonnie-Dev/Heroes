@@ -46,7 +46,12 @@ class HeroRemoteMediator @Inject constructor(
                 }
 
                 /*Load at the start of a PagingData. i.e. load from the db*/
-                LoadType.PREPEND -> {}
+                LoadType.PREPEND -> {
+
+                    val remoteKeys = getRemoteKeyForFirstItem(state = state)
+                    val prevPage = remoteKeys?.prevPage
+                    prevPage
+                }
 
                 /*Load at the end of a PagingData.*/
                 LoadType.APPEND -> {}
@@ -128,6 +133,8 @@ class HeroRemoteMediator @Inject constructor(
         //get the first pages then check if it is empty
         return state.pages.firstOrNull {
             it.data.isNotEmpty()
+
+            //get the first page and extract hero from it
         }?.data?.firstOrNull()
                 ?.let { hero ->
                     heroRemoteKeysDao.getRemoteKeys(hero.id)
