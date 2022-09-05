@@ -5,7 +5,7 @@ import com.uxstate.heroes.data.local.entity.HeroRemoteKeysEntity
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.domain.model.HeroRemoteKeys
 
-//HeroEntity to Hero 
+//HeroEntity to Hero
 fun HeroEntity.toModel():Hero {
 
     return Hero(
