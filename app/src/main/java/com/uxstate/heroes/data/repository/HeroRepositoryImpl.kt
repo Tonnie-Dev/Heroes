@@ -1,5 +1,6 @@
 package com.uxstate.heroes.data.repository
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -29,6 +30,7 @@ class HeroRepositoryImpl @Inject constructor(
         return dataStoreOps.readOnBoardingState()
     }
 
+    @OptIn(ExperimentalPagingApi::class)
     override fun getAllData(): Flow<PagingData<Hero>> {
 
 
@@ -42,7 +44,7 @@ class HeroRepositoryImpl @Inject constructor(
         return Pager(
                 config = PagingConfig(pageSize = 3),
                 remoteMediator = HeroRemoteMediator(api =api, database =database),
-                pagingSourceFactory = {dao.getAllHeroes().ma}
+                pagingSourceFactory = {dao.getAllHeroes()}
         ).flow
     }
 
