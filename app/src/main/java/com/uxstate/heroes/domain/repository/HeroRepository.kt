@@ -9,6 +9,6 @@ interface HeroRepository {
 
     suspend fun saveOnboardingState(isCompleted:Boolean)
     fun readOnboardingStatus(): Flow<Boolean>
-    fun getAllData():Flow<PagingData<Hero>>
+    fun getAllHeroes():Flow<PagingData<Hero>>
     fun searchHeroes():Flow<PagingData<Hero>>
 }

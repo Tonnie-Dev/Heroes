@@ -32,7 +32,7 @@ class HeroRepositoryImpl @Inject constructor(
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    override fun getAllData(): Flow<PagingData<Hero>> {
+    override fun getAllHeroes(): Flow<PagingData<Hero>> {
 
 
         /*This is the place where we are going to actually call the pager
