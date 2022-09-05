@@ -18,7 +18,7 @@ import javax.inject.Inject
 class HeroRepositoryImpl @Inject constructor(
     private val dataStoreOps: DataStoreOps,
     private val api: HeroAPI,
-    private val database: HeroDatabase
+   database: HeroDatabase
 ) :
     HeroRepository {
 
@@ -31,15 +31,7 @@ class HeroRepositoryImpl @Inject constructor(
         return dataStoreOps.readOnBoardingState()
     }
 
-    @OptIn(ExperimentalPagingApi::class)
-    override fun getAllHeroes(): Flow<PagingData<Hero>> {
 
-
-    }
-
-    override fun searchHeroes(): Flow<PagingData<Hero>> {
-        TODO("Not yet implemented")
-    }
 
 
 }
