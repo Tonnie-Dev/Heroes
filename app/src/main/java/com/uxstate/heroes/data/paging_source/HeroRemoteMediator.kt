@@ -59,6 +59,8 @@ class HeroRemoteMediator @Inject constructor(
                 LoadType.APPEND -> {
 
                     val remoteKeys = getRemoteKeyForLastItem(state)
+
+                    //this return refers to return on try-catch block
                     val nextPage = remoteKeys?.nextPage ?: return MediatorResult.Success(
                             endOfPaginationReached = remoteKeys != null
                     )
