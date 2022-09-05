@@ -1,5 +1,7 @@
 package com.uxstate.heroes.di
 
+import com.uxstate.heroes.data.paging_source.RemoteDataSource
+import com.uxstate.heroes.data.paging_source.RemoteDataSourceImpl
 import com.uxstate.heroes.data.prefs.DataStoreOpsImpl
 import com.uxstate.heroes.data.prefs.DataStoreOps
 import com.uxstate.heroes.data.repository.HeroRepositoryImpl
@@ -33,5 +35,11 @@ abstract class RepositoryModule {
     is the interface implementation and the return type is the
     interface implemented by the given parameter object.*/
     abstract fun provideHeroRepository(heroRepositoryImpl: HeroRepositoryImpl):HeroRepository
+
+
+
+    @Binds
+    @Singleton
+    abstract fun provideRemoteDataSource(remoteDataSourceImpl: RemoteDataSourceImpl):RemoteDataSource
 
 }
