@@ -35,18 +35,6 @@ class HeroRepositoryImpl @Inject constructor(
     override fun getAllHeroes(): Flow<PagingData<Hero>> {
 
 
-        /*This is the place where we are going to actually call the pager
-        class and specify a paging config and PagingSource factory so that
-        we can return a Flow*/
-
-        //holds all cached data - it is a function
-        val pagingSourceFactory = { dao.getAllHeroes() }
-
-        return Pager(
-                config = PagingConfig(pageSize = Constants.ITEMS_PER_PAGE),
-                remoteMediator = HeroRemoteMediator(api = api, database = database),
-                pagingSourceFactory = pagingSourceFactory
-        ).flow
     }
 
     override fun searchHeroes(): Flow<PagingData<Hero>> {
