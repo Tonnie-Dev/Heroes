@@ -8,6 +8,7 @@ import com.uxstate.heroes.data.local.HeroDatabase
 import com.uxstate.heroes.data.remote.HeroAPI
 import com.uxstate.heroes.domain.repository.HeroRepository
 import com.uxstate.heroes.domain.use_cases.UseCaseWrapper
+import com.uxstate.heroes.domain.use_cases.get_heroes.GetAllHeroesUseCase
 import com.uxstate.heroes.domain.use_cases.read_onboarding.ReadOnboardingUseCase
 import com.uxstate.heroes.domain.use_cases.save_onboarding.SaveOnboardingUseCase
 import com.uxstate.heroes.util.Constants.HERO_DATABASE
@@ -43,7 +44,8 @@ object AppModule {
 
         return UseCaseWrapper(
                 readOnboardingUseCase = ReadOnboardingUseCase(repository),
-                saveOnboardingUseCase = SaveOnboardingUseCase(repository)
+                saveOnboardingUseCase = SaveOnboardingUseCase(repository),
+                getAllHeroesUseCase = GetAllHeroesUseCase(repository )
         )
     }
 

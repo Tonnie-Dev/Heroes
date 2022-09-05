@@ -6,6 +6,6 @@ import com.uxstate.heroes.domain.use_cases.save_onboarding.SaveOnboardingUseCase
 
 data class UseCaseWrapper(
     val readOnboardingUseCase: ReadOnboardingUseCase,
-    val saveOnboardingUseCase: SaveOnboardingUseCase
+    val saveOnboardingUseCase: SaveOnboardingUseCase,
     val getAllHeroesUseCase: GetAllHeroesUseCase
 )
