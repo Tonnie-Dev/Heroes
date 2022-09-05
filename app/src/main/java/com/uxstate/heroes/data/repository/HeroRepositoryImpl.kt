@@ -10,6 +10,7 @@ import com.uxstate.heroes.data.prefs.DataStoreOps
 import com.uxstate.heroes.data.remote.HeroAPI
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.domain.repository.HeroRepository
+import com.uxstate.heroes.util.Constants
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -38,13 +39,13 @@ class HeroRepositoryImpl @Inject constructor(
         class and specify a paging config and PagingSource factory so that
         we can return a Flow*/
 
-        //holds all cached data
-        val pagingSourceFactory = {dao.getAllHeroes()}
+        //holds all cached data - it is a function
+        val pagingSourceFactory = { dao.getAllHeroes() }
 
         return Pager(
-                config = PagingConfig(pageSize = 3),
-                remoteMediator = HeroRemoteMediator(api =api, database =database),
-                pagingSourceFactory = {dao.getAllHeroes()}
+                config = PagingConfig(pageSize = Constants.ITEMS_PER_PAGE),
+                remoteMediator = HeroRemoteMediator(api = api, database = database),
+                pagingSourceFactory = pagingSourceFactory
         ).flow
     }
 
