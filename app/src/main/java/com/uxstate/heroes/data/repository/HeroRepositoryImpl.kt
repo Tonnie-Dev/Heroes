@@ -6,6 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.uxstate.heroes.data.local.HeroDatabase
 import com.uxstate.heroes.data.paging_source.HeroRemoteMediator
+import com.uxstate.heroes.data.paging_source.RemoteDataSource
 import com.uxstate.heroes.data.prefs.DataStoreOps
 import com.uxstate.heroes.data.remote.HeroAPI
 import com.uxstate.heroes.domain.model.Hero
@@ -18,7 +19,8 @@ import javax.inject.Inject
 class HeroRepositoryImpl @Inject constructor(
     private val dataStoreOps: DataStoreOps,
     private val api: HeroAPI,
-   database: HeroDatabase
+   database: HeroDatabase,
+    private val remoteDataSource: RemoteDataSource
 ) :
     HeroRepository {
 
@@ -31,7 +33,9 @@ class HeroRepositoryImpl @Inject constructor(
         return dataStoreOps.readOnBoardingState()
     }
 
-
+    override fun getAllHeroes(): Flow<PagingData<Hero>> {
+       return remoteDataSource.getAllHeroes()
+    }
 
 
 }
