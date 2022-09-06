@@ -15,7 +15,7 @@ import com.uxstate.heroes.presentation.ui.theme.starColor
 import kotlin.math.roundToInt
 
 @Composable
-fun FilledStar(starPath: Path, starPathBounds: Rect, scaleFactor: Float = 3f) {
+fun FilledStar(starPath: Path, starPathBounds: Rect, scaleFactor: Float = 2f) {
 
     //Add Canvas
     Canvas(modifier = Modifier.size(24.dp), onDraw = {
@@ -35,8 +35,8 @@ fun FilledStar(starPath: Path, starPathBounds: Rect, scaleFactor: Float = 3f) {
            val x1 = (canvasSize.width - pathWidth)/2
            val y1 = (canvasSize.height - pathHeight)/2
 
-           val x = (canvasSize.width/2 - pathWidth/2)
-           val y = (canvasSize.width/2 - pathHeight/2)
+           val x = (canvasSize.width/2f )- (pathWidth/1.7f)
+           val y = (canvasSize.width/2f) - (pathHeight/1.7f)
 
            //Translate the coordinate space by the given delta in pixels in
            // both the x and y coordinates

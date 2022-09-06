@@ -12,7 +12,7 @@ fun RatingWidget(modifier: Modifier, rating:Double) {
 
   val starPathString = stringResource(id = R.string.star_path)
 
-    /*Parses the path string to create a collection of PathNode instances*/
+    /*convert the string to to a Path/ PathNode instances*/
     val starPath = remember{ PathParser().parsePathString(pathData = starPathString).toPath()}
 
 
