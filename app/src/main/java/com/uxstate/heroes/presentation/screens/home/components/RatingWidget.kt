@@ -9,7 +9,7 @@ import com.uxstate.heroes.R
 
 @Composable
 fun RatingWidget(modifier: Modifier, rating:Double) {
-  
+
   val starPathString = stringResource(id = R.string.star_path)
 
     /*Parses the path string to create a collection of PathNode instances*/
