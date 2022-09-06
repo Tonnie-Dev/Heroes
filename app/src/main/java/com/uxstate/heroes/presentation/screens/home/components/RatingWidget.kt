@@ -15,14 +15,14 @@ fun RatingWidget(modifier: Modifier, rating:Double) {
     /*Parses the path string to create a collection of PathNode instances*/
     val starPath = remember{ PathParser().parsePathString(pathData = starPathString).toPath()}
 
-    //holds the path bounds
 
+  //Compute the bounds of the control points of the path,
+  // and write the answer into bounds
     val starPathBounds = remember {
         starPath.getBounds()
 
     }
 
-    //Compute the bounds of the control points of the path,
-    // and write the answer into bounds.
+
     FilledStar(starPath = starPath, starPathBounds = starPathBounds)
 }
