@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -14,7 +15,7 @@ import com.uxstate.heroes.presentation.ui.theme.starColor
 import kotlin.math.roundToInt
 
 @Composable
-fun FilledStar(starPath: Path, starPathBounds: Rect, scaleFactor: Float = 1f) {
+fun FilledStar(starPath: Path, starPathBounds: Rect, scaleFactor: Float = 3f) {
 
     //Add Canvas
     Canvas(modifier = Modifier.size(24.dp), onDraw = {
@@ -22,27 +23,32 @@ fun FilledStar(starPath: Path, starPathBounds: Rect, scaleFactor: Float = 1f) {
         //reference to the canvas size
         val canvasSize = this.size
 
-        //bounds dimens
-        val pathWidth = starPathBounds.width
-        val pathHeight = starPathBounds.height
+       scale(scale = scaleFactor){
 
 
-     val x1 = (canvasSize.width - pathWidth)/2
-        val y1 = (canvasSize.height - pathHeight)/2
 
-        val x = (canvasSize.width/2 - pathWidth/2)
-        val y = (canvasSize.width/2 - pathHeight/2)
-
-        //Translate the coordinate space by the given delta in pixels in
-        // both the x and y coordinates
-        translate(top = x1, left = y1){
-
-            //draw path
-            drawPath(path = starPath, color = starColor)
+           //bounds dimens
+           val pathWidth = starPathBounds.width
+           val pathHeight = starPathBounds.height
 
 
-        }
+           val x1 = (canvasSize.width - pathWidth)/2
+           val y1 = (canvasSize.height - pathHeight)/2
 
+           val x = (canvasSize.width/2 - pathWidth/2)
+           val y = (canvasSize.width/2 - pathHeight/2)
+
+           //Translate the coordinate space by the given delta in pixels in
+           // both the x and y coordinates
+           translate(top = x, left = y){
+
+               //draw path
+               drawPath(path = starPath, color = starColor)
+
+
+           }
+
+       }
     })
 
 }
