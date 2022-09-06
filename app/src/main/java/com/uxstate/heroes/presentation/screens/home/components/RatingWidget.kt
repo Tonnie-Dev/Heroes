@@ -21,4 +21,8 @@ fun RatingWidget(modifier: Modifier, rating:Double) {
         starPath.getBounds()
 
     }
+
+    //Compute the bounds of the control points of the path,
+    // and write the answer into bounds.
+    FilledStar(starPath = starPath, starPathBounds = starPathBounds)
 }
