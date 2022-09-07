@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,17 +24,20 @@ fun HalfFilledStar(
 
 
     //Canvas
-    Canvas(modifier = Modifier, onDraw = {
+    Canvas(modifier = Modifier.size(24.dp), onDraw = {
 
-        val size = this.size
+       scale(scaleFactor){
+           val size = this.size
 
-        val x = (size.width/2f) - (pathBounds.width/2f)
-        val y = (size.height/2f) - (pathBounds.height/2f)
+           val x = (size.width/2f) - (pathBounds.width/2f)
+           val y = (size.height/2f) - (pathBounds.height/2f)
 
-        translate(left = x, top = y){
+           translate(left = x, top = y){
 
-            drawPath(path = starPath, color = starColor)
-        }
+               drawPath(path = starPath, color = starColor)
+           }
+
+       }
 
 
 
