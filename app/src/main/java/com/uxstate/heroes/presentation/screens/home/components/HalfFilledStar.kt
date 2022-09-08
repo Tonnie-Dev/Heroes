@@ -18,7 +18,7 @@ import com.uxstate.heroes.presentation.ui.theme.starColor
 @Composable
 fun HalfFilledStar(
     starPath: Path,
-    pathBounds: Rect,
+    starPathBounds: Rect,
     scaleFactor: Float = 1f
 
 ) {
@@ -29,9 +29,11 @@ fun HalfFilledStar(
 
         scale(scaleFactor) {
             val canvasSize = this.size
-
-            val x = (canvasSize.width / 2f) - (pathBounds.width / 2f)
-            val y = (canvasSize.height / 2f) - (pathBounds.height / 2f)
+            //bounds dimens
+            val pathWidth = starPathBounds.width
+            val pathHeight = starPathBounds.height
+            val x = (canvasSize.width/2f )- (pathWidth/1.7f)
+            val y = (canvasSize.width/2f) - (pathHeight/1.7f)
 
             translate(left = x, top = y) {
 
@@ -53,8 +55,8 @@ fun HalfFilledStar(
 
                                 //Max.Dimens The greater of the magnitudes of the
                                 // width and the height of this rectangle.
-                                width = pathBounds.maxDimension / 1.7f,
-                                height = pathBounds.maxDimension*scaleFactor
+                                width = starPathBounds.maxDimension / 1.7f,
+                                height = starPathBounds.maxDimension*scaleFactor
                         )
                 )
             }
