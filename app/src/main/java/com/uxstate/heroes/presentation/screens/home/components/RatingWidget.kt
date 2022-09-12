@@ -23,6 +23,6 @@ fun RatingWidget(modifier: Modifier, rating:Double) {
 
     }
 
-HalfFilledStar(starPath = starPath, starPathBounds = starPathBounds)
     //FilledStar(starPath = starPath, starPathBounds = starPathBounds)
+    HalfFilledStar(starPath = starPath, starPathBounds = starPathBounds)
 }
