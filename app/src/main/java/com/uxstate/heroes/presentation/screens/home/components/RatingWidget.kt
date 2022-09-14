@@ -63,6 +63,14 @@ fun RatingWidget(
                 scaleFactor = scaleFactor
         )} }
 
+        //empty stars
+
+        result[EMPTY_STARS_KEY]?.let { repeat(it){ EmptyStar(
+                starPathBounds = starPathBounds,
+                starPath = starPath,
+                scaleFactor = scaleFactor
+        )} }
+
     }
 
     //FilledStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor)
