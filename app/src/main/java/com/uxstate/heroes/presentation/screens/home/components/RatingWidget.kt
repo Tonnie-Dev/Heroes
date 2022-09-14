@@ -59,11 +59,11 @@ fun calculateStars(rating: Double): Map<String, Int> {
 
 
         //if-else logic for determining number of the stars
-        if (firstNumber in 0..5 && lastNumber in 0..9){
+        if (firstNumber in 0..5 && lastNumber in 0..9) {
 
             filledStars = firstNumber
 
-            if (lastNumber in 0..5){
+            if (lastNumber in 0..5) {
 
                 /*Before recomposition the value of halfFilledStar
                 is 0 but when the LaunchedEffect is triggered the
@@ -73,7 +73,7 @@ fun calculateStars(rating: Double): Map<String, Int> {
 
             }
 
-            if (lastNumber in 6..9){
+            if (lastNumber in 6..9) {
                 /*filled stars will be equal to the firstNumber but
                  they will increase by 1 if this if-block is triggered*/
                 filledStars++
@@ -81,7 +81,7 @@ fun calculateStars(rating: Double): Map<String, Int> {
 
             //bad value
 
-            if(firstNumber==5 && lastNumber>0){
+            if (firstNumber == 5 && lastNumber > 0) {
 
                 filledStars = 0
                 halfFilledStars = 0
@@ -89,11 +89,19 @@ fun calculateStars(rating: Double): Map<String, Int> {
             }
 
 
-        }else{
+        } else {
 
             Timber.i("Invalid Rating Number")
         }
 
     })
 
+    //Assert the number of empty stars
+    emptyStars = maxStars - (filledStars+halfFilledStars)
+
+    return mapOf(
+            "filledStars" to filledStars,
+            "halfFilledStars" to halfFilledStars,
+            "emptyStars" to emptyStars
+    )
 }
