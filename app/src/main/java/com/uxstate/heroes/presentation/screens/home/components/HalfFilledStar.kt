@@ -41,25 +41,29 @@ fun HalfFilledStar(
                         path = starPath,
                         color = LightGray.copy(alpha = 0.5f)
                 )
+
+                //accepts path for bottom layer
+                clipPath(starPath) {
+
+
+                    //draw scope
+
+                    drawRect(
+                            color = starColor,
+
+                            size = Size(
+
+                                    //Max.Dimens The greater of the magnitudes of the
+                                    // width and the height of this rectangle.
+                                    width = starPathBounds.maxDimension / 1.7f,
+                                    height = starPathBounds.maxDimension*scaleFactor
+                            )
+                    )
+                }
+
+
             }
-            //accepts path for bottom layer
-            clipPath(starPath) {
 
-
-                //draw scope
-
-                drawRect(
-                        color = starColor,
-
-                        size = Size(
-
-                                //Max.Dimens The greater of the magnitudes of the
-                                // width and the height of this rectangle.
-                                width = starPathBounds.maxDimension / 1.7f,
-                                height = starPathBounds.maxDimension*scaleFactor
-                        )
-                )
-            }
 
 
         }
