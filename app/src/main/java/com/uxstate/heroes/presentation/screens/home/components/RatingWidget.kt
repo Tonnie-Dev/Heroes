@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.res.stringResource
 import com.uxstate.heroes.R
+import timber.log.Timber
 
 @Composable
 fun RatingWidget(modifier: Modifier, rating: Double, scaleFactor: Float = 3f) {
@@ -43,9 +44,9 @@ fun calculateStars(rating: Double): Map<String, Int> {
 
     /*cache, observe and trigger recomposition of any composable
     reading the value*/
-    val filledStars by remember { mutableStateOf(0) }
-    val halfFilledStars by remember { mutableStateOf(0) }
-    val emptyStars by remember { mutableStateOf(0) }
+    var filledStars by remember { mutableStateOf(0) }
+    var halfFilledStars by remember { mutableStateOf(0) }
+    var emptyStars by remember { mutableStateOf(0) }
 
 
     //triggered only when the rating changes
@@ -57,9 +58,40 @@ fun calculateStars(rating: Double): Map<String, Int> {
                 .map { it.toInt() }
 
 
+        //if-else logic for determining number of the stars
         if (firstNumber in 0..5 && lastNumber in 0..9){
 
+            filledStars = firstNumber
 
+            if (lastNumber in 0..5){
+
+                /*Before recomposition the value of halfFilledStar
+                is 0 but when the LaunchedEffect is triggered the
+                we add 1 to the number of half filled stars*/
+
+                halfFilledStars++
+
+            }
+
+            if (lastNumber in 6..9){
+                /*filled stars will be equal to the firstNumber but
+                 they will increase by 1 if this if-block is triggered*/
+                filledStars++
+            }
+
+            //bad value
+
+            if(firstNumber==5 && lastNumber>0){
+
+                filledStars = 0
+                halfFilledStars = 0
+                emptyStars = 5
+            }
+
+
+        }else{
+
+            Timber.i("Invalid Rating Number")
         }
 
     })
