@@ -1,9 +1,6 @@
 package com.uxstate.heroes.presentation.screens.home.components
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.res.stringResource
@@ -40,8 +37,8 @@ and an Int representing the stars to be drawn*/
 @Composable
 fun calculateStars(rating: Double): Map<String, Int> {
 
-   /* cache only - prevent expensive re-calculation operation on
-    recomposition*/
+    /* cache only - prevent expensive re-calculation operation on
+     recomposition*/
     val maxStars = remember { 5 }
 
     /*cache, observe and trigger recomposition of any composable
@@ -49,5 +46,22 @@ fun calculateStars(rating: Double): Map<String, Int> {
     val filledStars by remember { mutableStateOf(0) }
     val halfFilledStars by remember { mutableStateOf(0) }
     val emptyStars by remember { mutableStateOf(0) }
+
+
+    //triggered only when the rating changes
+    LaunchedEffect(key1 = rating, block = {
+
+        //split double to 2 separate integers
+        val (firstNumber, lastNumber) = rating.toString()
+                .split('.')
+                .map { it.toInt() }
+
+
+        if (firstNumber in 0..5 && lastNumber in 0..9){
+
+
+        }
+
+    })
 
 }
