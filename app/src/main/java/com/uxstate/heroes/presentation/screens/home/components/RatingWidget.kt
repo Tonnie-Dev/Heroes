@@ -27,3 +27,14 @@ fun RatingWidget(modifier: Modifier, rating:Double, scaleFactor:Float= 3f) {
     //HalfFilledStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor)
     EmptyStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor = scaleFactor)
 }
+
+
+/*This function takes a rating and returns a Map with String
+and an Int representing the stars to be drawn*/
+
+@Composable
+fun calculateStars(rating: Double): Map<String,Int> {
+
+
+
+}
