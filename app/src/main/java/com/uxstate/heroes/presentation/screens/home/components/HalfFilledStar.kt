@@ -19,7 +19,7 @@ import com.uxstate.heroes.presentation.ui.theme.starColor
 fun HalfFilledStar(
     starPath: Path,
     starPathBounds: Rect,
-    scaleFactor: Float = 1f
+    scaleFactor: Float
 
 ) {
 
@@ -48,6 +48,7 @@ fun HalfFilledStar(
 
                     //draw scope
 
+                    /*We draw a rectangle to intersect with the draw path*/
                     drawRect(
                             color = starColor,
 

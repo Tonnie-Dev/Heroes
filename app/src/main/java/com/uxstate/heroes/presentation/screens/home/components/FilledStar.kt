@@ -15,7 +15,7 @@ import com.uxstate.heroes.presentation.ui.theme.starColor
 import kotlin.math.roundToInt
 
 @Composable
-fun FilledStar(starPath: Path, starPathBounds: Rect, scaleFactor: Float = 2f) {
+fun FilledStar(starPath: Path, starPathBounds: Rect, scaleFactor: Float ) {
 
     //Add Canvas
     Canvas(modifier = Modifier.size(24.dp), onDraw = {

@@ -8,7 +8,7 @@ import androidx.compose.ui.res.stringResource
 import com.uxstate.heroes.R
 
 @Composable
-fun RatingWidget(modifier: Modifier, rating:Double) {
+fun RatingWidget(modifier: Modifier, rating:Double, scaleFactor:Float= 3f) {
 
   val starPathString = stringResource(id = R.string.star_path)
 
