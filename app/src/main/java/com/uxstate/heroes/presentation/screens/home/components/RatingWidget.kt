@@ -6,13 +6,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.uxstate.heroes.R
 import com.uxstate.heroes.util.Constants.EMPTY_STARS_KEY
 import com.uxstate.heroes.util.Constants.FILLED_STARS_KEY
 import com.uxstate.heroes.util.Constants.HALF_FILLED_STAR_KEY
-import com.uxstate.heroes.util.LocalSpacing
 import timber.log.Timber
 
 
@@ -25,7 +25,7 @@ fun RatingWidget(
 ) {
 
     val result = calculateStars(rating = rating)
-    val spacing = LocalSpacing.current
+
     val starPathString = stringResource(id = R.string.star_path)
 
     /*convert the string to to a Path/ PathNode instances*/
@@ -46,36 +46,50 @@ fun RatingWidget(
 
     Row(
             modifier = modifier,
-            horizontalArrangement = Arrangement.spacedBy(spacing.spaceExtraSmall)
+            horizontalArrangement = Arrangement.spacedBy(spaceBetweenStars)
     ) {
 
         //filled stars
-        result[FILLED_STARS_KEY]?.let { repeat(it){
+        result[FILLED_STARS_KEY]?.let {
+            repeat(it) {
 
-            FilledStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor = scaleFactor )
-        } }
+                FilledStar(
+                        starPath = starPath,
+                        starPathBounds = starPathBounds,
+                        scaleFactor = scaleFactor
+                )
+            }
+        }
 
         //half filled stars
 
-        result[HALF_FILLED_STAR_KEY]?.let { repeat(it){ HalfFilledStar(
-                starPath = starPath,
-                starPathBounds = starPathBounds,
-                scaleFactor = scaleFactor
-        )} }
+        result[HALF_FILLED_STAR_KEY]?.let {
+            repeat(it) {
+                HalfFilledStar(
+                        starPath = starPath,
+                        starPathBounds = starPathBounds,
+                        scaleFactor = scaleFactor
+                )
+            }
+        }
 
         //empty stars
 
-        result[EMPTY_STARS_KEY]?.let { repeat(it){ EmptyStar(
-                starPathBounds = starPathBounds,
-                starPath = starPath,
-                scaleFactor = scaleFactor
-        )} }
+        result[EMPTY_STARS_KEY]?.let {
+            repeat(it) {
+                EmptyStar(
+                        starPathBounds = starPathBounds,
+                        starPath = starPath,
+                        scaleFactor = scaleFactor
+                )
+            }
+        }
 
     }
 
     //FilledStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor)
     //HalfFilledStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor)
-    EmptyStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor = scaleFactor)
+    //EmptyStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor = scaleFactor)
 }
 
 
@@ -155,4 +169,12 @@ fun calculateStars(rating: Double): Map<String, Int> {
             HALF_FILLED_STAR_KEY to halfFilledStars,
             EMPTY_STARS_KEY to emptyStars
     )
+}
+
+
+@Preview(name = "RatingWidget", showBackground = true)
+@Composable
+fun RatingWidgetPreview() {
+
+    RatingWidget(modifier = Modifier, rating = 1.3)
 }
