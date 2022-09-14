@@ -10,6 +10,9 @@ object Constants {
     const val PREFERENCES_NAME= "hero_prefs"
     const val COMPLETED_ONBOARDING_PREF_KEY ="onboarding_completed"
     const val ITEMS_PER_PAGE =3
+    const val FILLED_STARS_KEY = "filledStars"
+    const val HALF_FILLED_STAR_KEY = "halfFilledStars"
+    const val EMPTY_STARS_KEY = "emptyStars"
 
 
 }

@@ -39,12 +39,14 @@ fun RatingWidget(
 
     }
 
+    //Row to hold the stars
 
     Row(
             modifier = modifier,
             horizontalArrangement = Arrangement.spacedBy(spacing.spaceExtraSmall)
     ) {
 
+        result["filledStar"]
     }
 
     //FilledStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor)
