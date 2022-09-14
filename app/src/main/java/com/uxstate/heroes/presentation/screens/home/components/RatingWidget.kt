@@ -9,6 +9,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.uxstate.heroes.R
+import com.uxstate.heroes.util.Constants.EMPTY_STARS_KEY
+import com.uxstate.heroes.util.Constants.FILLED_STARS_KEY
+import com.uxstate.heroes.util.Constants.HALF_FILLED_STAR_KEY
 import com.uxstate.heroes.util.LocalSpacing
 import timber.log.Timber
 
@@ -46,7 +49,12 @@ fun RatingWidget(
             horizontalArrangement = Arrangement.spacedBy(spacing.spaceExtraSmall)
     ) {
 
-        result["filledStar"]
+        //filled star
+        result[FILLED_STARS_KEY]?.let { repeat(it){
+
+            FilledStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor = scaleFactor )
+        } }
+
     }
 
     //FilledStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor)
@@ -127,8 +135,8 @@ fun calculateStars(rating: Double): Map<String, Int> {
     emptyStars = maxStars - (filledStars + halfFilledStars)
 
     return mapOf(
-            "filledStars" to filledStars,
-            "halfFilledStars" to halfFilledStars,
-            "emptyStars" to emptyStars
+            FILLED_STARS_KEY to filledStars,
+            HALF_FILLED_STAR_KEY to halfFilledStars,
+            EMPTY_STARS_KEY to emptyStars
     )
 }
