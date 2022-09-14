@@ -36,7 +36,7 @@ fun RatingWidget(
 
 
     //Compute the bounds of the control points of the path,
-    // and write the answer into bounds
+    // and write the answer into bounds, cache expensive operation
     val starPathBounds = remember {
         starPath.getBounds()
 
@@ -49,11 +49,19 @@ fun RatingWidget(
             horizontalArrangement = Arrangement.spacedBy(spacing.spaceExtraSmall)
     ) {
 
-        //filled star
+        //filled stars
         result[FILLED_STARS_KEY]?.let { repeat(it){
 
             FilledStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor = scaleFactor )
         } }
+
+        //half filled stars
+
+        result[HALF_FILLED_STAR_KEY]?.let { repeat(it){ HalfFilledStar(
+                starPath = starPath,
+                starPathBounds = starPathBounds,
+                scaleFactor = scaleFactor
+        )} }
 
     }
 
