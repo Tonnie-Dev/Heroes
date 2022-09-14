@@ -1,15 +1,28 @@
 package com.uxstate.heroes.presentation.screens.home.components
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.uxstate.heroes.R
+import com.uxstate.heroes.util.LocalSpacing
 import timber.log.Timber
 
-@Composable
-fun RatingWidget(modifier: Modifier, rating: Double, scaleFactor: Float = 3f) {
 
+@Composable
+fun RatingWidget(
+    modifier: Modifier,
+    rating: Double,
+    scaleFactor: Float = 3f,
+    spaceBetweenStars: Dp = 6.dp
+) {
+
+    val result = calculateStars(rating = rating)
+    val spacing = LocalSpacing.current
     val starPathString = stringResource(id = R.string.star_path)
 
     /*convert the string to to a Path/ PathNode instances*/
@@ -26,6 +39,14 @@ fun RatingWidget(modifier: Modifier, rating: Double, scaleFactor: Float = 3f) {
 
     }
 
+
+    Row(
+            modifier = modifier,
+            horizontalArrangement = Arrangement.spacedBy(spacing.spaceExtraSmall)
+    ) {
+
+    }
+
     //FilledStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor)
     //HalfFilledStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor)
     EmptyStar(starPath = starPath, starPathBounds = starPathBounds, scaleFactor = scaleFactor)
@@ -33,7 +54,11 @@ fun RatingWidget(modifier: Modifier, rating: Double, scaleFactor: Float = 3f) {
 
 
 /*This function takes a rating and returns a Map with String
-and an Int representing the stars to be drawn*/
+and an Int representing the stars to be drawn
+
+it is a @Composable function to enable it to be invoked from
+a composable
+*/
 
 @Composable
 fun calculateStars(rating: Double): Map<String, Int> {
@@ -97,7 +122,7 @@ fun calculateStars(rating: Double): Map<String, Int> {
     })
 
     //Assert the number of empty stars
-    emptyStars = maxStars - (filledStars+halfFilledStars)
+    emptyStars = maxStars - (filledStars + halfFilledStars)
 
     return mapOf(
             "filledStars" to filledStars,
