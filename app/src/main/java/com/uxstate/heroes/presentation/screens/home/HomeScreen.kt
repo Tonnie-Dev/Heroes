@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.uxstate.heroes.presentation.common.ListContent
 import com.uxstate.heroes.presentation.screens.destinations.Destination
 import com.uxstate.heroes.presentation.screens.home.components.HomeTopBar
 
@@ -19,11 +20,10 @@ fun HomeScreen( viewModel: HomeViewModel = hiltViewModel()) {
     val allHeroes = viewModel.getAllHeroes.collectAsLazyPagingItems()
     //Add Scaffold
 
-    Scaffold( topBar = { HomeTopBar {}}) { paddingValues ->
+    Scaffold( topBar = { HomeTopBar {}}, content = { paddingValues ->
 
-    Column(modifier = Modifier.padding(paddingValues)) {
+        ListContent()
+    })
 
-    }
 
-    }
 }
