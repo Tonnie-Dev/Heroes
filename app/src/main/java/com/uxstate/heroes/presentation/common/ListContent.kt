@@ -9,3 +9,8 @@ import com.uxstate.heroes.domain.model.Hero
 fun ListContent(heroes:LazyPagingItems<Hero>, navigator: DestinationsNavigator) {
 
 }
+
+@Composable
+fun HeroItem(navigator: DestinationsNavigator, hero: Hero) {
+
+}
