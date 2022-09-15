@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uxstate.heroes.presentation.ui.theme.starColor
-import kotlin.math.roundToInt
 
 @Composable
 fun FilledStar(starPath: Path, starPathBounds: Rect, scaleFactor: Float ) {

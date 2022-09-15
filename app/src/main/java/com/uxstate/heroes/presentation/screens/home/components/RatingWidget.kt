@@ -176,5 +176,6 @@ fun calculateStars(rating: Double): Map<String, Int> {
 @Composable
 fun RatingWidgetPreview() {
 
-    RatingWidget(modifier = Modifier, rating = 1.3)
+    RatingWidget(modifier = Modifier, rating = 4.0)
 }
+
