@@ -94,6 +94,18 @@ fun HeroItem(navigator: DestinationsNavigator, hero: Hero) {
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                 )
+
+                //description text
+                Text(
+                        text = hero.about,
+                        color = Color.White.copy(alpha = ContentAlpha.medium),
+                        fontSize = MaterialTheme.typography.subtitle1.fontSize,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 3,
+                        overflow = TextOverflow.Ellipsis
+                )
+                
+
             }
         }
 
