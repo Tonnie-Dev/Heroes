@@ -7,11 +7,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.paging.compose.LazyPagingItems
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -19,6 +22,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.R
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.presentation.screens.destinations.DetailsScreenDestination
+import com.uxstate.heroes.presentation.ui.theme.topAppBarContentColor
 import com.uxstate.heroes.util.Constants.BASE_URL
 import com.uxstate.heroes.util.LocalSpacing
 
@@ -60,7 +64,7 @@ fun HeroItem(navigator: DestinationsNavigator, hero: Hero) {
 
         }
 
-        //Surface 2 - Overlay 40% of height
+        //Surface 2 - Overlay 40% of the height
         Surface(
                 modifier = Modifier
                         .fillMaxHeight(.4f)
@@ -74,7 +78,23 @@ fun HeroItem(navigator: DestinationsNavigator, hero: Hero) {
 
 
         ) {
+            Column(
+                    modifier = Modifier
+                            .fillMaxSize()
+                            .padding(spacing.spaceMedium)
+            ) {
 
+
+                //name text
+                Text(
+                        text = hero.name,
+                        color = MaterialTheme.colors.topAppBarContentColor,
+                        fontSize = MaterialTheme.typography.h5.fontSize,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                )
+            }
         }
 
     }
