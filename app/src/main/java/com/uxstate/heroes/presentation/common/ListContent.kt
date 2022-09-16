@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.paging.compose.LazyPagingItems
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.domain.model.Hero
+import com.uxstate.heroes.presentation.screens.destinations.DetailsScreenDestination
 
 @Composable
 fun ListContent(heroes: LazyPagingItems<Hero>, navigator: DestinationsNavigator) {
@@ -23,7 +24,7 @@ fun HeroItem(navigator: DestinationsNavigator, hero: Hero) {
                     .fillMaxWidth()
                     .aspectRatio(3f / 2f)
                     .clickable {
-
+                        navigator.navigate(DetailsScreenDestination)
                     }) {
 
     }
