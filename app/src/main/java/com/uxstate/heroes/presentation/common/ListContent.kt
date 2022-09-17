@@ -9,11 +9,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.paging.compose.LazyPagingItems
 import coil.compose.rememberAsyncImagePainter
@@ -22,6 +24,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.R
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.presentation.screens.destinations.DetailsScreenDestination
+import com.uxstate.heroes.presentation.screens.home.components.RatingWidget
 import com.uxstate.heroes.presentation.ui.theme.topAppBarContentColor
 import com.uxstate.heroes.util.Constants.BASE_URL
 import com.uxstate.heroes.util.LocalSpacing
@@ -100,11 +103,26 @@ fun HeroItem(navigator: DestinationsNavigator, hero: Hero) {
                         text = hero.about,
                         color = Color.White.copy(alpha = ContentAlpha.medium),
                         fontSize = MaterialTheme.typography.subtitle1.fontSize,
-                        fontWeight = FontWeight.Bold,
                         maxLines = 3,
                         overflow = TextOverflow.Ellipsis
                 )
 
+                //Rating Widget row
+                Row(
+                        modifier = Modifier.padding(spacing.spaceSmall),
+                        verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    RatingWidget(
+                            modifier = Modifier.padding(end = spacing.spaceSmall),
+                            rating = hero.rating
+                    )
+                    Text(
+                            text = "(${hero.rating})",
+                            textAlign = TextAlign.Center,
+                            color = Color.White.copy(alpha = ContentAlpha.medium)
+                    )
+                }
 
             }
         }
