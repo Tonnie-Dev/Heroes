@@ -104,7 +104,7 @@ fun HeroItem(navigator: DestinationsNavigator, hero: Hero) {
                         maxLines = 3,
                         overflow = TextOverflow.Ellipsis
                 )
-                
+
 
             }
         }
