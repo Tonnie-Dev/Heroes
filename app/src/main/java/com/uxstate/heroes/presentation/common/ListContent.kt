@@ -5,6 +5,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.MaterialTheme
@@ -20,8 +21,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.items
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -32,9 +33,27 @@ import com.uxstate.heroes.presentation.screens.home.components.RatingWidget
 import com.uxstate.heroes.presentation.ui.theme.topAppBarContentColor
 import com.uxstate.heroes.util.Constants.BASE_URL
 import com.uxstate.heroes.util.LocalSpacing
+import timber.log.Timber
 
 @Composable
 fun ListContent(heroes: LazyPagingItems<Hero>, navigator: DestinationsNavigator) {
+    val spacing = LocalSpacing.current
+
+    Timber.i("ListContent - ")
+    LazyColumn(
+            contentPadding = PaddingValues(all = spacing.spaceExtraSmall),
+            verticalArrangement = Arrangement.spacedBy(spacing.spaceExtraLarge),
+            content = {
+
+                items(items = heroes, key = {heroItem -> heroItem.id}){
+                    
+                    hero -> hero?.let { 
+                        
+                        HeroItem(hero = it, navigator = navigator)
+                }
+                }
+
+            })
 
 }
 
@@ -47,7 +66,8 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
             model = ImageRequest.Builder(LocalContext.current)
                     .data(url)
                     .placeholder(R.drawable.ic_placeholder)
-                    .error(R.drawable.ic_placeholder).build()
+                    .error(R.drawable.ic_placeholder)
+                    .build()
     )
 
     Box(
@@ -56,11 +76,12 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
                     .aspectRatio(4f / 5f)
                     .clickable {
                         navigator?.navigate(DetailsScreenDestination)
-                    }, contentAlignment = Alignment.BottomStart) {
+                    }, contentAlignment = Alignment.BottomStart
+    ) {
 
 
         //Surface 1 - Image
-        Surface(shape = MaterialTheme.shapes.large) {
+        Surface(shape = RoundedCornerShape(spacing.spaceMedium)) {
 
             Image(
                     modifier = Modifier.fillMaxSize(),
@@ -113,7 +134,7 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
 
                 //Rating Widget row
                 Row(
-                        modifier = Modifier.padding(top =spacing.spaceSmall),
+                        modifier = Modifier.padding(top = spacing.spaceSmall),
                         verticalAlignment = Alignment.CenterVertically
                 ) {
 
@@ -126,7 +147,7 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
                             textAlign = TextAlign.Center,
                             color = Color.White.copy(alpha = ContentAlpha.medium)
                     )
-                    
+
 
                 }
 
@@ -141,20 +162,22 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
 @Composable
 fun ListContentPreviewLight() {
 
-  HeroItem(hero = Hero(
-          id = 7,
-          name = "Tonnie",
-          image = "",
-          about = "A story for another Day and time, Rachael is not talking to me and I am wondering" +
-                  "what could be wrong with her ...",
-          rating = 4.0,
-          power = 13,
-          month = "Jan",
-          day = "6",
-          family = listOf(),
-          abilities = listOf(),
-          natureTypes = listOf()
-  ) )
+    HeroItem(
+            hero = Hero(
+                    id = 7,
+                    name = "Tonnie",
+                    image = "",
+                    about = "A story for another Day and time, Rachael is not talking to me and I am wondering" +
+                            "what could be wrong with her ...",
+                    rating = 4.0,
+                    power = 13,
+                    month = "Jan",
+                    day = "6",
+                    family = listOf(),
+                    abilities = listOf(),
+                    natureTypes = listOf()
+            )
+    )
 }
 
 
@@ -162,18 +185,20 @@ fun ListContentPreviewLight() {
 @Composable
 fun ListContentPreviewDark() {
 
-    HeroItem(hero = Hero(
-            id = 7,
-            name = "Tonnie",
-            image = "",
-            about = "A story for another Day and time, Rachael is not talking to me and I am wondering" +
-                    "what could be wrong with her ...",
-            rating = 4.0,
-            power = 13,
-            month = "Jan",
-            day = "6",
-            family = listOf(),
-            abilities = listOf(),
-            natureTypes = listOf()
-    ) )
+    HeroItem(
+            hero = Hero(
+                    id = 7,
+                    name = "Tonnie",
+                    image = "",
+                    about = "A story for another Day and time, Rachael is not talking to me and I am wondering" +
+                            "what could be wrong with her ...",
+                    rating = 4.0,
+                    power = 13,
+                    month = "Jan",
+                    day = "6",
+                    family = listOf(),
+                    abilities = listOf(),
+                    natureTypes = listOf()
+            )
+    )
 }
