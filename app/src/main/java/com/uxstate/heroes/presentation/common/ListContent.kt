@@ -51,7 +51,7 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
     Box(
             modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(3f / 2f)
+                    .aspectRatio(4f / 5f)
                     .clickable {
                         navigator?.navigate(DetailsScreenDestination)
                     }, contentAlignment = Alignment.BottomStart) {
@@ -111,7 +111,7 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
 
                 //Rating Widget row
                 Row(
-                        modifier = Modifier.padding(spacing.spaceSmall),
+                        modifier = Modifier.padding(top =spacing.spaceSmall),
                         verticalAlignment = Alignment.CenterVertically
                 ) {
 
@@ -124,6 +124,8 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
                             textAlign = TextAlign.Center,
                             color = Color.White.copy(alpha = ContentAlpha.medium)
                     )
+                    
+
                 }
 
             }
@@ -141,7 +143,8 @@ fun ListContentPreview() {
           id = 7,
           name = "Tonnie",
           image = "",
-          about = "A story for another Dat ...",
+          about = "A story for another Day and time, Rachael is not talking to me and I am wondering" +
+                  "what could be wrong with her ...",
           rating = 4.0,
           power = 13,
           month = "Jan",
