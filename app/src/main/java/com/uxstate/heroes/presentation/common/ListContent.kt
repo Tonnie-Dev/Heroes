@@ -17,6 +17,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.LazyPagingItems
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -35,7 +37,7 @@ fun ListContent(heroes: LazyPagingItems<Hero>, navigator: DestinationsNavigator)
 }
 
 @Composable
-fun HeroItem(navigator: DestinationsNavigator, hero: Hero) {
+fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
 
     val spacing = LocalSpacing.current
     val url = "$BASE_URL${hero.image}"
@@ -43,7 +45,7 @@ fun HeroItem(navigator: DestinationsNavigator, hero: Hero) {
             model = ImageRequest.Builder(LocalContext.current)
                     .data(url)
                     .placeholder(R.drawable.ic_placeholder)
-                    .error(R.drawable.ic_placeholder)
+                    .error(R.drawable.ic_placeholder).build()
     )
 
     Box(
@@ -51,8 +53,8 @@ fun HeroItem(navigator: DestinationsNavigator, hero: Hero) {
                     .fillMaxWidth()
                     .aspectRatio(3f / 2f)
                     .clickable {
-                        navigator.navigate(DetailsScreenDestination)
-                    }) {
+                        navigator?.navigate(DetailsScreenDestination)
+                    }, contentAlignment = Alignment.BottomStart) {
 
 
         //Surface 1 - Image
@@ -129,4 +131,23 @@ fun HeroItem(navigator: DestinationsNavigator, hero: Hero) {
 
     }
 
+}
+
+@Preview(name = "ListContent", showBackground = true)
+@Composable
+fun ListContentPreview() {
+
+  HeroItem(hero = Hero(
+          id = 7,
+          name = "Tonnie",
+          image = "",
+          about = "A story for another Dat ...",
+          rating = 4.0,
+          power = 13,
+          month = "Jan",
+          day = "6",
+          family = listOf(),
+          abilities = listOf(),
+          natureTypes = listOf()
+  ) )
 }
