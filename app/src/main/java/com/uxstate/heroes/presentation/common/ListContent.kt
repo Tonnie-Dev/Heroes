@@ -1,5 +1,7 @@
 package com.uxstate.heroes.presentation.common
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -73,7 +75,7 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
         Surface(
                 modifier = Modifier
                         .fillMaxHeight(.4f)
-                        .fillMaxSize(),
+                        .fillMaxWidth(),
 
                 color = Color.Black.copy(alpha = ContentAlpha.medium),
                 shape = RoundedCornerShape(
@@ -135,9 +137,9 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
 
 }
 
-@Preview(name = "ListContent", showBackground = true)
+@Preview(name = "ListContent - Light", showBackground = true, uiMode = UI_MODE_NIGHT_NO)
 @Composable
-fun ListContentPreview() {
+fun ListContentPreviewLight() {
 
   HeroItem(hero = Hero(
           id = 7,
@@ -153,4 +155,25 @@ fun ListContentPreview() {
           abilities = listOf(),
           natureTypes = listOf()
   ) )
+}
+
+
+@Preview(name = "ListContent - Dark", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun ListContentPreviewDark() {
+
+    HeroItem(hero = Hero(
+            id = 7,
+            name = "Tonnie",
+            image = "",
+            about = "A story for another Day and time, Rachael is not talking to me and I am wondering" +
+                    "what could be wrong with her ...",
+            rating = 4.0,
+            power = 13,
+            month = "Jan",
+            day = "6",
+            family = listOf(),
+            abilities = listOf(),
+            natureTypes = listOf()
+    ) )
 }
