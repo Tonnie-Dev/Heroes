@@ -5,6 +5,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -22,7 +23,18 @@ import com.uxstate.heroes.util.LocalSpacing
 
 @Composable
 fun ShimmerEffect() {
+    val spacing = LocalSpacing.current
+    LazyColumn(
+            contentPadding = PaddingValues(spacing.spaceExtraSmall),
+            verticalArrangement = Arrangement.spacedBy(spacing.spaceExtraSmall),
+            content = {
 
+                items(count = 2){
+
+                    AnimatedShimmerItem()
+                }
+
+            })
 }
 
 
@@ -34,9 +46,12 @@ fun AnimatedShimmerItem() {
 
     val transition = rememberInfiniteTransition()
 
-    //holds the state of alpha
+    //holds the animated state of alpha
     val alphaValue by transition.animateFloat(
+            //full visibility
             initialValue = 1f,
+
+            //zero visibility
             targetValue = 0f,
             animationSpec = infiniteRepeatable(
                     animation = tween(
