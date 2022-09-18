@@ -1,5 +1,7 @@
 package com.uxstate.heroes.presentation.screens.home.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -47,9 +49,18 @@ fun ShimmerItem() {
     }
 }
 
-@Preview(name = "ShimmerPreview - Light", showBackground = true)
+@Preview(name = "ShimmerPreview - Light", showBackground = true, uiMode = UI_MODE_NIGHT_NO)
 @Composable
 fun ShimmerPreviewLight() {
+
+    ShimmerItem()
+
+}
+
+
+@Preview(name = "ShimmerPreview - Dark", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun ShimmerPreviewDark() {
 
     ShimmerItem()
 
