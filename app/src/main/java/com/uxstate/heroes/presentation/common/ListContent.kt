@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import coil.compose.rememberAsyncImagePainter
@@ -31,6 +32,7 @@ import com.uxstate.heroes.R
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.presentation.screens.destinations.DetailsScreenDestination
 import com.uxstate.heroes.presentation.screens.home.components.RatingWidget
+import com.uxstate.heroes.presentation.screens.home.components.ShimmerEffect
 import com.uxstate.heroes.presentation.ui.theme.topAppBarContentColor
 import com.uxstate.heroes.util.Constants.BASE_URL
 import com.uxstate.heroes.util.LocalSpacing
@@ -43,8 +45,8 @@ fun ListContent(
     modifier: Modifier = Modifier
 ) {
     val spacing = LocalSpacing.current
+    
 
-    Timber.i("ListContent - ${heroes.loadState.toString()}")
     LazyColumn(modifier = modifier,
             contentPadding = PaddingValues(all = spacing.spaceSmall),
             verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall),
@@ -66,6 +68,43 @@ fun ListContent(
 
 }
 
+//small letter because this function returns a value
+@Composable
+fun handlePagingResult(heroes: LazyPagingItems<Hero>):Boolean {
+
+    heroes.apply {
+
+        //this variable stores errors found in refresh, prepend or append
+        val error = when{
+
+            loadState.refresh is LoadState.Error -> {
+                loadState.refresh as LoadState.Error
+            }
+            loadState.prepend is LoadState.Error -> {
+
+                loadState.prepend as LoadState.Error
+            }
+            loadState.append is LoadState.Error -> {
+                loadState.append as LoadState.Error
+            }
+
+            else -> null
+        }
+        // during loading
+        return when { loadState.refresh is LoadState.Loading -> {
+
+            ShimmerEffect()
+            false
+        }
+        //in case of error
+            error!= null -> false
+
+            // if there is no error and data is not loading any more we show lazy column
+            else -> true
+        }
+    }
+
+}
 @Composable
 fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
 

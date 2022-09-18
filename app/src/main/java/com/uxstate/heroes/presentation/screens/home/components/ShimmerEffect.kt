@@ -25,8 +25,8 @@ import com.uxstate.heroes.util.LocalSpacing
 fun ShimmerEffect() {
     val spacing = LocalSpacing.current
     LazyColumn(
-            contentPadding = PaddingValues(spacing.spaceExtraSmall),
-            verticalArrangement = Arrangement.spacedBy(spacing.spaceExtraSmall),
+            contentPadding = PaddingValues(spacing.spaceSmall),
+            verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall),
             content = {
 
                 items(count = 2){
