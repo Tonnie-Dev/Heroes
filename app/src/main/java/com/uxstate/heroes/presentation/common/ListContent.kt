@@ -39,10 +39,10 @@ import timber.log.Timber
 fun ListContent(heroes: LazyPagingItems<Hero>, navigator: DestinationsNavigator) {
     val spacing = LocalSpacing.current
 
-    Timber.i("ListContent - ")
+    Timber.i("ListContent - ${heroes.loadState.toString()}")
     LazyColumn(
-            contentPadding = PaddingValues(all = spacing.spaceExtraSmall),
-            verticalArrangement = Arrangement.spacedBy(spacing.spaceExtraLarge),
+            contentPadding = PaddingValues(all = spacing.spaceSmall),
+            verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall),
             content = {
 
                 items(items = heroes, key = {heroItem -> heroItem.id}){
