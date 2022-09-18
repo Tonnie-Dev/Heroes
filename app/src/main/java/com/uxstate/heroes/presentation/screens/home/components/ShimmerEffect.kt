@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -30,10 +32,10 @@ fun AnimatedShimmerItem() {
     //This will animate the Alpha state and will animate as
     //as the Shimmer is visible i.e indefinitely
 
-    val transition by rememberInfiniteTransition()
+    val transition = rememberInfiniteTransition()
 
     //holds the state of alpha
-    val alphaValue = transition.animateFloat(
+    val alphaValue by transition.animateFloat(
             initialValue = 1f,
             targetValue = 0f,
             animationSpec = infiniteRepeatable(
@@ -46,11 +48,12 @@ fun AnimatedShimmerItem() {
     )
 
 
+    ShimmerPlaceHolderItem(alphaValue = alphaValue)
 
 }
 
 @Composable
-fun ShimmerItem(alphaValue:Float) {
+fun ShimmerPlaceHolderItem(alphaValue: Float) {
 
     val spacing = LocalSpacing.current
 
@@ -99,11 +102,12 @@ fun ShimmerItem(alphaValue:Float) {
 
 
 @Composable
-fun ShimmerBars(modifier: Modifier, height: Dp = 0.dp) {
+fun ShimmerBars(modifier: Modifier, height: Dp = 0.dp, alphaValue: Float) {
 
     val spacing = LocalSpacing.current
     Surface(
             modifier = modifier
+                    .alpha(alphaValue)
                     .height(height),
             color = if (isSystemInDarkTheme()) ShimmerDarkGray else ShimmerMediumGray,
             shape = RoundedCornerShape(spacing.spaceExtraSmall)
@@ -116,7 +120,7 @@ fun ShimmerBars(modifier: Modifier, height: Dp = 0.dp) {
 @Composable
 fun ShimmerPreviewLight() {
 
-    ShimmerItem()
+    ShimmerPlaceHolderItem()
 
 }
 
@@ -125,6 +129,6 @@ fun ShimmerPreviewLight() {
 @Composable
 fun ShimmerPreviewDark() {
 
-    ShimmerItem()
+    ShimmerPlaceHolderItem()
 
 }
