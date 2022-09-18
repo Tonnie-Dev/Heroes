@@ -81,7 +81,7 @@ By default, for the OkHttpClient, this timeout is set to 10 seconds.   */
         return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .client(okHttpClient)
+                .client(okHttpClient)// to set time outs
                 .build()
                 .create()
     }

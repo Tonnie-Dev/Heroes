@@ -45,26 +45,33 @@ fun ListContent(
     modifier: Modifier = Modifier
 ) {
     val spacing = LocalSpacing.current
-    
 
-    LazyColumn(modifier = modifier,
-            contentPadding = PaddingValues(all = spacing.spaceSmall),
-            verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall),
-            content = {
+    //if false &&loading Shimmer will be shown
+    val result = handlePagingResult(heroes = heroes)
 
-                items(items = heroes,
-                        //key represents a unique value for each item
-                        key = { heroItem -> heroItem.id })
-                {
+    if (result){
 
-                    hero ->
-                    hero?.let {
+        LazyColumn(modifier = modifier,
+                contentPadding = PaddingValues(all = spacing.spaceSmall),
+                verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall),
+                content = {
 
-                        HeroItem(hero = it, navigator = navigator)
+                    items(items = heroes,
+                            //key represents a unique value for each item
+                            key = { heroItem -> heroItem.id })
+                    {
+
+                        hero ->
+                        hero?.let {
+
+                            HeroItem(hero = it, navigator = navigator)
+                        }
                     }
-                }
 
-            })
+                })
+    }
+
+
 
 }
 
