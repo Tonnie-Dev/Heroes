@@ -2,6 +2,7 @@ package com.uxstate.heroes.presentation.screens.home.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,15 +17,40 @@ import com.uxstate.heroes.presentation.ui.theme.ShimmerDarkGray
 import com.uxstate.heroes.presentation.ui.theme.ShimmerLightGray
 import com.uxstate.heroes.presentation.ui.theme.ShimmerMediumGray
 import com.uxstate.heroes.util.LocalSpacing
-import timber.log.Timber.Forest.i
 
 @Composable
 fun ShimmerEffect() {
 
 }
 
+
 @Composable
-fun ShimmerItem() {
+fun AnimatedShimmerItem() {
+
+    //This will animate the Alpha state and will animate as
+    //as the Shimmer is visible i.e indefinitely
+
+    val transition by rememberInfiniteTransition()
+
+    //holds the state of alpha
+    val alphaValue = transition.animateFloat(
+            initialValue = 1f,
+            targetValue = 0f,
+            animationSpec = infiniteRepeatable(
+                    animation = tween(
+                            durationMillis = 500,
+                            easing = FastOutSlowInEasing
+                    ),
+                    repeatMode = RepeatMode.Reverse
+            )
+    )
+
+
+
+}
+
+@Composable
+fun ShimmerItem(alphaValue:Float) {
 
     val spacing = LocalSpacing.current
 
@@ -40,14 +66,19 @@ fun ShimmerItem() {
                 verticalArrangement = Arrangement.Bottom
         ) {
 
-            ShimmerBars(modifier = Modifier.fillMaxWidth(0.5f), height = spacing.spaceLarge)
+            ShimmerBars(
+                    modifier = Modifier.fillMaxWidth(0.5f),
+                    height = spacing.spaceLarge
+            )
 
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
 
             repeat(3) {
 
-
-                ShimmerBars(modifier = Modifier.fillMaxWidth(), height = spacing.spaceMedium)
+                ShimmerBars(
+                        modifier = Modifier.fillMaxWidth(),
+                        height = spacing.spaceMedium
+                )
                 Spacer(modifier = Modifier.height(spacing.spaceSmall))
 
             }
@@ -68,7 +99,7 @@ fun ShimmerItem() {
 
 
 @Composable
-fun ShimmerBars(modifier: Modifier, height:Dp = 0.dp) {
+fun ShimmerBars(modifier: Modifier, height: Dp = 0.dp) {
 
     val spacing = LocalSpacing.current
     Surface(
