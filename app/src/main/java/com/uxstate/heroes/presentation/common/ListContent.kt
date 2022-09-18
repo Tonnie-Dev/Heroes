@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import coil.compose.rememberAsyncImagePainter
+import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.R
@@ -36,24 +37,29 @@ import com.uxstate.heroes.util.LocalSpacing
 import timber.log.Timber
 
 @Composable
-fun ListContent(heroes: LazyPagingItems<Hero>, navigator: DestinationsNavigator, modifier:Modifier = Modifier) {
+fun ListContent(
+    heroes: LazyPagingItems<Hero>,
+    navigator: DestinationsNavigator,
+    modifier: Modifier = Modifier
+) {
     val spacing = LocalSpacing.current
 
     Timber.i("ListContent - ${heroes.loadState.toString()}")
-    LazyColumn(
+    LazyColumn(modifier = modifier,
             contentPadding = PaddingValues(all = spacing.spaceSmall),
             verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall),
             content = {
 
                 items(items = heroes,
                         //key represents a unique value for each item
-                        key = {heroItem -> heroItem.id})
+                        key = { heroItem -> heroItem.id })
                 {
-                    
-                    hero -> hero?.let { 
-                        
+
+                    hero ->
+                    hero?.let {
+
                         HeroItem(hero = it, navigator = navigator)
-                }
+                    }
                 }
 
             })
@@ -65,6 +71,8 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
 
     val spacing = LocalSpacing.current
     val url = "$BASE_URL${hero.image}"
+    
+
     val painter = rememberAsyncImagePainter(
             model = ImageRequest.Builder(LocalContext.current)
                     .data(url)
@@ -76,7 +84,7 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
     Box(
             modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(4f / 5f)
+                    .aspectRatio(9f / 10f)
                     .clickable {
                         navigator?.navigate(DetailsScreenDestination)
                     }, contentAlignment = Alignment.BottomStart
