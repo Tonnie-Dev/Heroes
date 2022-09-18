@@ -69,7 +69,7 @@ fun ShimmerPlaceHolderItem(alphaValue: Float) {
                 verticalArrangement = Arrangement.Bottom
         ) {
 
-            ShimmerBars(
+            ShimmerBar(
                     modifier = Modifier.fillMaxWidth(0.5f),
                     height = spacing.spaceLarge
             )
@@ -78,7 +78,7 @@ fun ShimmerPlaceHolderItem(alphaValue: Float) {
 
             repeat(3) {
 
-                ShimmerBars(
+                ShimmerBar(
                         modifier = Modifier.fillMaxWidth(),
                         height = spacing.spaceMedium
                 )
@@ -91,7 +91,7 @@ fun ShimmerPlaceHolderItem(alphaValue: Float) {
             Row() {
                 repeat(5) {
 
-                    ShimmerBars(modifier = Modifier.size(spacing.spaceLarge))
+                    ShimmerBar(modifier = Modifier.size(spacing.spaceLarge))
                     Spacer(modifier = Modifier.width(spacing.spaceExtraSmall))
                 }
             }
@@ -102,7 +102,7 @@ fun ShimmerPlaceHolderItem(alphaValue: Float) {
 
 
 @Composable
-fun ShimmerBars(modifier: Modifier, height: Dp = 0.dp, alphaValue: Float) {
+fun ShimmerBar(modifier: Modifier, height: Dp = 0.dp, alphaValue: Float) {
 
     val spacing = LocalSpacing.current
     Surface(
