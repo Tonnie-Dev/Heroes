@@ -45,7 +45,10 @@ fun ListContent(heroes: LazyPagingItems<Hero>, navigator: DestinationsNavigator)
             verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall),
             content = {
 
-                items(items = heroes, key = {heroItem -> heroItem.id}){
+                items(items = heroes,
+                        //key represents a unique value for each item
+                        key = {heroItem -> heroItem.id})
+                {
                     
                     hero -> hero?.let { 
                         
