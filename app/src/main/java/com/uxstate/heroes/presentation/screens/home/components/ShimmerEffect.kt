@@ -71,7 +71,8 @@ fun ShimmerPlaceHolderItem(alphaValue: Float) {
 
             ShimmerBar(
                     modifier = Modifier.fillMaxWidth(0.5f),
-                    height = spacing.spaceLarge
+                    height = spacing.spaceLarge,
+                    alphaValue = alphaValue
             )
 
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
@@ -80,7 +81,8 @@ fun ShimmerPlaceHolderItem(alphaValue: Float) {
 
                 ShimmerBar(
                         modifier = Modifier.fillMaxWidth(),
-                        height = spacing.spaceMedium
+                        height = spacing.spaceMedium,
+                        alphaValue = alphaValue
                 )
                 Spacer(modifier = Modifier.height(spacing.spaceSmall))
 
@@ -91,7 +93,10 @@ fun ShimmerPlaceHolderItem(alphaValue: Float) {
             Row() {
                 repeat(5) {
 
-                    ShimmerBar(modifier = Modifier.size(spacing.spaceLarge))
+                    ShimmerBar(
+                            modifier = Modifier.size(spacing.spaceLarge),
+                            alphaValue = alphaValue
+                    )
                     Spacer(modifier = Modifier.width(spacing.spaceExtraSmall))
                 }
             }
@@ -120,7 +125,7 @@ fun ShimmerBar(modifier: Modifier, height: Dp = 0.dp, alphaValue: Float) {
 @Composable
 fun ShimmerPreviewLight() {
 
-    ShimmerPlaceHolderItem()
+    AnimatedShimmerItem()
 
 }
 
@@ -129,6 +134,6 @@ fun ShimmerPreviewLight() {
 @Composable
 fun ShimmerPreviewDark() {
 
-    ShimmerPlaceHolderItem()
+    AnimatedShimmerItem()
 
 }
