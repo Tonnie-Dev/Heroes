@@ -10,10 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.uxstate.heroes.presentation.ui.theme.ShimmerDarkGray
 import com.uxstate.heroes.presentation.ui.theme.ShimmerLightGray
 import com.uxstate.heroes.presentation.ui.theme.ShimmerMediumGray
 import com.uxstate.heroes.util.LocalSpacing
+import timber.log.Timber.Forest.i
 
 @Composable
 fun ShimmerEffect() {
@@ -26,7 +29,9 @@ fun ShimmerItem() {
     val spacing = LocalSpacing.current
 
     Surface(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(9f / 10f),
             color = if (isSystemInDarkTheme()) Color.Black else ShimmerLightGray,
             shape = RoundedCornerShape(spacing.spaceMedium)
     ) {
@@ -35,17 +40,44 @@ fun ShimmerItem() {
                 verticalArrangement = Arrangement.Bottom
         ) {
 
+            ShimmerBars(modifier = Modifier.fillMaxWidth(0.5f), height = spacing.spaceLarge)
 
-            Surface(
-                    modifier = Modifier
-                            .fillMaxWidth(0.5f)
-                            .height(spacing.spaceLarge),
-                    color = if (isSystemInDarkTheme()) ShimmerDarkGray else ShimmerMediumGray,
-                    shape = RoundedCornerShape(spacing.spaceSmall)
-            ) {
+            Spacer(modifier = Modifier.height(spacing.spaceSmall))
+
+            repeat(3) {
+
+
+                ShimmerBars(modifier = Modifier.fillMaxWidth(), height = spacing.spaceMedium)
+                Spacer(modifier = Modifier.height(spacing.spaceSmall))
 
             }
+
+            Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
+
+            Row() {
+                repeat(5) {
+
+                    ShimmerBars(modifier = Modifier.size(spacing.spaceLarge))
+                    Spacer(modifier = Modifier.width(spacing.spaceExtraSmall))
+                }
+            }
+
         }
+    }
+}
+
+
+@Composable
+fun ShimmerBars(modifier: Modifier, height:Dp = 0.dp) {
+
+    val spacing = LocalSpacing.current
+    Surface(
+            modifier = modifier
+                    .height(height),
+            color = if (isSystemInDarkTheme()) ShimmerDarkGray else ShimmerMediumGray,
+            shape = RoundedCornerShape(spacing.spaceExtraSmall)
+    ) {
+
     }
 }
 
