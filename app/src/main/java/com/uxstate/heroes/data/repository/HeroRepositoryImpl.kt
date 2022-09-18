@@ -18,13 +18,11 @@ import javax.inject.Inject
 //always depend on abstraction and not concretions
 class HeroRepositoryImpl @Inject constructor(
     private val dataStoreOps: DataStoreOps,
-    private val api: HeroAPI,
-   database: HeroDatabase,
     private val remoteDataSource: RemoteDataSource
 ) :
     HeroRepository {
 
-    private val dao = database.heroDao
+    //private val dao = database.heroDao
     override suspend fun saveOnboardingState(isCompleted: Boolean) {
         dataStoreOps.saveOnBoardingState(isCompleted = isCompleted)
     }

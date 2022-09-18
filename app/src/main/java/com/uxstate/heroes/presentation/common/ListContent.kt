@@ -36,7 +36,7 @@ import com.uxstate.heroes.util.LocalSpacing
 import timber.log.Timber
 
 @Composable
-fun ListContent(heroes: LazyPagingItems<Hero>, navigator: DestinationsNavigator) {
+fun ListContent(heroes: LazyPagingItems<Hero>, navigator: DestinationsNavigator, modifier:Modifier = Modifier) {
     val spacing = LocalSpacing.current
 
     Timber.i("ListContent - ${heroes.loadState.toString()}")
