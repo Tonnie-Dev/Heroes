@@ -45,7 +45,8 @@ fun HeroRemoteKeys.toEntity(): HeroRemoteKeysEntity {
     return HeroRemoteKeysEntity(
             id = this.id,
             prevPage = this.prevPage,
-            nextKey = this.nextPage
+            nextKey = this.nextPage,
+            lastUpdated = this.lastUpdated
     )
 }
 
@@ -56,6 +57,7 @@ fun HeroRemoteKeysEntity.toModel(): HeroRemoteKeys{
     return HeroRemoteKeys(
             id = this.id,
             prevPage = this.prevPage,
-            nextPage = this.nextKey
+            nextPage = this.nextKey,
+            lastUpdated = this.lastUpdated
     )
 }
