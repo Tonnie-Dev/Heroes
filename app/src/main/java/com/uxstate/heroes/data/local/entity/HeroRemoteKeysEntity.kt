@@ -33,5 +33,6 @@ data class HeroRemoteKeysEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val prevPage: Int?,
-    val nextKey: Int?
+    val nextKey: Int?,
+    val lastUpdated:Long? = null
 )
