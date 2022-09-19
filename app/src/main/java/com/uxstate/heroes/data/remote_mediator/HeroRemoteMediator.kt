@@ -1,4 +1,4 @@
-package com.uxstate.heroes.data.paging_source
+package com.uxstate.heroes.data.remote_mediator
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType

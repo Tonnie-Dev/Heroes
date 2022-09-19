@@ -6,6 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.uxstate.heroes.data.local.HeroDatabase
 import com.uxstate.heroes.data.remote.HeroAPI
+import com.uxstate.heroes.data.remote_mediator.HeroRemoteMediator
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.util.Constants
 import kotlinx.coroutines.flow.Flow
