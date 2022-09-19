@@ -37,20 +37,27 @@ class HeroRemoteMediator @Inject constructor(
         //pass an arbitrary id
         val lastUpdate = heroRemoteKeysDao.getRemoteKeys(1)?.lastUpdated ?: 0L
 
-        val cacheTimeout = 5
+        val cacheTimeout = 1440
 
         Timber.i("Mediator: Current Time ${parseMillis(currentTime)}")
-        Timber.i("Mediiator: Last Updated Time ${parseMillis(currentTime)}")
+        Timber.i("Mediator: Last Updated Time ${parseMillis(lastUpdate)}")
 
         //divide by 1000 to get secs and 60 to get minutes
         val diffInMinutes = (currentTime - lastUpdate)/1000/60
 
         return if (diffInMinutes.toInt() <= cacheTimeout){
-
+            Timber.i("Mediator: UP TO DATE")
             //load from the database
             InitializeAction.SKIP_INITIAL_REFRESH
-        }else
+
+
+        }else{
+
+            Timber.i ("Mediator: REFRESH")
             InitializeAction.LAUNCH_INITIAL_REFRESH
+
+        }
+
 
     }
 
