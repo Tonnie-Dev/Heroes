@@ -28,7 +28,24 @@ class HeroRemoteMediator @Inject constructor(
 
 
     override suspend fun initialize(): InitializeAction {
-        return super.initialize()
+        //get current time when initialize() is triggered
+        val currentTime = System.currentTimeMillis()
+
+        //pass an arbitrary id
+        val lastUpdate = heroRemoteKeysDao.getRemoteKeys(1)?.lastUpdated ?: 0L
+
+        val cacheTimeout = 5
+
+        //divide by 1000 to get secs and 60 to get minutes
+        val diffInMinutes = (currentTime - lastUpdate)/1000/60
+
+        return if (diffInMinutes.toInt() <= cacheTimeout){
+
+            //load from the database
+            InitializeAction.SKIP_INITIAL_REFRESH
+        }else
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+
     }
 
     /*responsible for updating the backing dataset and invalidating the paging source*/
@@ -100,7 +117,8 @@ class HeroRemoteMediator @Inject constructor(
                         HeroRemoteKeys(
                                 id = it.id,
                                 prevPage = prevPage,
-                                nextPage = nextPage
+                                nextPage = nextPage,
+                                lastUpdated =response.lastUpdated
                         )
                     }
 

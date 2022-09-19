@@ -34,5 +34,7 @@ data class HeroRemoteKeysEntity(
     val id: Int,
     val prevPage: Int?,
     val nextKey: Int?,
+
+    //to be used by RemoteMediator to determine whether to refresh data
     val lastUpdated:Long? = null
 )
