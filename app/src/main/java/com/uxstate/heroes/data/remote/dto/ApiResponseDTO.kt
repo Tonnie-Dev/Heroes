@@ -16,5 +16,8 @@ data class ApiResponseDTO(
     @Json(name = "previousPage")
     val prevPage: Int?,
     @Json(name = "heroes")
-    val heroes: List<Hero>
+    val heroes: List<Hero>,
+    @Json(name = "lastUpdated")
+    val lastUpdated: Long?,
+
 )

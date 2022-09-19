@@ -26,6 +26,11 @@ class HeroRemoteMediator @Inject constructor(
     private val heroDao = database.heroDao
     private val heroRemoteKeysDao = database.heroRemoteKeysDao
 
+
+    override suspend fun initialize(): InitializeAction {
+        return super.initialize()
+    }
+
     /*responsible for updating the backing dataset and invalidating the paging source*/
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Hero>): MediatorResult {
         return try {
