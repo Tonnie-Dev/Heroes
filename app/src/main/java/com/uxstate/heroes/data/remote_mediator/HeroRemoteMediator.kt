@@ -11,6 +11,9 @@ import com.uxstate.heroes.data.mapper.toModel
 import com.uxstate.heroes.data.remote.HeroAPI
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.domain.model.HeroRemoteKeys
+import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
@@ -35,6 +38,9 @@ class HeroRemoteMediator @Inject constructor(
         val lastUpdate = heroRemoteKeysDao.getRemoteKeys(1)?.lastUpdated ?: 0L
 
         val cacheTimeout = 5
+
+        Timber.i("Mediator: Current Time ${parseMillis(currentTime)}")
+        Timber.i("Mediiator: Last Updated Time ${parseMillis(currentTime)}")
 
         //divide by 1000 to get secs and 60 to get minutes
         val diffInMinutes = (currentTime - lastUpdate)/1000/60
@@ -187,4 +193,15 @@ class HeroRemoteMediator @Inject constructor(
                 }
     }
 
+
+
+    fun parseMillis(millis:Long):String{
+
+        val date = Date(millis)
+
+        //used as the language/country neutral locale for the locale sensitive operations
+        val sdf = SimpleDateFormat( "yyyy.MM.dd HH.mm", Locale.ROOT)
+
+        return sdf.format(date)
+    }
 }
