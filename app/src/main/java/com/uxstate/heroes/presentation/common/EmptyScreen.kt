@@ -1,11 +1,10 @@
 package com.uxstate.heroes.presentation.common
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.paging.LoadState
 import com.uxstate.heroes.R
 import com.uxstate.heroes.util.LocalSpacing
@@ -45,6 +46,17 @@ fun EmptyScreen(error: LoadState.Error) {
                 painter = painterResource(id = icon),
                 contentDescription = stringResource(R.string.network_error_icon),
                 tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
+        )
+
+        //Text
+
+        Text(
+                modifier = Modifier.padding(top = spacing.spaceSmall),
+                text = message,
+                color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
+                fontSize = MaterialTheme.typography.subtitle1.fontSize,
+                fontWeight = FontWeight.Medium,
+                textAlign = TextAlign.Center
         )
     }
 
