@@ -104,7 +104,10 @@ fun handlePagingResult(heroes: LazyPagingItems<Hero>):Boolean {
             false
         }
         //in case of error
-            error!= null -> false
+            error!= null -> {
+                EmptyScreen(error = error)
+                false
+            }
 
             // if there is no error and data is not loading any more we show lazy column
             else -> true
