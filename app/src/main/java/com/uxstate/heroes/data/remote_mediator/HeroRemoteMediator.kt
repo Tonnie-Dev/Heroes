@@ -202,7 +202,7 @@ class HeroRemoteMediator @Inject constructor(
 
 
 
-    fun parseMillis(millis:Long):String{
+    private fun parseMillis(millis:Long):String{
 
         val date = Date(millis)
 
