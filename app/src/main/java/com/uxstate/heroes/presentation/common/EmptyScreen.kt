@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
 import com.uxstate.heroes.R
+import com.uxstate.heroes.util.Dimens
 import com.uxstate.heroes.util.LocalSpacing
 import java.net.SocketTimeoutException
 
@@ -56,6 +57,17 @@ fun EmptyScreen(error: LoadState.Error) {
             animationSpec = tween(1000)
     )
 
+    EmptyContent(spacing, alphaValue, icon, message)
+
+}
+
+@Composable
+fun EmptyContent(
+    spacing: Dimens,
+    alphaValue: Float,
+    icon: Int,
+    message: String
+) {
     Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -88,7 +100,6 @@ fun EmptyScreen(error: LoadState.Error) {
 
 
     }
-
 }
 
 fun parseErrorMessage(message: String): String {
