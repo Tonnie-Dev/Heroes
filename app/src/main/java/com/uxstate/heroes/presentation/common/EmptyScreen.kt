@@ -2,6 +2,7 @@ package com.uxstate.heroes.presentation.common
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -33,8 +34,8 @@ fun EmptyScreen(error: LoadState.Error) {
         mutableStateOf(parseErrorMessage(error.toString()))
     }
 
-    val icon by remember {
-        mutableStateOf(R.drawable.ic_placeholder)
+    val icon = remember {
+        R.drawable.ic_network_error
     }
 
     Column(
@@ -49,7 +50,7 @@ fun EmptyScreen(error: LoadState.Error) {
                 modifier = Modifier.size(spacing.spaceOneHundredFifty),
                 painter = painterResource(id = icon),
                 contentDescription = stringResource(R.string.network_error_icon),
-                tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
+               tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
         )
 
         //Text
@@ -62,6 +63,10 @@ fun EmptyScreen(error: LoadState.Error) {
                 fontWeight = FontWeight.Medium,
                 textAlign = TextAlign.Center
         )
+
+
+
+
     }
 
 }
