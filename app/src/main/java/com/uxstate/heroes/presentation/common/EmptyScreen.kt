@@ -1,5 +1,7 @@
 package com.uxstate.heroes.presentation.common
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -16,9 +18,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
 import com.uxstate.heroes.R
 import com.uxstate.heroes.util.LocalSpacing
+import java.net.SocketTimeoutException
 
 @Composable
 fun EmptyScreen(error: LoadState.Error) {
@@ -71,4 +75,16 @@ fun parseErrorMessage(message: String): String {
         else -> "Unknown Error"
     }
 
+}
+
+@Preview("EmptyScreen - Light", uiMode = UI_MODE_NIGHT_NO, showBackground = true)
+@Composable
+fun EmptyScreenPreviewLight() {
+    EmptyScreen(error = LoadState.Error(error = SocketTimeoutException()))
+}
+
+@Preview("EmptyScreen - Dark", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Composable
+fun EmptyScreenPreviewDark() {
+    EmptyScreen(error = LoadState.Error(error = SocketTimeoutException()))
 }
