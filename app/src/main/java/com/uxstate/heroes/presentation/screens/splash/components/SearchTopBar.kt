@@ -121,7 +121,7 @@ fun SearchWidget(
 }
 
 
-@Preview(name = "Light", uiMode = UI_MODE_NIGHT_NO, showSystemUi = true, showBackground = true)
+@Preview(name = "Light", uiMode = UI_MODE_NIGHT_NO, showBackground = true)
 @Composable
 fun SearchWidgetPreviewLight() {
 
@@ -130,7 +130,7 @@ fun SearchWidgetPreviewLight() {
 }
 
 
-@Preview(name = "Dark", uiMode = UI_MODE_NIGHT_YES, showSystemUi = true, showBackground = true)
+@Preview(name = "Dark", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun SearchWidgetPreviewDark() {
 
