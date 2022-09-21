@@ -2,4 +2,5 @@
 <resources>
     <string name="network_error_icon">Network Error Icon</string>
     <string name="search_lable">Search</string>
+    <string name="close_label">Close</string>
 </resources>
