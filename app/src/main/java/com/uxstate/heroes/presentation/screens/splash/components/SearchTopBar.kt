@@ -23,6 +23,7 @@ import com.uxstate.heroes.presentation.ui.theme.topAppBarBackgroundColor
 import com.uxstate.heroes.presentation.ui.theme.topAppBarContentColor
 import com.uxstate.heroes.util.LocalSpacing
 
+/*
 @Composable
 fun SearchTopBar(
     text: String,
@@ -33,6 +34,7 @@ fun SearchTopBar(
 ) {
 
 }
+*/
 
 
 @Composable
@@ -64,10 +66,13 @@ fun SearchWidget(
                     )
                 },
 
-                //unlike Text element you can't specify the color directly
-                textStyle = TextStyle(color = MaterialTheme.colors.topAppBarContentColor),
+                //TextStyle always take precedence over TextField colors
+                textStyle = TextStyle(color = MaterialTheme.colors.topAppBarContentColor
+                ),
+
+                //access other colors values for TextField
                 colors = TextFieldDefaults.textFieldColors(
-                        textColor = MaterialTheme.colors.topAppBarContentColor,
+                        textColor = Color.Black,
                         backgroundColor = Color.Transparent,
                         cursorColor = MaterialTheme.colors.topAppBarContentColor
                 ),
@@ -125,7 +130,7 @@ fun SearchWidget(
 @Composable
 fun SearchWidgetPreviewLight() {
 
-    SearchWidget(text = "", onTextChange = {}, onSearch = {}, onClose = { })
+    SearchWidget(text = "Me Boss", onTextChange = {}, onSearch = {}, onClose = { })
 
 }
 
@@ -134,6 +139,6 @@ fun SearchWidgetPreviewLight() {
 @Composable
 fun SearchWidgetPreviewDark() {
 
-    SearchWidget(text = "", onTextChange = {}, onSearch = {}, onClose = { })
+    SearchWidget(text = "The Boss", onTextChange = {}, onSearch = {}, onClose = { })
 
 }
