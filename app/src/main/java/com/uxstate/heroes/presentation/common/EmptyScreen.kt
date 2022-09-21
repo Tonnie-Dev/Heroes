@@ -26,6 +26,7 @@ import com.uxstate.heroes.R
 import com.uxstate.heroes.util.LocalSpacing
 import java.net.ConnectException
 import java.net.SocketException
+import java.net.SocketTimeoutException
 
 @Composable
 fun EmptyScreen(error: LoadState.Error) {
@@ -109,8 +110,14 @@ fun EmptyContent(
 fun parseErrorMessage(loadStateError: LoadState.Error): String {
 
     return when (loadStateError.error) {
-        is ConnectException -> "Internet Unavailable"
-        is SocketException -> "Server Unavailable"
+
+        is SocketTimeoutException -> {
+            "Server Unavailable"
+        }
+
+        is ConnectException -> {
+            "Internet Unavailable"
+        }
         else -> "Unknown Error"
     }
 
