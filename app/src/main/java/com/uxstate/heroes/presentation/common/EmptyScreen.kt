@@ -2,6 +2,7 @@ package com.uxstate.heroes.presentation.common
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -22,17 +23,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
 import com.uxstate.heroes.R
-import com.uxstate.heroes.util.Dimens
 import com.uxstate.heroes.util.LocalSpacing
-import java.net.SocketTimeoutException
+import java.net.ConnectException
+import java.net.SocketException
 
 @Composable
 fun EmptyScreen(error: LoadState.Error) {
 
-    val spacing = LocalSpacing.current
 
     val message by remember {
-        mutableStateOf(parseErrorMessage(error.toString()))
+        mutableStateOf(parseErrorMessage(error))
     }
 
     val icon = remember {
@@ -57,19 +57,23 @@ fun EmptyScreen(error: LoadState.Error) {
             animationSpec = tween(1000)
     )
 
-    EmptyContent(spacing, alphaValue, icon, message)
+    EmptyContent(alphaValue, icon, message)
 
 }
 
 @Composable
 fun EmptyContent(
-    spacing: Dimens,
     alphaValue: Float,
-    icon: Int,
+    @DrawableRes icon: Int,
     message: String
 ) {
+
+    val spacing = LocalSpacing.current
+
+
     Column(
             modifier = Modifier.fillMaxSize(),
+
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
     ) {
@@ -102,25 +106,38 @@ fun EmptyContent(
     }
 }
 
-fun parseErrorMessage(message: String): String {
+fun parseErrorMessage(loadStateError: LoadState.Error): String {
 
-    return when {
-        message.contains("SocketTimeoutException") -> "Server Unavailable"
-        message.contains("ConnectException") -> "Internet Unavailable"
-
+    return when (loadStateError.error) {
+        is ConnectException -> "Internet Unavailable"
+        is SocketException -> "Server Unavailable"
         else -> "Unknown Error"
     }
 
+
 }
 
-@Preview("EmptyScreen - Light", uiMode = UI_MODE_NIGHT_NO, showBackground = true)
+@Preview(name = "Light", showBackground = true, uiMode = UI_MODE_NIGHT_NO, showSystemUi = true)
 @Composable
 fun EmptyScreenPreviewLight() {
-    EmptyScreen(error = LoadState.Error(error = SocketTimeoutException()))
+    EmptyContent(
+            alphaValue = ContentAlpha.disabled,
+            icon = R.drawable.ic_network_error,
+            message = stringResource(
+                    id = R.string.network_error_icon
+            )
+    )
 }
 
-@Preview("EmptyScreen - Dark", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(name = "Dark", showBackground = false, uiMode = UI_MODE_NIGHT_YES, showSystemUi = true)
 @Composable
 fun EmptyScreenPreviewDark() {
-    EmptyScreen(error = LoadState.Error(error = SocketTimeoutException()))
+
+    EmptyContent(
+            alphaValue = ContentAlpha.disabled,
+            icon = R.drawable.ic_network_error,
+            message = stringResource(
+                    id = R.string.network_error_icon
+            )
+    )
 }

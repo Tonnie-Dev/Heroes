@@ -218,7 +218,7 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
 
 }
 
-@Preview(name = "ListContent - Light", showBackground = true, uiMode = UI_MODE_NIGHT_NO)
+@Preview(name = "Light", showBackground = true, uiMode = UI_MODE_NIGHT_NO)
 @Composable
 fun ListContentPreviewLight() {
 
@@ -241,7 +241,7 @@ fun ListContentPreviewLight() {
 }
 
 
-@Preview(name = "ListContent - Dark", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Preview(name = "Dark", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun ListContentPreviewDark() {
 

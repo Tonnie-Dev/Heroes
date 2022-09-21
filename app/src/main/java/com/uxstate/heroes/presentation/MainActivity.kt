@@ -23,12 +23,12 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colors.background
                 ) {
-
+                    //add the NavHost call
+                    DestinationsNavHost(navGraph =NavGraphs.root )
                 }
 
 
-                //add the NavHost call
-                DestinationsNavHost(navGraph =NavGraphs.root )
+
 
             }
         }

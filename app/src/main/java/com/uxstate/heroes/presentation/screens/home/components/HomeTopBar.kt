@@ -31,7 +31,7 @@ fun HomeTopBar(onSearch: () -> Unit) {
 }
 
 
-@Preview(name = "HomeTopBar - Light")
+@Preview(name = "HomeTopBar - Light", showBackground = true)
 @Composable
 fun HomeTopBarPreviewLight() {
 
@@ -43,7 +43,8 @@ fun HomeTopBarPreviewLight() {
 
 //TopAppBar Background color calculated only during runtime
 //and cannot be previewed
-@Preview(name ="HomeTopBar - Dark", uiMode = UI_MODE_NIGHT_YES)
+@Preview(name ="HomeTopBar - Dark", uiMode = UI_MODE_NIGHT_YES, showBackground = true
+)
 @Composable
 fun HomeTopBarPreviewDark() {
     HomeTopBar {}

@@ -144,7 +144,7 @@ fun SplashScreenPreviewLight() {
 @Preview(name = "Dark", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun SplashScreenPreviewDark() {
-    //SplashScreen()
+   // SplashScreen()
 }
 
 
