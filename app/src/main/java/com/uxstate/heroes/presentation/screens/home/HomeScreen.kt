@@ -24,7 +24,9 @@ fun HomeScreen( viewModel: HomeViewModel = hiltViewModel(), navigator: Destinati
     Timber.i("HomeScreen - ${allHeroes.loadState}")
     //Add Scaffold
 
-    Scaffold( topBar = { HomeTopBar {}}, content = { paddingValues ->
+    Scaffold( topBar = { HomeTopBar {}},
+
+            content = { paddingValues ->
 
         ListContent(heroes = allHeroes, navigator =navigator, modifier = Modifier.fillMaxSize().padding(paddingValues))
     })
