@@ -6,7 +6,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.ramcosta.composedestinations.annotation.Destination
-import com.uxstate.heroes.presentation.screens.splash.components.SearchWidget
+import com.uxstate.heroes.presentation.screens.search.components.SearchWidget
 
 @Destination
 @Composable
@@ -16,7 +16,8 @@ fun SearchScreen() {
             text = "",
             onTextChange = {},
             onSearch ={} ,
-            onClose = { })}) { paddingValues ->   Column(modifier = Modifier.padding(paddingValues)) {
+            onClose = { })
+    }) { paddingValues ->   Column(modifier = Modifier.padding(paddingValues)) {
 
     }}
 }

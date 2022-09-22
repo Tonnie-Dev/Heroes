@@ -1,4 +1,4 @@
-package com.uxstate.heroes.presentation.screens.splash.components
+package com.uxstate.heroes.presentation.screens.search.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
