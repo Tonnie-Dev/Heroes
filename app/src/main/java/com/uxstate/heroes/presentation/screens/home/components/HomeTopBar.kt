@@ -35,7 +35,7 @@ fun HomeTopBar(onSearch: () -> Unit) {
 @Composable
 fun HomeTopBarPreviewLight() {
 
-    HomeTopBar { ona}
+    HomeTopBar { }
 
 
 

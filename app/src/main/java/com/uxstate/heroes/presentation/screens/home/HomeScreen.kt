@@ -12,6 +12,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.presentation.common.ListContent
 import com.uxstate.heroes.presentation.screens.destinations.Destination
+import com.uxstate.heroes.presentation.screens.destinations.SearchScreenDestination
 import com.uxstate.heroes.presentation.screens.home.components.HomeTopBar
 import timber.log.Timber
 
@@ -24,7 +25,7 @@ fun HomeScreen( viewModel: HomeViewModel = hiltViewModel(), navigator: Destinati
     Timber.i("HomeScreen - ${allHeroes.loadState}")
     //Add Scaffold
 
-    Scaffold( topBar = { HomeTopBar {}},
+    Scaffold( topBar = { HomeTopBar {navigator.navigate(SearchScreenDestination)}},
 
             content = { paddingValues ->
 

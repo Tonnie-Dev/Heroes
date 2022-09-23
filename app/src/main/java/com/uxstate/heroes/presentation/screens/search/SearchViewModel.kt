@@ -14,7 +14,9 @@ class SearchViewModel @Inject constructor() : ViewModel() {
     var searchQuery by mutableStateOf("")
     private set
 
-    var searchText by mutableStateOf("")
-    private set
+   fun updateSearchQuery(query:String){
+
+       searchQuery = query
+   }
 
 }
