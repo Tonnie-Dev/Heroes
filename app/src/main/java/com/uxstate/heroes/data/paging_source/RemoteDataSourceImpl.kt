@@ -18,9 +18,9 @@ class RemoteDataSourceImpl @Inject constructor(
 ) : RemoteDataSource {
 
     private val dao = database.heroDao
+
     @OptIn(ExperimentalPagingApi::class)
     override fun getAllHeroes(): Flow<PagingData<Hero>> {
-
 
 
         /*This is the place where we are going to actually call the pager
@@ -30,6 +30,8 @@ class RemoteDataSourceImpl @Inject constructor(
         //holds all cached data - it is a function
         val pagingSourceFactory = { dao.getAllHeroes() }
 
+
+        //Pager with 3 parameters constructor
         return Pager(
                 config = PagingConfig(pageSize = Constants.ITEMS_PER_PAGE),
                 remoteMediator = HeroRemoteMediator(api = api, database = database),
@@ -37,7 +39,11 @@ class RemoteDataSourceImpl @Inject constructor(
         ).flow
     }
 
-    override fun searchHeroes(): Flow<PagingData<Hero>> {
-        TODO("Not yet implemented")
+    override fun searchHeroes(query: String): Flow<PagingData<Hero>> {
+
+        //Pager with 2 parameters constructor
+        return Pager(
+                config = PagingConfig(pageSize = Constants.ITEMS_PER_PAGE),
+                pagingSourceFactory = { SearchHeroesSource(api = api, query = query) }).flow
     }
 }
