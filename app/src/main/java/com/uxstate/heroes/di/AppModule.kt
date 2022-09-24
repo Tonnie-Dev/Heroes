@@ -11,6 +11,7 @@ import com.uxstate.heroes.domain.use_cases.UseCaseWrapper
 import com.uxstate.heroes.domain.use_cases.get_heroes.GetAllHeroesUseCase
 import com.uxstate.heroes.domain.use_cases.read_onboarding.ReadOnboardingUseCase
 import com.uxstate.heroes.domain.use_cases.save_onboarding.SaveOnboardingUseCase
+import com.uxstate.heroes.domain.use_cases.search_heroes.SearchHeroesUseCase
 import com.uxstate.heroes.util.Constants.BASE_URL
 import com.uxstate.heroes.util.Constants.HERO_DATABASE
 import dagger.Module
@@ -46,7 +47,8 @@ object AppModule {
         return UseCaseWrapper(
                 readOnboardingUseCase = ReadOnboardingUseCase(repository),
                 saveOnboardingUseCase = SaveOnboardingUseCase(repository),
-                getAllHeroesUseCase = GetAllHeroesUseCase(repository )
+                getAllHeroesUseCase = GetAllHeroesUseCase(repository ),
+                searchHeroesUseCase = SearchHeroesUseCase(repository)
         )
     }
 
