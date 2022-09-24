@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.presentation.screens.search.components.SearchWidget
@@ -16,6 +18,9 @@ fun SearchScreen(navigator: DestinationsNavigator,
                  viewModel: SearchViewModel = hiltViewModel()) {
 
     val query = viewModel.searchQuery
+
+    //heroes will be passed to this screen using a lazy column
+    val heroes = viewModel.searchedHeroes.collectAsLazyPagingItems()
     Scaffold(topBar = {
         SearchWidget(
                 text = query,
