@@ -28,6 +28,9 @@ class HeroRepositoryImpl @Inject constructor(
        return remoteDataSource.getAllHeroes()
     }
 
+    override fun searchHeroes(query: String): Flow<PagingData<Hero>> {
+        return remoteDataSource.searchHeroes(query)
+    }
 
 
 }
