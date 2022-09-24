@@ -15,7 +15,7 @@ class SearchHeroesSource @Inject constructor(
 ) : PagingSource<Int, Hero>() {
     override fun getRefreshKey(state: PagingState<Int, Hero>): Int? {
 
-        TODO("Not yet implemented")
+    return state.anchorPosition
 
 
     }

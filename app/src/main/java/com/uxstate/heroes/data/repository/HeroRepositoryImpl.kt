@@ -28,5 +28,9 @@ class HeroRepositoryImpl @Inject constructor(
        return remoteDataSource.getAllHeroes()
     }
 
+    override fun searchHeroes(query: String): Flow<PagingData<Hero>> {
+        TODO("Not yet implemented")
+    }
+
 
 }
