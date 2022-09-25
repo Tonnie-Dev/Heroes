@@ -1,40 +1,45 @@
 package com.uxstate.heroes.presentation.screens.search
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.uxstate.heroes.presentation.common.ListContent
 import com.uxstate.heroes.presentation.screens.search.components.SearchWidget
 
 @Destination
 @Composable
-fun SearchScreen(navigator: DestinationsNavigator,
-                 viewModel: SearchViewModel = hiltViewModel()) {
+fun SearchScreen(
+    navigator: DestinationsNavigator,
+    viewModel: SearchViewModel = hiltViewModel()
+) {
 
     val query = viewModel.searchQuery
 
     //heroes will be passed to this screen using a lazy column
     val heroes = viewModel.searchedHeroes.collectAsLazyPagingItems()
-    Scaffold(topBar = {
-        SearchWidget(
-                text = query,
-                onTextChange = viewModel::updateSearchQuery,
-                onSearch = {},
-                onClose = {
+    Scaffold(
+            topBar = {
+                SearchWidget(
+                        text = query,
+                        onTextChange = viewModel::updateSearchQuery,
+                        onSearch = viewModel::searchedHeroes,
+                        onClose = {
 
-                    //pop back stack to exit search screen back to
-                    // take us to home screen
-                    navigator.popBackStack()
-                })
-    }) { paddingValues ->
-        Column(modifier = Modifier.padding(paddingValues)) {
-
-        }
-    }
+                            //pop back stack to exit search screen back to
+                            // take us to home screen
+                            navigator.popBackStack()
+                        })
+            },
+            content = { paddingValues ->
+                ListContent(
+                        heroes = heroes,
+                        navigator = navigator,
+                        modifier = Modifier.padding(paddingValues)
+                )
+            })
 }

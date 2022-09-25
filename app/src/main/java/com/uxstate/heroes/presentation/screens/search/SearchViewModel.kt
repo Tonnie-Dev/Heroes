@@ -49,7 +49,15 @@ class SearchViewModel @Inject constructor(private val useCaseWrapper: UseCaseWra
                     The flow is kept active as long as the given scope is active. To avoid
                     leaks, make sure to use a scope that is already managed (like a ViewModel
                     scope) or manually cancel it when you don't need paging anymore.
+
+                    Important in case of configuration changes, this call is not made again
+
+                    due to any configuration changes, android will try to retrieve the existing
+                    instance of ViewModel, if found then it's state and data are retained as is
+                    else it will create a new instance of ViewModel.
                     */
+
+
                     .cachedIn(viewModelScope).collect{
 
                 _searchedHeroes.value = it
