@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
+import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.uxstate.heroes.R
 import com.uxstate.heroes.util.LocalSpacing
 import java.net.ConnectException
@@ -82,39 +83,41 @@ fun EmptyContent(
     val spacing = LocalSpacing.current
 
 
-    Column(
-            modifier = Modifier.fillMaxSize(),
+   SwipeRefresh(state = , onRefresh = { /*TODO*/ }) {
+       Column(
+               modifier = Modifier.fillMaxSize(),
 
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-    ) {
+               horizontalAlignment = Alignment.CenterHorizontally,
+               verticalArrangement = Arrangement.Center
+       ) {
 
-        //Icon
+           //Icon
 
-        Icon(
-                modifier = Modifier
-                        .size(spacing.spaceOneHundredFifty)
-                        .alpha(alphaValue),
-                painter = painterResource(id = icon),
-                contentDescription = stringResource(R.string.network_error_icon),
-                tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
-        )
+           Icon(
+                   modifier = Modifier
+                           .size(spacing.spaceOneHundredFifty)
+                           .alpha(alphaValue),
+                   painter = painterResource(id = icon),
+                   contentDescription = stringResource(R.string.network_error_icon),
+                   tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
+           )
 
-        //Text
+           //Text
 
-        Text(
-                modifier = Modifier
-                        .padding(top = spacing.spaceSmall)
-                        .alpha(alphaValue),
-                text = message,
-                color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
-                fontSize = MaterialTheme.typography.subtitle1.fontSize,
-                fontWeight = FontWeight.Medium,
-                textAlign = TextAlign.Center
-        )
+           Text(
+                   modifier = Modifier
+                           .padding(top = spacing.spaceSmall)
+                           .alpha(alphaValue),
+                   text = message,
+                   color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
+                   fontSize = MaterialTheme.typography.subtitle1.fontSize,
+                   fontWeight = FontWeight.Medium,
+                   textAlign = TextAlign.Center
+           )
 
 
-    }
+       }
+   }
 }
 
 fun parseErrorMessage(loadStateError: LoadState.Error): String {
