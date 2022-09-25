@@ -32,14 +32,20 @@ import java.net.SocketTimeoutException
 fun EmptyScreen(error: LoadState.Error? =  null) {
 
 
-    val message by remember {
+    var message by remember {
         mutableStateOf("Find Your Favorite Hero!")
     }
 
-    val icon = remember {
-        R.drawable.ic_network_error
+    var icon = remember {
+        R.drawable.ic_search_document
     }
 
+
+    if (error!= null){
+
+        message = parseErrorMessage(error)
+        icon = R.drawable.ic_network_error
+    }
 
     var start by remember {
         //make it observable to trigger recomposition
