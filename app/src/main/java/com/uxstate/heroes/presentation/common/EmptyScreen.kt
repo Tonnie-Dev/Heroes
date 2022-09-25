@@ -22,16 +22,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.uxstate.heroes.R
+import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.util.LocalSpacing
 import java.net.ConnectException
-import java.net.SocketException
 import java.net.SocketTimeoutException
 
 //default value added to enable us call this screen even if there is no error
+
+//Add heroes:LazyPagingItems which has a convenient function to refresh data
 @Composable
-fun EmptyScreen(error: LoadState.Error? =  null) {
+fun EmptyScreen(error: LoadState.Error? = null, heroes:LazyPagingItems<Hero>) {
 
 
     var message by remember {
@@ -45,7 +49,7 @@ fun EmptyScreen(error: LoadState.Error? =  null) {
     }
 
 
-    if (error!= null){
+    if (error != null) {
 
         //in case of an error
         message = parseErrorMessage(error)
@@ -77,47 +81,53 @@ fun EmptyScreen(error: LoadState.Error? =  null) {
 fun EmptyContent(
     alphaValue: Float,
     @DrawableRes icon: Int,
-    message: String
+    message: String,
+    heroes: LazyPagingItems<Hero>
 ) {
 
     val spacing = LocalSpacing.current
+    var isRefreshing by remember {
+        mutableStateOf(false)
+    }
+
+    SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
+
+            /*In this lambda we need to invalidate data*/
+            onRefresh = { /*TODO*/ }) {
+        Column(
+                modifier = Modifier.fillMaxSize(),
+
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+        ) {
+
+            //Icon
+
+            Icon(
+                    modifier = Modifier
+                            .size(spacing.spaceOneHundredFifty)
+                            .alpha(alphaValue),
+                    painter = painterResource(id = icon),
+                    contentDescription = stringResource(R.string.network_error_icon),
+                    tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
+            )
+
+            //Text
+
+            Text(
+                    modifier = Modifier
+                            .padding(top = spacing.spaceSmall)
+                            .alpha(alphaValue),
+                    text = message,
+                    color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
+                    fontSize = MaterialTheme.typography.subtitle1.fontSize,
+                    fontWeight = FontWeight.Medium,
+                    textAlign = TextAlign.Center
+            )
 
 
-   SwipeRefresh(state = , onRefresh = { /*TODO*/ }) {
-       Column(
-               modifier = Modifier.fillMaxSize(),
-
-               horizontalAlignment = Alignment.CenterHorizontally,
-               verticalArrangement = Arrangement.Center
-       ) {
-
-           //Icon
-
-           Icon(
-                   modifier = Modifier
-                           .size(spacing.spaceOneHundredFifty)
-                           .alpha(alphaValue),
-                   painter = painterResource(id = icon),
-                   contentDescription = stringResource(R.string.network_error_icon),
-                   tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
-           )
-
-           //Text
-
-           Text(
-                   modifier = Modifier
-                           .padding(top = spacing.spaceSmall)
-                           .alpha(alphaValue),
-                   text = message,
-                   color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
-                   fontSize = MaterialTheme.typography.subtitle1.fontSize,
-                   fontWeight = FontWeight.Medium,
-                   textAlign = TextAlign.Center
-           )
-
-
-       }
-   }
+        }
+    }
 }
 
 fun parseErrorMessage(loadStateError: LoadState.Error): String {
