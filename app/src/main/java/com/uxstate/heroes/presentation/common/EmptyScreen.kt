@@ -35,7 +35,8 @@ import java.net.SocketTimeoutException
 
 //Add heroes:LazyPagingItems which has a convenient function to refresh data
 @Composable
-fun EmptyScreen(error: LoadState.Error? = null, heroes:LazyPagingItems<Hero>) {
+fun EmptyScreen(error: LoadState.Error? = null,
+                heroes: LazyPagingItems<Hero>? = null) {
 
 
     var message by remember {
@@ -73,7 +74,7 @@ fun EmptyScreen(error: LoadState.Error? = null, heroes:LazyPagingItems<Hero>) {
             animationSpec = tween(1000)
     )
 
-    EmptyContent(alphaValue, icon, message)
+    EmptyContent(alphaValue, icon, message, heroes = heroes, error = error)
 
 }
 
@@ -82,7 +83,8 @@ fun EmptyContent(
     alphaValue: Float,
     @DrawableRes icon: Int,
     message: String,
-    heroes: LazyPagingItems<Hero>
+    heroes: LazyPagingItems<Hero>? = null,
+    error: LoadState.Error? = null
 ) {
 
     val spacing = LocalSpacing.current
@@ -92,8 +94,24 @@ fun EmptyContent(
 
     SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
 
+            //SwipeRefresh will be visible only if the error is not null
+            swipeEnabled = error!=null,
             /*In this lambda we need to invalidate data*/
-            onRefresh = { /*TODO*/ }) {
+            onRefresh = {
+
+                //first set the value of isRefreshing to true
+                isRefreshing = true
+
+                //call refresh() off the LazyPagingItem
+
+                heroes?.refresh()
+
+                //reset is refreshing to false
+
+                isRefreshing = false
+
+
+            }) {
         Column(
                 modifier = Modifier.fillMaxSize(),
 
