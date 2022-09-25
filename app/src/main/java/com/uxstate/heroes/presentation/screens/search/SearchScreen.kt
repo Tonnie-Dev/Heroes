@@ -10,6 +10,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.presentation.common.ListContent
 import com.uxstate.heroes.presentation.screens.search.components.SearchWidget
+import timber.log.Timber
 
 @Destination
 @Composable
@@ -17,7 +18,7 @@ fun SearchScreen(
     navigator: DestinationsNavigator,
     viewModel: SearchViewModel = hiltViewModel()
 ) {
-
+Timber.i("Searxche screen called")
     val query = viewModel.searchQuery
 
     //heroes will be passed to this screen using a lazy column

@@ -46,7 +46,6 @@ fun ListContent(
 ) {
     val spacing = LocalSpacing.current
 
-
     val result = handlePagingResult(heroes = heroes)
 
     if (result){
@@ -71,14 +70,13 @@ fun ListContent(
                 })
     }
 
-
-
 }
 
 //small letter because this function returns a value
 @Composable
 fun handlePagingResult(heroes: LazyPagingItems<Hero>):Boolean {
 
+    Timber.i ("HandlePaging composable fxn invoked")
     heroes.apply {
 
         //this variable stores errors found in refresh, prepend or append
@@ -101,7 +99,7 @@ fun handlePagingResult(heroes: LazyPagingItems<Hero>):Boolean {
         return when {
 
             loadState.refresh is LoadState.Loading -> {
-            ShimmerEffect()
+           ShimmerEffect()
                 Timber.i("ListContent - Loading Shimmer called")
             false
         }

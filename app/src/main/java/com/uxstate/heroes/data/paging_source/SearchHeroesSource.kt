@@ -23,15 +23,22 @@ class SearchHeroesSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Hero> {
         return  try {
 
-            val apiResponse = api.searchHeroes(query)
+            val apiResponse = api.searchHeroes(name =query)
             val heroes = apiResponse.heroes
 
             if(heroes.isNotEmpty()){
 
-                LoadResult.Page(data = heroes, prevKey = apiResponse.prevPage, nextKey = apiResponse.nextPage)
+                LoadResult.Page(
+                        data = heroes,
+                        prevKey = apiResponse.prevPage,
+                        nextKey = apiResponse.nextPage
+                )
             }else {
 
-                LoadResult.Page(data = emptyList(), prevKey = null, nextKey = null)
+                LoadResult.Page(
+                        data = emptyList(),
+                        prevKey = null,
+                        nextKey = null)
             }
         }
         catch (e:Exception){

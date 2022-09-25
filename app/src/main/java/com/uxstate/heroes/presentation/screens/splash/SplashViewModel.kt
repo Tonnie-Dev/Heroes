@@ -1,10 +1,13 @@
 package com.uxstate.heroes.presentation.screens.splash
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uxstate.heroes.domain.use_cases.UseCaseWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,8 +18,9 @@ class SplashViewModel @Inject constructor(useCaseWrapper: UseCaseWrapper) : View
     //var isOnboardingCompleted by mutableStateOf(false)
 
     private val _isOnboardingCompleted = MutableStateFlow(false)
-    val isOnboardingCompleted = _isOnboardingCompleted
+    val isOnboardingCompleted = _isOnboardingCompleted.asStateFlow()
 
+    //val isOnBoardingCompleted by mutableStateOf(false)
 
     init {
 

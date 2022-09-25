@@ -28,11 +28,14 @@ import java.net.ConnectException
 import java.net.SocketException
 import java.net.SocketTimeoutException
 
+//default value added to enable us call this screen even if there is no error
 @Composable
 fun EmptyScreen(error: LoadState.Error? =  null) {
 
 
     var message by remember {
+
+        //default value
         mutableStateOf("Find Your Favorite Hero!")
     }
 
@@ -43,6 +46,7 @@ fun EmptyScreen(error: LoadState.Error? =  null) {
 
     if (error!= null){
 
+        //in case of an error
         message = parseErrorMessage(error)
         icon = R.drawable.ic_network_error
     }

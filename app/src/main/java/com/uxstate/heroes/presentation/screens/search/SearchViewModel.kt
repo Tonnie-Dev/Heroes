@@ -10,6 +10,7 @@ import androidx.paging.cachedIn
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.domain.use_cases.UseCaseWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -33,10 +34,11 @@ class SearchViewModel @Inject constructor(private val useCaseWrapper: UseCaseWra
    }
 
     fun searchedHeroes(query: String){
-        Timber.i("searchedHeroes Called XXX")
+
+        Timber.i("on")
         //use viewModelScope because collect{} is a suspend function
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             //useCaseWrapper.searchHeroesUseCase returns Flow<PagingData<Hero>>
             useCaseWrapper.searchHeroesUseCase(query = query)
 
