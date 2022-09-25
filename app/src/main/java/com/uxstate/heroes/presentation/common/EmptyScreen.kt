@@ -29,11 +29,11 @@ import java.net.SocketException
 import java.net.SocketTimeoutException
 
 @Composable
-fun EmptyScreen(error: LoadState.Error) {
+fun EmptyScreen(error: LoadState.Error? =  null) {
 
 
     val message by remember {
-        mutableStateOf(parseErrorMessage(error))
+        mutableStateOf("Find Your Favorite Hero!")
     }
 
     val icon = remember {

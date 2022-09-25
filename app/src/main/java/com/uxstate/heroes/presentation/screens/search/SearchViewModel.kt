@@ -12,6 +12,7 @@ import com.uxstate.heroes.domain.use_cases.UseCaseWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -32,7 +33,7 @@ class SearchViewModel @Inject constructor(private val useCaseWrapper: UseCaseWra
    }
 
     fun searchedHeroes(query: String){
-
+        Timber.i("searchedHeroes Called XXX")
         //use viewModelScope because collect{} is a suspend function
 
         viewModelScope.launch {
@@ -58,10 +59,14 @@ class SearchViewModel @Inject constructor(private val useCaseWrapper: UseCaseWra
                     */
 
 
-                    .cachedIn(viewModelScope).collect{
+                  .cachedIn(viewModelScope)
+
+                    .collect{
 
                 _searchedHeroes.value = it
             }
+
+
 
         }
 
