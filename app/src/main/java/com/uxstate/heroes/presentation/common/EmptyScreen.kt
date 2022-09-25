@@ -7,6 +7,8 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -35,8 +37,10 @@ import java.net.SocketTimeoutException
 
 //Add heroes:LazyPagingItems which has a convenient function to refresh data
 @Composable
-fun EmptyScreen(error: LoadState.Error? = null,
-                heroes: LazyPagingItems<Hero>? = null) {
+fun EmptyScreen(
+    error: LoadState.Error? = null,
+    heroes: LazyPagingItems<Hero>? = null
+) {
 
 
     var message by remember {
@@ -95,7 +99,7 @@ fun EmptyContent(
     SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
 
             //SwipeRefresh will be visible only if the error is not null
-            swipeEnabled = error!=null,
+            swipeEnabled = error != null,
             /*In this lambda we need to invalidate data*/
             onRefresh = {
 
@@ -113,7 +117,9 @@ fun EmptyContent(
 
             }) {
         Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(state = rememberScrollState()),
 
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
