@@ -46,7 +46,7 @@ fun ListContent(
 ) {
     val spacing = LocalSpacing.current
 
-    //if false &&loading Shimmer will be shown
+
     val result = handlePagingResult(heroes = heroes)
 
     if (result){
@@ -98,14 +98,27 @@ fun handlePagingResult(heroes: LazyPagingItems<Hero>):Boolean {
             else -> null
         }
         // during loading
-        return when { loadState.refresh is LoadState.Loading -> {
+        return when {
 
+            loadState.refresh is LoadState.Loading -> {
             ShimmerEffect()
+                Timber.i("ListContent - Loading Shimmer called")
             false
         }
         //in case of error
             error!= null -> {
+
+                Timber.i("ListContent - Error occurred")
                 EmptyScreen(error = error)
+                false
+            }
+
+            //null meaning default icon and message
+            //less than one is when we don't receive any heroes
+            heroes.itemCount < 1 -> {
+
+                EmptyScreen()
+                Timber.i("ListContent - Less than 1 - Search")
                 false
             }
 
