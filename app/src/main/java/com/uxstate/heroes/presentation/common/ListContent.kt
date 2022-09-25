@@ -107,7 +107,7 @@ fun handlePagingResult(heroes: LazyPagingItems<Hero>):Boolean {
             error!= null -> {
 
                 Timber.i("ListContent - Error occurred")
-                EmptyScreen(error = error)
+                EmptyScreen(error = error, heroes = heroes)
                 false
             }
 

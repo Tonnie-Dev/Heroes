@@ -116,6 +116,8 @@ fun EmptyContent(
 
 
             }) {
+
+        /*Column not scrollable by default there we add verticalScroll modifier*/
         Column(
                 modifier = Modifier
                         .fillMaxSize()
