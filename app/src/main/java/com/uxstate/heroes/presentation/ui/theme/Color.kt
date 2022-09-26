@@ -1,6 +1,7 @@
 package com.uxstate.heroes.presentation.ui.theme
 
 import androidx.compose.material.Colors
+import androidx.compose.material.ContentAlpha
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
@@ -35,7 +36,7 @@ val Colors.titleColor
 
 val Colors.descriptionColor
     @Composable
-    get() = if (isLight) DarkGray.copy(alpha = 0.5f)
+    get() = if (isLight) DarkGray.copy(alpha = ContentAlpha.medium)
     else LightGray.copy(alpha = 0.5f)
 
 
