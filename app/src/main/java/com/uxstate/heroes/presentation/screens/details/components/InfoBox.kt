@@ -1,13 +1,17 @@
 package com.uxstate.heroes.presentation.screens.details.components
 
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
@@ -18,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.uxstate.heroes.R
 import com.uxstate.heroes.presentation.ui.theme.titleColor
+import com.uxstate.heroes.util.LocalSpacing
 
 @Composable
 fun InfoBox(
@@ -27,9 +32,15 @@ fun InfoBox(
     smallText: String,
     textColor: Color
 ) {
-    Row() {
+
+    val spacing = LocalSpacing.current
+    Row(verticalAlignment = Alignment.CenterVertically) {
         Icon(
-                painter = icon,
+                modifier = Modifier
+                        .padding(end = spacing.spaceExtraSmall)
+                        .size(spacing.spaceLarge),
+
+                        painter = icon,
                 contentDescription = stringResource(R.string.info_icon),
                 tint = iconTint
         )
@@ -58,6 +69,19 @@ fun InfoBox(
 @Preview
 @Composable
 fun InfoBoxPreview() {
+    InfoBox(
+            icon = painterResource(id = R.drawable.ic_bolt),
+            iconTint = MaterialTheme.colors.primary,
+            bigText = "97",
+            smallText = "Fair",
+            textColor = MaterialTheme.colors.titleColor
+    )
+
+}
+
+@Preview(uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Composable
+fun InfoBoxPreviewDark() {
     InfoBox(
             icon = painterResource(id = R.drawable.ic_bolt),
             iconTint = MaterialTheme.colors.primary,
