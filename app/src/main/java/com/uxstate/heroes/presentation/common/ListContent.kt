@@ -146,7 +146,7 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
                     .fillMaxWidth()
                     .aspectRatio(9f / 10f)
                     .clickable {
-                        navigator?.navigate(DetailsScreenDestination)
+                        navigator?.navigate(DetailsScreenDestination(hero))
                     }, contentAlignment = Alignment.BottomStart
     ) {
 
