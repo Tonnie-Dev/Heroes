@@ -63,5 +63,41 @@ fun BottomSheetContent(
                     fontSize = MaterialTheme.typography.h4.fontSize
             )
         }
+
+        //Info Box Row
+        Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = spacing.spaceMedium)
+        ) {
+
+            InfoBox(
+                    icon = painterResource(id = R.drawable.ic_bolt),
+                    iconTint = infoBoxIconColor,
+                    bigText = hero.power.toString(),
+                    smallText = stringResource(
+                            R.string.power_label
+                    ),
+                    textColor = contentColor
+            )
+
+            InfoBox(
+                    icon = painterResource(id = R.drawable.ic_calendar),
+                    iconTint = infoBoxIconColor,
+                    bigText = hero.month,
+                    smallText = stringResource(R.string.month_label),
+                    textColor = contentColor
+            )
+
+            InfoBox(
+                    icon = painterResource(id = R.drawable.ic_cake),
+                    iconTint = infoBoxIconColor,
+                    bigText = hero.day,
+                    smallText = stringResource(R.string.birthday_label),
+                    textColor = contentColor
+            )
+
+        }
     }
 }

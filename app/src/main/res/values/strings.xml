@@ -12,5 +12,8 @@
     <string name="search_lable">Search</string>
     <string name="close_label">Close</string>
     <string name="info_icon">Info Icon</string>
+    <string name="power_label">Power</string>
+    <string name="month_label">Month</string>
+    <string name="birthday_label">Birthday</string>
 
 </resources>
