@@ -1,9 +1,11 @@
 package com.uxstate.heroes.presentation.screens.details.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.uxstate.heroes.R
 import com.uxstate.heroes.domain.model.Hero
+import com.uxstate.heroes.presentation.ui.theme.HeroesTheme
 import com.uxstate.heroes.presentation.ui.theme.titleColor
 import com.uxstate.heroes.util.LocalSpacing
 
@@ -100,6 +103,13 @@ fun BottomSheetContent(
             )
 
         }
+
+        Text(modifier = Modifier.fillMaxWidth(),
+                text = stringResource(R.string.about_label),
+                color = contentColor,
+                fontSize = MaterialTheme.typography.subtitle1.fontSize,
+                fontWeight = FontWeight.Bold
+        )
     }
 }
 
@@ -123,5 +133,34 @@ fun BottomSheetContentLight() {
             natureTypes = listOf("Trees", "Water")
     )
     )
+
+}
+
+@Preview(uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Composable
+fun BottomSheetContentDark() {
+
+
+        HeroesTheme() {
+            BottomSheetContent(hero = Hero(
+                    id = 45,
+                    name = "Tonnie",
+                    image = "",
+                    about = "Richest Man in Babylon",
+                    rating = 5.0,
+                    power = 97,
+                    month = "January",
+                    day = "6th",
+                    family = listOf("Njiri", "Muchiri"),
+                    abilities = listOf("Computing", "Scrabble"),
+                    natureTypes = listOf("Trees", "Water")
+            )
+            )
+        }
+
+
+
+
+
 
 }

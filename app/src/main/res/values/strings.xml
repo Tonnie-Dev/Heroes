@@ -15,5 +15,6 @@
     <string name="power_label">Power</string>
     <string name="month_label">Month</string>
     <string name="birthday_label">Birthday</string>
+    <string name="about_label">About</string>
 
 </resources>
