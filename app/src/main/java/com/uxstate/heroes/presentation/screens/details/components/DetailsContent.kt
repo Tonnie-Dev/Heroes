@@ -8,7 +8,7 @@ import com.uxstate.heroes.util.LocalSpacing
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun DetailsContent(navigator: DestinationsNavigator, selectedHero: Hero) {
+fun DetailsContent(navigator: DestinationsNavigator, hero: Hero) {
 
     val spacing = LocalSpacing.current
     val scaffoldState =
@@ -19,7 +19,7 @@ fun DetailsContent(navigator: DestinationsNavigator, selectedHero: Hero) {
     BottomSheetScaffold(
             scaffoldState = scaffoldState,
             sheetPeekHeight = spacing.spaceOneHundredFifty,
-            sheetContent =
+            sheetContent = {}
     ) {
 
     }

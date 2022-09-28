@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import com.uxstate.heroes.R
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.presentation.ui.theme.titleColor
@@ -100,4 +101,27 @@ fun BottomSheetContent(
 
         }
     }
+}
+
+
+@Preview
+@Composable
+fun BottomSheetContentLight() {
+
+
+    BottomSheetContent(hero = Hero(
+            id = 45,
+            name = "Tonnie",
+            image = "",
+            about = "Richest Man in Babylon",
+            rating = 5.0,
+            power = 97,
+            month = "January",
+            day = "6th",
+            family = listOf("Njiri", "Muchiri"),
+            abilities = listOf("Computing", "Scrabble"),
+            natureTypes = listOf("Trees", "Water")
+    )
+    )
+
 }
