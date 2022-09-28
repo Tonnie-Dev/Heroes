@@ -8,4 +8,7 @@
     <string name="month_label">Month</string>
     <string name="birthday_label">Birthday</string>
     <string name="about_label">About</string>
+    <string name="family_label">Family</string>
+    <string name="abilities_label">Abilities</string>
+    <string name="nature_types">Nature Types</string>
 </resources>
