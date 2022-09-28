@@ -14,6 +14,7 @@ object Constants {
     const val HALF_FILLED_STAR_KEY = "halfFilledStars"
     const val EMPTY_STARS_KEY = "emptyStars"
     const val BASE_URL = "http://10.0.2.2:8080"
+    const val ABOUT_TEXT_MAX_LINES = 7
 
 
 }

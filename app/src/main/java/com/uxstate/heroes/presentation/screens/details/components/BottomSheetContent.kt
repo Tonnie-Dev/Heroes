@@ -19,6 +19,7 @@ import com.uxstate.heroes.R
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.presentation.ui.theme.HeroesTheme
 import com.uxstate.heroes.presentation.ui.theme.titleColor
+import com.uxstate.heroes.util.Constants.ABOUT_TEXT_MAX_LINES
 import com.uxstate.heroes.util.LocalSpacing
 
 @Composable
@@ -109,6 +110,13 @@ fun BottomSheetContent(
                 color = contentColor,
                 fontSize = MaterialTheme.typography.subtitle1.fontSize,
                 fontWeight = FontWeight.Bold
+        )
+        //about text
+        Text(modifier = Modifier.fillMaxWidth(),
+                text = hero.about,
+                color = contentColor,
+                fontSize = MaterialTheme.typography.body1.fontSize,
+                maxLines = ABOUT_TEXT_MAX_LINES
         )
     }
 }
