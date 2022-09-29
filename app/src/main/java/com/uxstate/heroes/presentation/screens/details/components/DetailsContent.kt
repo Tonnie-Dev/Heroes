@@ -19,9 +19,10 @@ fun DetailsContent(navigator: DestinationsNavigator, hero: Hero) {
     BottomSheetScaffold(
             scaffoldState = scaffoldState,
             sheetPeekHeight = spacing.spaceOneHundredFifty,
-            sheetContent = { BottomSheetContent(hero = hero)}
-    ) {
+            sheetContent = { BottomSheetContent(hero = hero)},
+            content = { BackgroundContent(heroImage = hero.image) {
 
-    }
+            }}
+    ) 
 
 }

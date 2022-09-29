@@ -2,11 +2,12 @@ package com.uxstate.heroes.presentation.screens.details.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +19,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.heroes.R
 import com.uxstate.heroes.util.Constants.BASE_URL
+import com.uxstate.heroes.util.LocalSpacing
 
 @Composable
 fun BackgroundContent(
@@ -27,6 +29,7 @@ fun BackgroundContent(
     onCloseClicked: () -> Unit
 ) {
 
+    val spacing = LocalSpacing.current
 
     val imageUrl = "$BASE_URL$heroImage"
     val painter = rememberAsyncImagePainter(
@@ -49,6 +52,20 @@ fun BackgroundContent(
                         .fillMaxHeight(imageFraction)
                         .align(Alignment.TopStart)
         )
+
+        Row(horizontalArrangement = Arrangement.End) {
+
+            IconButton(onClick = onCloseClicked) {
+
+                Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = stringResource(id = R.string.close_label),
+                        modifier = Modifier.size(spacing.spaceLarge)
+                )
+
+            }
+
+        }
 
     }
 }
