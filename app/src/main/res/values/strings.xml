@@ -19,5 +19,6 @@
     <string name="family_label">Family</string>
     <string name="abilities_label">Abilities</string>
     <string name="nature_types">Nature Types</string>
+    <string name="hero_image">Hero Image</string>
 
 </resources>
