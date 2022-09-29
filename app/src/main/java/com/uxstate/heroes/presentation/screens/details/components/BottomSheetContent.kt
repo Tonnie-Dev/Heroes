@@ -75,7 +75,7 @@ fun BottomSheetContent(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = spacing.spaceMedium)
+                        .padding(top = spacing.spaceExtraSmall, bottom = spacing.spaceMedium)
         ) {
 
             InfoBox(
