@@ -5,6 +5,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.presentation.screens.details.components.DetailsContent
+import timber.log.Timber
 
 @Destination
 @Composable

@@ -20,11 +20,12 @@ import coil.request.ImageRequest
 import com.uxstate.heroes.R
 import com.uxstate.heroes.util.Constants.BASE_URL
 import com.uxstate.heroes.util.LocalSpacing
+import timber.log.Timber
 
 @Composable
 fun BackgroundContent(
     heroImage: String,
-    imageFraction: Float = 1f,
+    imageFraction: Float = 0f,
     backgroundColor: Color = MaterialTheme.colors.surface,
     onCloseClicked: () -> Unit
 ) {

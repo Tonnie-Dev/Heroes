@@ -20,7 +20,8 @@ import com.uxstate.heroes.presentation.ui.theme.titleColor
 import com.uxstate.heroes.util.Constants.ABOUT_TEXT_MAX_LINES
 import com.uxstate.heroes.util.LocalSpacing
 import timber.log.Timber
-
+import androidx.compose.material.BottomSheetValue.Collapsed
+import androidx.compose.material.BottomSheetValue.Expanded
 @Composable
 fun BottomSheetContent(
     hero: Hero,
@@ -144,7 +145,9 @@ fun BottomSheetContent(
                     items = hero.abilities,
                     textColor = contentColor
             )
-
+            /*Timber.i("Fraction is: $fraction")
+            Timber.i("Target is: $targetValue")
+            Timber.i("Current is: $currentValue")*/
 
             OrderedList(
                     title = stringResource(R.string.nature_types),
@@ -156,29 +159,6 @@ fun BottomSheetContent(
 }
 //extension variable to BottomSheetScaffoldState
 
-@OptIn(ExperimentalMaterialApi::class)
-val BottomSheetScaffoldState.currentSheetFraction: Float
-    get() {
-        val fraction = bottomSheetState.progress.fraction
-        val targetValue = bottomSheetState.targetValue
-        val currentValue = bottomSheetState.currentValue
-
-        Timber.i("Fraction $fraction")
-        Timber.i("Fraction - Target $targetValue")
-        Timber.i("Fraction - Current $currentValue")
-
-        return when{
-
-
-            currentValue ==BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Collapsed -> 1f
-            currentValue== BottomSheetValue.Expanded && targetValue== BottomSheetValue.Expanded -> 0f
-            currentValue==BottomSheetValue.Collapsed&& targetValue==BottomSheetValue.Expanded -> 1f -fraction
-            currentValue==BottomSheetValue.Expanded && targetValue== BottomSheetValue.Collapsed -> 1f + fraction
-
-            else -> fraction
-        }
-
-    }
 
 @Preview
 @Composable
