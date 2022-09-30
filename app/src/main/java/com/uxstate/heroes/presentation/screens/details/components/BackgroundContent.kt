@@ -53,19 +53,23 @@ fun BackgroundContent(
                         .align(Alignment.TopStart)
         )
 
-        Row(horizontalArrangement = Arrangement.End) {
+Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+    IconButton(onClick = onCloseClicked) {
 
-            IconButton(onClick = onCloseClicked) {
+        Icon(
+                imageVector = Icons.Default.Close,
+                contentDescription = stringResource(id = R.string.close_label),
+                modifier = Modifier
+                        .size(spacing.spaceLarge)
+                        ,
+                tint = Color.White
+        )
 
-                Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = stringResource(id = R.string.close_label),
-                        modifier = Modifier.size(spacing.spaceLarge)
-                )
+    }
+}
 
-            }
 
-        }
+
 
     }
 }

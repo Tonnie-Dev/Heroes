@@ -3,10 +3,7 @@ package com.uxstate.heroes.presentation.screens.details.components
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,6 +19,7 @@ import com.uxstate.heroes.presentation.ui.theme.HeroesTheme
 import com.uxstate.heroes.presentation.ui.theme.titleColor
 import com.uxstate.heroes.util.Constants.ABOUT_TEXT_MAX_LINES
 import com.uxstate.heroes.util.LocalSpacing
+import timber.log.Timber
 
 @Composable
 fun BottomSheetContent(
@@ -156,7 +154,31 @@ fun BottomSheetContent(
         }
     }
 }
+//extension variable to BottomSheetScaffoldState
 
+@OptIn(ExperimentalMaterialApi::class)
+val BottomSheetScaffoldState.currentSheetFraction: Float
+    get() {
+        val fraction = bottomSheetState.progress.fraction
+        val targetValue = bottomSheetState.targetValue
+        val currentValue = bottomSheetState.currentValue
+
+        Timber.i("Fraction $fraction")
+        Timber.i("Fraction - Target $targetValue")
+        Timber.i("Fraction - Current $currentValue")
+
+        return when{
+
+
+            currentValue ==BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Collapsed -> 1f
+            currentValue== BottomSheetValue.Expanded && targetValue== BottomSheetValue.Expanded -> 0f
+            currentValue==BottomSheetValue.Collapsed&& targetValue==BottomSheetValue.Expanded -> 1f -fraction
+            currentValue==BottomSheetValue.Expanded && targetValue== BottomSheetValue.Collapsed -> 1f + fraction
+
+            else -> fraction
+        }
+
+    }
 
 @Preview
 @Composable

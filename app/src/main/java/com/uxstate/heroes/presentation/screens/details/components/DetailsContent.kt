@@ -16,13 +16,19 @@ fun DetailsContent(navigator: DestinationsNavigator, hero: Hero) {
                 bottomSheetState =
                 BottomSheetState(initialValue = BottomSheetValue.Expanded)
         )
+
+
+    val currentSheetFraction = scaffoldState.currentSheetFraction
     BottomSheetScaffold(
             scaffoldState = scaffoldState,
             sheetPeekHeight = spacing.spaceOneHundredFifty,
-            sheetContent = { BottomSheetContent(hero = hero)},
-            content = { BackgroundContent(heroImage = hero.image) {
-
-            }}
-    ) 
+            sheetContent = { BottomSheetContent(hero = hero) },
+            content = {
+                BackgroundContent(
+                        heroImage = hero.image,
+                        imageFraction = currentSheetFraction,
+                        onCloseClicked = { navigator.popBackStack() })
+            }
+    )
 
 }
