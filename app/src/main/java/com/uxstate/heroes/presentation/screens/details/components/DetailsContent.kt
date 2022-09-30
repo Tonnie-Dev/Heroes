@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.util.LocalSpacing
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -13,10 +14,10 @@ fun DetailsContent(navigator: DestinationsNavigator, hero: Hero) {
     val spacing = LocalSpacing.current
     val scaffoldState =
         rememberBottomSheetScaffoldState(
-                bottomSheetState =
-                BottomSheetState(initialValue = BottomSheetValue.Expanded)
+                //State of the persistent bottom sheet in BottomSheetScaffold
+                bottomSheetState = BottomSheetState(initialValue = BottomSheetValue.Expanded)
         )
-    
+
     BottomSheetScaffold(
             scaffoldState = scaffoldState,
             sheetPeekHeight = spacing.spaceOneHundredFifty,
@@ -33,16 +34,16 @@ fun DetailsContent(navigator: DestinationsNavigator, hero: Hero) {
 
 }
 
+
 @OptIn(ExperimentalMaterialApi::class)
 val BottomSheetScaffoldState.currentSheetFraction: Float
     get() {
         val fraction = bottomSheetState.progress.fraction
         val targetValue = bottomSheetState.targetValue
         val currentValue = bottomSheetState.currentValue
-
-        /*Timber.i("Fraction is: $fraction")
+        Timber.i("Fraction is: $fraction")
         Timber.i("Target is: $targetValue")
-        Timber.i("Current is: $currentValue")*/
+        Timber.i("Current is: $currentValue")
         return when {
             currentValue == BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Collapsed -> 1f
             currentValue == BottomSheetValue.Expanded && targetValue == BottomSheetValue.Expanded -> 0f

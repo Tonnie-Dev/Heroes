@@ -19,6 +19,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.heroes.R
 import com.uxstate.heroes.util.Constants.BASE_URL
+import com.uxstate.heroes.util.Constants.MIN_BACKGROUND_IMAGE_HEIGHT
 import com.uxstate.heroes.util.LocalSpacing
 import timber.log.Timber
 
@@ -50,7 +51,7 @@ fun BackgroundContent(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(imageFraction)
+                        .fillMaxHeight(imageFraction +MIN_BACKGROUND_IMAGE_HEIGHT)
                         .align(Alignment.TopStart)
         )
 

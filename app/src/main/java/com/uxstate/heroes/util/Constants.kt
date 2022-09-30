@@ -15,6 +15,7 @@ object Constants {
     const val EMPTY_STARS_KEY = "emptyStars"
     const val BASE_URL = "http://10.0.2.2:8080"
     const val ABOUT_TEXT_MAX_LINES = 7
+    const val MIN_BACKGROUND_IMAGE_HEIGHT = 0.4f
 
 
 }
