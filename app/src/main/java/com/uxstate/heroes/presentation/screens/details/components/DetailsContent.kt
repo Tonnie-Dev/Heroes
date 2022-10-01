@@ -1,7 +1,10 @@
 package com.uxstate.heroes.presentation.screens.details.components
 
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.util.LocalSpacing
@@ -17,11 +20,19 @@ fun DetailsContent(navigator: DestinationsNavigator, hero: Hero) {
                 //State of the persistent bottom sheet in BottomSheetScaffold
                 bottomSheetState = BottomSheetState(initialValue = BottomSheetValue.Expanded)
         )
+    /*val radiusAnim by animateDpAsState(
+
+            //1f means the bottom sheet is collapsed
+            targetValue = if (scaffoldState.currentSheetFraction == 1f)
+                spacing.spaceLarge
+            else
+                spacing.spaceDefault)*/
 
     BottomSheetScaffold(
             scaffoldState = scaffoldState,
             sheetPeekHeight = spacing.spaceOneHundredFifty,
             sheetContent = { BottomSheetContent(hero = hero) },
+            sheetShape = RoundedCornerShape(spacing.spaceLarge),
             content = {
 
 
