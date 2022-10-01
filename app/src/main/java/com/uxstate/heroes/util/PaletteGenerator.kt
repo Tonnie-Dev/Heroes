@@ -10,6 +10,8 @@ import coil.request.SuccessResult
 
 object PaletteGenerator {
 
+
+    //make this a suspend fun because of loader.execute() call
     suspend fun convertImageUrlToBitmap(url: String, context: Context): Bitmap? {
 
         //loader class from the Coil Library
@@ -41,6 +43,28 @@ Default: true*/
 
     }
 
+
+    fun extractColorsFromBitmap(bitmap: Bitmap): Map<String, String> {
+
+        return mapOf(
+
+                //content swatch color - text will be placed on top of this color
+                "vibrant" to parseColorSwatch(
+                        color = Palette.from(bitmap)
+                                .generate().vibrantSwatch
+                ),
+                //content swatch color - text will be placed on top of this color
+                "darkVibrant" to parseColorSwatch(
+                        color = Palette.from(bitmap)
+                                .generate().darkVibrantSwatch
+                ),
+                //text color
+                "onDarkVibrant" to parseBodyColor(
+                        color = Palette.from(bitmap)
+                                .generate().darkVibrantSwatch?.bodyTextColor
+                )
+        )
+    }
 
     private fun parseColorSwatch(color: Palette.Swatch?): String {
 
