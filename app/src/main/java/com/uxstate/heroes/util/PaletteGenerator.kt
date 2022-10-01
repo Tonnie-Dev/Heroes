@@ -53,10 +53,23 @@ Default: true*/
 
         } else {
 
-            //else return black color
+            //else return black color - for background/surface
             "#000000"
         }
 
 
+    }
+
+    private fun parseBodyColor(color: Int?): String {
+
+        return if (color != null) {
+            val parsedColor = Integer.toHexString(color)
+            "#$parsedColor"
+
+        } else {
+
+            //else return white color - good for content
+            "#FFFFFF"
+        }
     }
 }
