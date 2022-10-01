@@ -3,13 +3,14 @@ package com.uxstate.heroes.util
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import androidx.palette.graphics.Palette
 import coil.ImageLoader
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 
 object PaletteGenerator {
 
-    suspend fun convertImageUrlToBitMap(url: String, context: Context): Bitmap? {
+    suspend fun convertImageUrlToBitmap(url: String, context: Context): Bitmap? {
 
         //loader class from the Coil Library
         val loader = ImageLoader(context = context)
@@ -37,6 +38,25 @@ Default: true*/
 
             null
         }
+
+    }
+
+
+    private fun parseColorSwatch(color: Palette.Swatch?): String {
+
+        return if (color != null) {
+            //convert color to hex
+            val parsedColor = Integer.toHexString(color.rgb)
+
+            //concatenate #
+            "#$parsedColor"
+
+        } else {
+
+            //else return black color
+            "#000000"
+        }
+
 
     }
 }
