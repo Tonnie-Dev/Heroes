@@ -12,7 +12,7 @@ import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun DetailsContent(navigator: DestinationsNavigator, hero: Hero) {
+fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors:Map<String, String>) {
 
     val spacing = LocalSpacing.current
     val scaffoldState =

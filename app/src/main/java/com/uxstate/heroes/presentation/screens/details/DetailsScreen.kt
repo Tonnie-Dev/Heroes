@@ -19,13 +19,19 @@ fun DetailsScreen(
     hero: Hero,
     viewModel: DetailsViewModel = hiltViewModel()
 ) {
-
+//whenever this changes a recomposition is done - if-block will excute
     val colorPalette by viewModel.colorPalette
 
+    //1st time the colorPalette from VM will be empty meaning else block will trigger
     if (colorPalette.isNotEmpty()) {
+
+        //upon recomposition
         DetailsContent(navigator = navigator, hero = hero)
 
     } else {
+
+        //trigger VM to emit a UIEVent collected in the Launch block
+
         viewModel.generateColorPalette()
     }
 
@@ -38,6 +44,7 @@ fun DetailsScreen(
 
         viewModel.uiEvent.collectLatest { uiEvent ->
 
+            //immediately extracts colors from bitmap and set them on VM color palette
             when (uiEvent) {
 
                 is UIEvent.GenerateColorPalette -> {
