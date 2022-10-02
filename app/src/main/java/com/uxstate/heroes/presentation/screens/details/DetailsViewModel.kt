@@ -21,7 +21,8 @@ class DetailsViewModel @Inject constructor() : ViewModel() {
     private val _uiEvent = MutableSharedFlow<UIEvent>()
     val uiEvent = _uiEvent.asSharedFlow()
 
-    var colorPalette by mutableStateOf<Map<String,String>>(mapOf())
+
+    var colorsPalette by mutableStateOf<Map<String,String>>(mapOf())
     private set
 
 
@@ -40,7 +41,7 @@ class DetailsViewModel @Inject constructor() : ViewModel() {
     fun setPalette(colors:Map<String,String>){
 
 
-        colorPalette = colors
+        colorsPalette = colors
 
     }
 

@@ -12,7 +12,9 @@ import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors: Map<String, String>) {
+fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors: Map<String, String> ) {
+
+    Timber.i("DetailsContent called")
     val scaffoldState =
         rememberBottomSheetScaffoldState(
                 //State of the persistent bottom sheet in BottomSheetScaffold

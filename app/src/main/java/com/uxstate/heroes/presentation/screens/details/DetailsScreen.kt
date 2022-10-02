@@ -11,6 +11,7 @@ import com.uxstate.heroes.presentation.screens.details.components.DetailsContent
 import com.uxstate.heroes.util.Constants.BASE_URL
 import com.uxstate.heroes.util.PaletteGenerator
 import kotlinx.coroutines.flow.collectLatest
+import timber.log.Timber
 
 @Destination
 @Composable
@@ -19,17 +20,21 @@ fun DetailsScreen(
     hero: Hero,
     viewModel: DetailsViewModel = hiltViewModel()
 ) {
-//whenever this changes a recomposition is done - if-block will excute
-    val colorPalette by viewModel.colorPalette
+//whenever this changes a recomposition is done - if-block will execute
+val colorPalette = viewModel.colorsPalette
+    Timber.i("DetailsScreen called")
+
 
     //1st time the colorPalette from VM will be empty meaning else block will trigger
     if (colorPalette.isNotEmpty()) {
 
+        Timber.i("Inside Details Screen - if")
         //upon recomposition
-        DetailsContent(navigator = navigator, hero = hero)
+        DetailsContent(navigator = navigator, hero = hero, colors = colorPalette)
 
     } else {
 
+        Timber.i("Inside Details Screen - else")
         //trigger VM to emit a UIEVent collected in the Launch block
 
         viewModel.generateColorPalette()
