@@ -1,8 +1,10 @@
 package com.uxstate.heroes.presentation.screens.details.components
 
+import android.graphics.Color.parseColor
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.graphics.Color
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.util.LocalSpacing
@@ -45,11 +47,18 @@ fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors: Map<Str
     BottomSheetScaffold(
             scaffoldState = scaffoldState,
             sheetPeekHeight = spacing.spaceOneHundredFifty,
-            sheetContent = { BottomSheetContent(hero = hero) },
+            sheetContent = {
+                BottomSheetContent(
+                        hero = hero,
+
+                        //use parseColor to parse string to Int
+                        infoBoxIconColor = Color(parseColor(vibrant)),
+                        sheetBackgroundColor = Color(parseColor(darkVibrant)),
+                        contentColor = Color(parseColor(onDarkVibrant))
+                )
+            },
             sheetShape = RoundedCornerShape(spacing.spaceLarge),
             content = {
-
-
                 BackgroundContent(
                         heroImage = hero.image,
                         imageFraction = scaffoldState.currentSheetFraction,
