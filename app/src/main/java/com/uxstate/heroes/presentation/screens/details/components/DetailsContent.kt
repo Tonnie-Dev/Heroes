@@ -32,9 +32,9 @@ fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors: Map<Str
     LaunchedEffect(key1 = hero, block = {
 
         //update the default colors
-        vibrant = colors["vibrant"]!!
-        darkVibrant = colors["darkVibrant"]!!
-        onDarkVibrant = colors["onDarkVibrant"]!!
+        vibrant = colors["vibrant"]?:"#000"
+        darkVibrant = colors["darkVibrant"]?:"#000"
+        onDarkVibrant = colors["onDarkVibrant"]?:"#fff"
     })
 
 

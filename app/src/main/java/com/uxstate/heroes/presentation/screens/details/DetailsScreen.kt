@@ -36,8 +36,8 @@ val colorPalette = viewModel.colorsPalette
 
         Timber.i("Inside Details Screen - else")
         //trigger VM to emit a UIEVent collected in the Launch block
-
-        viewModel.generateColorPalette()
+        DetailsContent(navigator = navigator, hero = hero, colors = colorPalette)
+       // viewModel.generateColorPalette()
     }
 
 
@@ -47,6 +47,7 @@ val colorPalette = viewModel.colorsPalette
     //doesn't re-trigger during recomposition
     LaunchedEffect(key1 = true, block = {
 
+        Timber.i("DetailsScreen Launch Block Called")
         viewModel.uiEvent.collectLatest { uiEvent ->
 
             //immediately extracts colors from bitmap and set them on VM color palette

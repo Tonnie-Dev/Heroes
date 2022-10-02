@@ -9,10 +9,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor() : ViewModel() {
+
+    init {
+        Timber.i("Init Block called inside DetailsViewModel")
+    }
 
     /*with shared flow we are going to be able to trigger
     one time events and our events will not re-trigger
@@ -34,13 +39,14 @@ class DetailsViewModel @Inject constructor() : ViewModel() {
         viewModelScope.launch {
             _uiEvent.emit(UIEvent.GenerateColorPalette)
 
+            Timber.i("UIEvent detected inside DetailsViewModel")
         }
 
     }
 
     fun setPalette(colors:Map<String,String>){
 
-
+Timber.i("The colors are $colors")
         colorsPalette = colors
 
     }

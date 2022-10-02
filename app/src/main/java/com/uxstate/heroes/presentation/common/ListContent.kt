@@ -76,7 +76,7 @@ fun ListContent(
 @Composable
 fun handlePagingResult(heroes: LazyPagingItems<Hero>):Boolean {
 
-    Timber.i ("HandlePaging composable fxn invoked")
+
     heroes.apply {
 
         //this variable stores errors found in refresh, prepend or append
@@ -147,6 +147,7 @@ fun HeroItem(navigator: DestinationsNavigator? = null, hero: Hero) {
                     .aspectRatio(9f / 10f)
                     .clickable {
                         navigator?.navigate(DetailsScreenDestination(hero))
+                        Timber.i("Onclick detected inside the ListContent")
                     }, contentAlignment = Alignment.BottomStart
     ) {
 
