@@ -1,6 +1,5 @@
 package com.uxstate.heroes.presentation.screens.details.components
 
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -11,19 +10,30 @@ import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors:Map<String, String>) {
-
-    val spacing = LocalSpacing.current
-
-    var vibrant by remember { mutableStateOf("#000000") }
-    var darkVibrant by remember { mutableStateOf("#000000") }
-    var onDarkVibrant by remember { mutableStateOf("#000000") }
-
+fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors: Map<String, String>) {
     val scaffoldState =
         rememberBottomSheetScaffoldState(
                 //State of the persistent bottom sheet in BottomSheetScaffold
                 bottomSheetState = BottomSheetState(initialValue = BottomSheetValue.Expanded)
         )
+    val spacing = LocalSpacing.current
+
+    //default colors
+    var vibrant by remember { mutableStateOf("#000000") }
+    var darkVibrant by remember { mutableStateOf("#000000") }
+    var onDarkVibrant by remember { mutableStateOf("#FFFFFF") }
+
+    //LaunchEffect to trigger on selecting different heroes
+
+    LaunchedEffect(key1 = hero, block = {
+
+        //update the default colors
+        vibrant = colors["vibrant"]!!
+        darkVibrant = colors["darkVibrant"]!!
+        onDarkVibrant = colors["onDarkVibrant"]!!
+    })
+
+
     /*val radiusAnim by animateDpAsState(
 
             //1f means the bottom sheet is collapsed
