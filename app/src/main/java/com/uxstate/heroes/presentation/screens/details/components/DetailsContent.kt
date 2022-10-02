@@ -3,8 +3,7 @@ package com.uxstate.heroes.presentation.screens.details.components
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.util.LocalSpacing
@@ -15,6 +14,11 @@ import timber.log.Timber
 fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors:Map<String, String>) {
 
     val spacing = LocalSpacing.current
+
+    var vibrant by remember { mutableStateOf("#000000") }
+    var darkVibrant by remember { mutableStateOf("#000000") }
+    var onDarkVibrant by remember { mutableStateOf("#000000") }
+
     val scaffoldState =
         rememberBottomSheetScaffoldState(
                 //State of the persistent bottom sheet in BottomSheetScaffold
