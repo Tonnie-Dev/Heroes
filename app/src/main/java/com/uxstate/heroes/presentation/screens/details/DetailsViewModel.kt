@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -23,8 +22,9 @@ class DetailsViewModel @Inject constructor() : ViewModel() {
     one time events and our events will not re-trigger
     even with screen rotation*/
 
-    private val _uiEvent = MutableSharedFlow<UIEvent>()
-    val uiEvent = _uiEvent.asSharedFlow()
+    var uiEvent = MutableSharedFlow<UIEvent>()
+    private set
+
 
 
     var colorsPalette by mutableStateOf<Map<String,String>>(mapOf())
@@ -37,9 +37,9 @@ class DetailsViewModel @Inject constructor() : ViewModel() {
 
         //emit should only be called from a coroutine
         viewModelScope.launch {
-            _uiEvent.emit(UIEvent.GenerateColorPalette)
+            uiEvent.emit(UIEvent.GenerateColorPalette)
 
-            Timber.i("UIEvent detected inside DetailsViewModel")
+            Timber.i("UIEvent emitted from DetailsViewModel")
         }
 
     }

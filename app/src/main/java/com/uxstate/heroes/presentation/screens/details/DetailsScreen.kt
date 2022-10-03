@@ -22,7 +22,7 @@ fun DetailsScreen(
 ) {
 //whenever this changes a recomposition is done - if-block will execute
 val colorPalette = viewModel.colorsPalette
-    Timber.i("DetailsScreen called")
+    Timber.i("DetailsScreen composable called")
 
 
     //1st time the colorPalette from VM will be empty meaning else block will trigger
@@ -49,9 +49,9 @@ val colorPalette = viewModel.colorsPalette
     //doesn't re-trigger during recomposition
     LaunchedEffect(key1 = true, block = {
 
-        Timber.i("DetailsScreen Launch Block Called")
-        viewModel.uiEvent.collectLatest { uiEvent ->
-
+        Timber.i("Entering the LaunchBlock")
+        viewModel.uiEvent.collectLatest{ uiEvent ->
+            Timber.i("Inside the collectLatestBlock")
             //immediately extracts colors from bitmap and set them on VM color palette
             when (uiEvent) {
 
@@ -78,7 +78,11 @@ val colorPalette = viewModel.colorsPalette
                 }
             }
         }
+        Timber.i("Exiting the Launch Block")
+    }
 
-    })
+    )
+
+    Timber.i("End of DetailsScreen composable reached")
 
 }
