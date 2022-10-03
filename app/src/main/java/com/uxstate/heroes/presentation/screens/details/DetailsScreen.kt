@@ -50,7 +50,9 @@ val colorPalette = viewModel.colorsPalette
     LaunchedEffect(key1 = true, block = {
 
         Timber.i("Entering the LaunchBlock")
-        viewModel.eventFlow.collectLatest{
+
+
+        viewModel.uiEvent.collectLatest{
 
             event ->
 
@@ -80,7 +82,7 @@ val colorPalette = viewModel.colorsPalette
 
                 }
 
-             
+
             }
         }
         Timber.i("Exiting the Launch Block")

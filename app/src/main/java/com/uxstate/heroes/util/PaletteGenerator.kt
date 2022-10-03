@@ -73,7 +73,7 @@ Default: true*/
             val parsedColor = Integer.toHexString(color.rgb)
 
             //concatenate #
-            "#$parsedColor"
+           return "#$parsedColor"
 
         } else {
 
@@ -88,7 +88,7 @@ Default: true*/
 
         return if (color != null) {
             val parsedColor = Integer.toHexString(color)
-            "#$parsedColor"
+           "#$parsedColor"
 
         } else {
 
