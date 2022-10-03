@@ -36,8 +36,10 @@ val colorPalette = viewModel.colorsPalette
 
         Timber.i("Inside Details Screen - else")
         //trigger VM to emit a UIEVent collected in the Launch block
-        DetailsContent(navigator = navigator, hero = hero, colors = colorPalette)
-       // viewModel.generateColorPalette()
+
+        viewModel.generateColorPalette()
+
+        //DetailsContent(navigator = navigator, hero = hero, colors = colorPalette)
     }
 
 
@@ -54,19 +56,25 @@ val colorPalette = viewModel.colorsPalette
             when (uiEvent) {
 
                 is UIEvent.GenerateColorPalette -> {
-
+                    Timber.i("Latest UIEvent signal collected in Launch Block")
                     //extract a bitmap from the selected hero image
 
                     val imageUrl = "$BASE_URL${hero.image}"
+                    Timber.i("Image url is $imageUrl")
                     val bitMap = PaletteGenerator.convertImageUrlToBitmap(imageUrl, context)
 
                     //check if bitmap is null before extracting colors from it
 
+                    Timber.i("Bitmap nullability: ${bitMap ==null}")
                     if (bitMap != null) {
+
+                        Timber.i("Bitmap is not null")
                         viewModel.setPalette(
                                 PaletteGenerator.extractColorsFromBitmap(bitmap = bitMap)
                         )
                     }
+
+
                 }
             }
         }

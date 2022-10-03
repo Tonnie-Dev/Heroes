@@ -45,7 +45,7 @@ class DetailsViewModel @Inject constructor() : ViewModel() {
     }
 
     fun setPalette(colors:Map<String,String>){
-
+        Timber.i("inside the setPalette() DetailsViewModel")
 Timber.i("The colors are $colors")
         colorsPalette = colors
 
