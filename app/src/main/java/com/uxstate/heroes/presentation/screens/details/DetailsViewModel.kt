@@ -22,7 +22,7 @@ class DetailsViewModel @Inject constructor() : ViewModel() {
     one time events and our events will not re-trigger
     even with screen rotation*/
 
-    var uiEvent = MutableSharedFlow<UIEvent>()
+    var eventFlow = MutableSharedFlow<UIEvent>()
     private set
 
 
@@ -37,7 +37,7 @@ class DetailsViewModel @Inject constructor() : ViewModel() {
 
         //emit should only be called from a coroutine
         viewModelScope.launch {
-            uiEvent.emit(UIEvent.GenerateColorPalette)
+            eventFlow.emit(UIEvent.GenerateColorPalette)
 
             Timber.i("UIEvent emitted from DetailsViewModel")
         }

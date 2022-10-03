@@ -50,10 +50,13 @@ val colorPalette = viewModel.colorsPalette
     LaunchedEffect(key1 = true, block = {
 
         Timber.i("Entering the LaunchBlock")
-        viewModel.uiEvent.collectLatest{ uiEvent ->
+        viewModel.eventFlow.collectLatest{
+
+            event ->
+
             Timber.i("Inside the collectLatestBlock")
             //immediately extracts colors from bitmap and set them on VM color palette
-            when (uiEvent) {
+            when (event) {
 
                 is UIEvent.GenerateColorPalette -> {
                     Timber.i("Latest UIEvent signal collected in Launch Block")
@@ -76,6 +79,8 @@ val colorPalette = viewModel.colorsPalette
 
 
                 }
+
+             
             }
         }
         Timber.i("Exiting the Launch Block")
