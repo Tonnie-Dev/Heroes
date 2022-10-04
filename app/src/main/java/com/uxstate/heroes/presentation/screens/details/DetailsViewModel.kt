@@ -32,7 +32,7 @@ class DetailsViewModel @Inject constructor() : ViewModel() {
     val uiEvent = _uiEvent.receiveAsFlow()
 
     fun generateColorPalette() {
-        
+
         //emit should only be called from a coroutine
         viewModelScope.launch {
 
