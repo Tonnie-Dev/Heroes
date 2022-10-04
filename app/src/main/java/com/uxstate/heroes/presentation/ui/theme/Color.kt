@@ -26,6 +26,11 @@ val ShimmerDarkGray = Color(0xFFF1D1D1D)
 /*We will be able to access this color variable through the
  material object*/
 
+
+
+val Colors.statusBarColor
+get() = if (this.isLight) Purple700 else Color.Black
+
 val Colors.welcomeScreenBackgroundColor
 
     get() = if (this.isLight) Color.White else Color.Black //composable getter function
