@@ -36,7 +36,7 @@ fun DetailsScreen(
         viewModel.generateColorPalette()
 
     }
-    
+
     val context = LocalContext.current
 
     //doesn't re-trigger during recomposition

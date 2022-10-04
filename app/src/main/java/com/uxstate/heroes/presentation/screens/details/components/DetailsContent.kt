@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.util.LocalSpacing
@@ -27,6 +28,10 @@ fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors: Map<Str
     var vibrant by remember { mutableStateOf("#000000") }
     var darkVibrant by remember { mutableStateOf("#000000") }
     var onDarkVibrant by remember { mutableStateOf("#FFFFFF") }
+
+    //change status bar color
+    val uiController = rememberSystemUiController()
+    uiController.setStatusBarColor(Color(color = parseColor(darkVibrant)))
 
     //LaunchEffect to trigger on selecting different heroes
     LaunchedEffect(key1 = hero, block = {
