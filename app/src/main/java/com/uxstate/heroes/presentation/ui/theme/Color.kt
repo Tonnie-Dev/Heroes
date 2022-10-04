@@ -18,7 +18,7 @@ val starColor = Color(0xFFFFC94D)
 //Shimmer colors
 val ShimmerLightGray = Color(0xFFF1F1F1)
 val ShimmerMediumGray = Color(0xFFE3E3E3)
-val ShimmerDarkGray = Color(0xFFF1D1D1D)
+val ShimmerDarkGray = Color(0xFF1D1D1D)
 
 
 //extension variable on MaterialTheme.colors
@@ -27,12 +27,10 @@ val ShimmerDarkGray = Color(0xFFF1D1D1D)
  material object*/
 
 
-
 val Colors.statusBarColor
-get() = if (this.isLight) Purple700 else Color.Black
+    get() = if (this.isLight) Purple700 else Color.Black
 
 val Colors.welcomeScreenBackgroundColor
-
     get() = if (this.isLight) Color.White else Color.Black //composable getter function
 
 val Colors.titleColor
@@ -45,20 +43,19 @@ val Colors.descriptionColor
     else LightGray.copy(alpha = 0.5f)
 
 
-
 val Colors.activeColorIndicator
-get() = if (this.isLight) Purple500 else Purple700
+    get() = if (this.isLight) Purple500 else Purple700
 
 
 val Colors.inactiveColorIndicator
-get() = if (this.isLight) LightGray else DarkGray
+    get() = if (this.isLight) LightGray else DarkGray
 
 
 val Colors.buttonBackgroundColor
-get() = if (this.isLight) Purple500 else Purple700
+    get() = if (this.isLight) Purple500 else Purple700
 
 val Colors.topAppBarContentColor
-get() = if (this.isLight) Color.White else LightGray
+    get() = if (this.isLight) Color.White else LightGray
 
 val Colors.topAppBarBackgroundColor
-get() = if (this.isLight) Purple500 else Color.Black
+    get() = if (this.isLight) Purple500 else Color.Black
