@@ -59,7 +59,7 @@ fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors: Map<Str
                         contentColor = Color(parseColor(onDarkVibrant))
                 )
             },
-            sheetShape = RoundedCornerShape(spacing.spaceLarge),
+            sheetShape = RoundedCornerShape(spacing.spaceDefault),
             content = {
                 BackgroundContent(
                         heroImage = hero.image,
