@@ -1,6 +1,7 @@
 package com.uxstate.heroes.presentation.screens.details.components
 
 import android.graphics.Color.parseColor
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -14,7 +15,7 @@ import timber.log.Timber
 @Composable
 fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors: Map<String, String> ) {
 
-    Timber.i("DetailsContent called")
+
     val scaffoldState =
         rememberBottomSheetScaffoldState(
                 //State of the persistent bottom sheet in BottomSheetScaffold
@@ -28,13 +29,12 @@ fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors: Map<Str
     var onDarkVibrant by remember { mutableStateOf("#FFFFFF") }
 
     //LaunchEffect to trigger on selecting different heroes
-
     LaunchedEffect(key1 = hero, block = {
 
         //update the default colors
-        vibrant = colors["vibrant"]?:"#000000"
-        darkVibrant = colors["darkVibrant"]?:"#000000"
-        onDarkVibrant = colors["onDarkVibrant"]?:"#ffffff"
+        vibrant = colors["vibrant"]!!
+        darkVibrant = colors["darkVibrant"]!!
+        onDarkVibrant = colors["onDarkVibrant"]!!
     })
 
 
