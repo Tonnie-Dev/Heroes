@@ -19,12 +19,11 @@ import timber.log.Timber
 @com.ramcosta.composedestinations.annotation.Destination
 @Composable
 fun HomeScreen( viewModel: HomeViewModel = hiltViewModel(), navigator: DestinationsNavigator) {
-Timber.i("HomeScreen called")
+
 
     val allHeroes = viewModel.getAllHeroes.collectAsLazyPagingItems()
-   // Timber.i("HomeScreen - ${allHeroes.loadState}")
-    //Add Scaffold
 
+    //Add Scaffold
     Scaffold( topBar = { HomeTopBar {navigator.navigate(SearchScreenDestination)}},
 
             content = { paddingValues ->
