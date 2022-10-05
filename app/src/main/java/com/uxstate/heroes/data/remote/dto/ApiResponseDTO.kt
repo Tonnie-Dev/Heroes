@@ -10,14 +10,14 @@ data class ApiResponseDTO(
     @Json(name = "success")
     val success: Boolean,
     @Json(name = "message")
-    val message: String?,
+    val message: String? = null,
     @Json(name = "nextPage")
-    val nextPage: Int?,
+    val nextPage: Int? = null,
     @Json(name = "previousPage")
-    val prevPage: Int?,
+    val prevPage: Int? = null,
     @Json(name = "heroes")
-    val heroes: List<Hero>,
+    val heroes: List<Hero> = emptyList(),
     @Json(name = "lastUpdated")
-    val lastUpdated: Long?,
+    val lastUpdated: Long? = null,
 
-)
+    )
