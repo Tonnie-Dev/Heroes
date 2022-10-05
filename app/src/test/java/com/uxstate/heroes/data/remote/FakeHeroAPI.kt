@@ -57,7 +57,9 @@ class FakeHeroAPI : HeroAPI {
     }
 
     override suspend fun searchHeroes(name: String): ApiResponseDTO {
-        TODO("Not yet implemented")
+        val foundHero = findHero(name = name)
+
+        return ApiResponseDTO(success = true, message = "OK", heroes = foundHero)
     }
 
     private fun findHero(name: String): List<Hero> {
