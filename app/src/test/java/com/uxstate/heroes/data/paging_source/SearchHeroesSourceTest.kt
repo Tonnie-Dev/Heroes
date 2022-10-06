@@ -1,5 +1,6 @@
 package com.uxstate.heroes.data.paging_source
 
+import androidx.paging.PagingSource
 import com.uxstate.heroes.data.remote.FakeHeroAPI
 import com.uxstate.heroes.data.remote.HeroAPI
 import com.uxstate.heroes.domain.model.Hero
@@ -17,7 +18,7 @@ class SearchHeroesSourceTest {
     fun setUp() {
 
         api = FakeHeroAPI()
-        val heroes = listOf<Hero>(
+         heroes = listOf<Hero>(
                 Hero(
                         id = 1,
                         name = "Sasuke",
@@ -65,8 +66,21 @@ class SearchHeroesSourceTest {
     @Test
     fun `Search api with an existing hero name, expect single hero result, assert LoadResult_Page`() =
         runBlocking {
-val heroSource = SearchHeroesSource(api = api, query = "Sasuke")
+            val heroSource = SearchHeroesSource(api = api, query = "Ssuke")
 
-
+            assertEquals<PagingSource.LoadResult<Int, Hero>>(
+                    expected = PagingSource.LoadResult.Page(
+                            data = listOf(heroes.first()),
+                            prevKey = null,
+                            nextKey = null
+                    ),
+                    actual = heroSource.load(
+                            PagingSource.LoadParams.Refresh(
+                                    key = null,
+                                    loadSize = 3,
+                                    placeholdersEnabled = false
+                            )
+                    )
+            )
         }
 }
