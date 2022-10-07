@@ -1,4 +1,4 @@
-package com.uxstate.heroes.data.paging_source
+package com.uxstate.heroes.domain.paging_source
 
 import androidx.paging.PagingData
 import com.uxstate.heroes.domain.model.Hero

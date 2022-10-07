@@ -1,7 +1,7 @@
 package com.uxstate.heroes.data.repository
 
 import androidx.paging.PagingData
-import com.uxstate.heroes.data.paging_source.RemoteDataSource
+import com.uxstate.heroes.domain.paging_source.RemoteDataSource
 import com.uxstate.heroes.data.prefs.DataStoreOps
 import com.uxstate.heroes.domain.model.Hero
 import com.uxstate.heroes.domain.repository.HeroRepository

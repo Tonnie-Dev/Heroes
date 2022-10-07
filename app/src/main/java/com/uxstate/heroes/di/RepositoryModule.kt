@@ -1,6 +1,6 @@
 package com.uxstate.heroes.di
 
-import com.uxstate.heroes.data.paging_source.RemoteDataSource
+import com.uxstate.heroes.domain.paging_source.RemoteDataSource
 import com.uxstate.heroes.data.paging_source.RemoteDataSourceImpl
 import com.uxstate.heroes.data.prefs.DataStoreOpsImpl
 import com.uxstate.heroes.data.prefs.DataStoreOps
@@ -40,6 +40,6 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun provideRemoteDataSource(remoteDataSourceImpl: RemoteDataSourceImpl):RemoteDataSource
+    abstract fun provideRemoteDataSource(remoteDataSourceImpl: RemoteDataSourceImpl): RemoteDataSource
 
 }

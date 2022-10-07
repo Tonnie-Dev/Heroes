@@ -13,35 +13,34 @@ class SearchHeroesSource @Inject constructor(
     private val api: HeroAPI,
     private val query: String
 ) : PagingSource<Int, Hero>() {
+
     override fun getRefreshKey(state: PagingState<Int, Hero>): Int? {
-
-    return state.anchorPosition
-
+        return state.anchorPosition
 
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Hero> {
-        return  try {
+        return try {
 
-            val apiResponse = api.searchHeroes(name =query)
+            val apiResponse = api.searchHeroes(name = query)
             val heroes = apiResponse.heroes
 
-            if(heroes.isNotEmpty()){
+            if (heroes.isNotEmpty()) {
 
                 LoadResult.Page(
                         data = heroes,
                         prevKey = apiResponse.prevPage,
                         nextKey = apiResponse.nextPage
                 )
-            }else {
+            } else {
 
                 LoadResult.Page(
                         data = emptyList(),
                         prevKey = null,
-                        nextKey = null)
+                        nextKey = null
+                )
             }
-        }
-        catch (e:Exception){
+        } catch (e: Exception) {
             LoadResult.Error(e)
 
         }
