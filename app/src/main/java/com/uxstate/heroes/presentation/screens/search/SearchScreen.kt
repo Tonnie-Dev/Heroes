@@ -24,7 +24,7 @@ fun SearchScreen(
 
     val uiController = rememberSystemUiController()
     uiController.setStatusBarColor(color = MaterialTheme.colors.statusBarColor)
-Timber.i("Searxche screen called")
+
     val query = viewModel.searchQuery
 
     //heroes will be passed to this screen using a lazy column
