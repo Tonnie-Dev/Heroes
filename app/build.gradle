@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "com.uxstate.heroes"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -82,8 +82,6 @@ dependencies {
     androidTestImplementation "androidx.test:rules:1.4.0"
 
 
-
-
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
 
@@ -91,16 +89,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
 
 
-
-
     // DataStore Preferences
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
 
-
-
-
-// Coil
+    // Coil
     implementation "io.coil-kt:coil-compose:2.1.0"
 
     //Dagger - Hilt
