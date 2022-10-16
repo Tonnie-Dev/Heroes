@@ -23,6 +23,7 @@ interface HeroDao {
  our items from the database page by page
 
 */
+
     @Query("SELECT * FROM hero_table ORDER BY id ASC")
     fun getAllHeroes(): PagingSource<Int, Hero>
 
