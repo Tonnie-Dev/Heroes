@@ -4,6 +4,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.uxstate.heroes.data.remote.HeroAPI
 import com.uxstate.heroes.domain.model.Hero
+import retrofit2.HttpException
+import java.io.IOException
 import javax.inject.Inject
 
 
@@ -40,9 +42,11 @@ class SearchHeroesSource @Inject constructor(
                         nextKey = null
                 )
             }
-        } catch (e: Exception) {
-            LoadResult.Error(e)
+        } catch (e: HttpException) {
+            LoadResult.Error(throwable = e)
 
+        }catch (e:IOException) {
+            LoadResult.Error(throwable = e)
         }
     }
 }
