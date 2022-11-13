@@ -100,13 +100,12 @@ fun handlePagingResult(heroes: LazyPagingItems<Hero>):Boolean {
 
             loadState.refresh is LoadState.Loading -> {
            ShimmerEffect()
-                Timber.i("ListContent - Loading Shimmer called")
+
             false
         }
         //in case of error
             error!= null -> {
 
-                Timber.i("ListContent - Error occurred")
                 EmptyScreen(error = error, heroes = heroes)
                 false
             }
@@ -116,7 +115,7 @@ fun handlePagingResult(heroes: LazyPagingItems<Hero>):Boolean {
             heroes.itemCount < 1 -> {
 
                 EmptyScreen()
-                Timber.i("ListContent - Less than 1 - Search")
+
                 false
             }
 

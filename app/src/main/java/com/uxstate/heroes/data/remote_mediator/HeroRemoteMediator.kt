@@ -157,6 +157,20 @@ class HeroRemoteMediator @Inject constructor(
     }
 
 
+    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Hero>): HeroRemoteKeys? {
+
+        //get the first pages then check if it is empty
+        return state.pages.firstOrNull {
+            it.data.isNotEmpty()
+
+            //get the first page and extract hero from it
+        }?.data?.firstOrNull()
+                ?.let { hero ->
+                    heroRemoteKeysDao.getRemoteKeys(hero.id)
+                            ?.toModel()
+                }
+    }
+
     private suspend fun getRemoteKeyClosetToCurrentPosition(state: PagingState<Int, Hero>): HeroRemoteKeys? {
         //anchor position is the most recently accessed index in the list
         return state.anchorPosition?.let { position ->
@@ -171,21 +185,6 @@ class HeroRemoteMediator @Inject constructor(
                         ?.toModel()
             }
         }
-    }
-
-
-    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Hero>): HeroRemoteKeys? {
-
-        //get the first pages then check if it is empty
-        return state.pages.firstOrNull {
-            it.data.isNotEmpty()
-
-            //get the first page and extract hero from it
-        }?.data?.firstOrNull()
-                ?.let { hero ->
-                    heroRemoteKeysDao.getRemoteKeys(hero.id)
-                            ?.toModel()
-                }
     }
 
 

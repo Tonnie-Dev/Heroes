@@ -1,7 +1,6 @@
 package com.uxstate.heroes.presentation.screens.details.components
 
 import android.graphics.Color.parseColor
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -14,7 +13,7 @@ import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors: Map<String, String> ) {
+fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors: Map<String, String>) {
 
 
     val scaffoldState =
@@ -42,7 +41,13 @@ fun DetailsContent(navigator: DestinationsNavigator, hero: Hero, colors: Map<Str
         onDarkVibrant = colors["onDarkVibrant"]!!
     })
 
-
+    val text = """
+    
+    This is a long 
+    long
+    long
+    line
+""".trimIndent()
     /*val radiusAnim by animateDpAsState(
 
             //1f means the bottom sheet is collapsed
