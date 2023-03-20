@@ -5,8 +5,8 @@ import com.uxstate.heroes.domain.model.Hero
 
 /*This class will fake the result from the server*/
 class FakeHeroAPI : HeroAPI {
-
-    private val heroes = listOf<Hero>(
+    //random heroes
+    private val heroes = listOf(
             Hero(
                     id = 1,
                     name = "Sasuke",
@@ -52,8 +52,8 @@ class FakeHeroAPI : HeroAPI {
 
     override suspend fun getAllHeroes(page: Int): ApiResponseDTO {
 
-        //we will not implement this so we return a blank API
-        return ApiResponseDTO(success = false)
+        //we will not test/implement this so we return a blank DTO
+        return ApiResponseDTO(success = false, heroes = heroes)
     }
 
     override suspend fun searchHeroes(name: String): ApiResponseDTO {
@@ -68,7 +68,7 @@ class FakeHeroAPI : HeroAPI {
 
             for (hero in heroes) {
 
-                if (hero.name.contains(name, true)) {
+                if (hero.name.lowercase().contains(name, true)) {
                     foundHero.add(hero)
                 }
 

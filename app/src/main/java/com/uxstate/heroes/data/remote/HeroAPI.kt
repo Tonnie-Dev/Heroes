@@ -12,6 +12,4 @@ interface HeroAPI {
     @GET("boruto/heroes/search")
     suspend fun searchHeroes(@Query("name") name: String):ApiResponseDTO
 
-
-
 }
