@@ -18,7 +18,9 @@ class SearchHeroesSourceTest {
     fun setUp() {
 
         api = FakeHeroAPI()
-         heroes = listOf(
+
+        //to be used in the expected context
+        heroes = listOf(
                 Hero(
                         id = 1,
                         name = "Sasuke",
@@ -68,7 +70,7 @@ class SearchHeroesSourceTest {
 
         //we are testing PagingSource's load() function which is suspending
         runBlocking {
-            val heroPagingSource = SearchHeroesSource(api = api, query = "Ssuke")
+            val heroPagingSource = SearchHeroesSource(api = api, query = "Sasuke")
 
             assertEquals<PagingSource.LoadResult<Int, Hero>>(
                     expected = PagingSource.LoadResult.Page(
@@ -87,4 +89,26 @@ class SearchHeroesSourceTest {
                     )
             )
         }
+
+
+    @Test
+    fun `Search with a keyword, expect multiple heroes, assert LoadResult_Page`() = runBlocking {
+
+        val source = SearchHeroesSource(api = api, query = "u")
+        assertEquals<PagingSource.LoadResult<Int,Hero>>(
+                expected = PagingSource.LoadResult.Page(
+                        data = heroes,
+                        prevKey = null,
+                        nextKey = null
+                ),
+                actual = source.load(
+                        params = PagingSource.LoadParams.Refresh(
+                                key = null,
+                                loadSize = 3,
+                                placeholdersEnabled = false
+                        )
+                )
+        )
+
+    }
 }
