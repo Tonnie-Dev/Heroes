@@ -153,7 +153,27 @@ class SearchHeroesSourceTest {
             val response = api.searchHeroes("").heroes
 
             assertTrue(actual = response.isEmpty())
-            assertTrue{loadingResult is PagingSource.LoadResult.Page}
+            assertTrue { loadingResult is PagingSource.LoadResult.Page }
 
+        }
+
+
+    @Test
+    fun `Search heroes with non_existent name, expect empty response, assert LoadResult_Page`() =
+        runBlocking {
+
+            val source = SearchHeroesSource(api = api, query = "Unknown")
+
+            val loadResult = source.load(
+                    PagingSource.LoadParams.Refresh(
+                            key = null,
+                            loadSize = 13,
+                            placeholdersEnabled = false
+                    )
+            )
+
+            val response = api.searchHeroes("Unknown").heroes
+            assertTrue { response.isEmpty() }
+            assertTrue { loadResult is PagingSource.LoadResult.Page }
         }
 }
