@@ -395,7 +395,16 @@ class FakeHeroApiTwo: HeroAPI {
             )
     )
     override suspend fun getAllHeroes(page: Int): ApiResponseDTO {
-        TODO("Not yet implemented")
+
+        require(page in 1..5)
+
+        return ApiResponseDTO(
+                success = true,
+                message = "OK",
+                nextPage = calculatePage(page)["nextPage"],
+                prevPage = calculatePage(page)["prevPage"],
+                heroes = heroes[page]!!
+        )
     }
 
     override suspend fun searchHeroes(name: String): ApiResponseDTO {
