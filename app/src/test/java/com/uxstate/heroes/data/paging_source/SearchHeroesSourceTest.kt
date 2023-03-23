@@ -8,6 +8,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class SearchHeroesSourceTest {
 
@@ -95,7 +96,7 @@ class SearchHeroesSourceTest {
     fun `Search with a keyword, expect multiple heroes, assert LoadResult_Page`() = runBlocking {
 
         val source = SearchHeroesSource(api = api, query = "u")
-        assertEquals<PagingSource.LoadResult<Int,Hero>>(
+        assertEquals<PagingSource.LoadResult<Int, Hero>>(
                 expected = PagingSource.LoadResult.Page(
                         data = heroes,
                         prevKey = null,
@@ -111,4 +112,48 @@ class SearchHeroesSourceTest {
         )
 
     }
+
+    @Test
+    fun `Search with an empty hero name, expect an empty heroes list, assert LoadResult_Page`() =
+        runBlocking {
+
+            //first establish source to return LoadResult.Page
+            val source = SearchHeroesSource(api = api, query = "")
+            assertEquals<PagingSource.LoadResult<Int, Hero>>(
+                    expected = PagingSource.LoadResult.Page(
+                            data = emptyList(),
+                            prevKey = null,
+                            nextKey = null
+                    ),
+
+                    actual = source.load(
+                            params = PagingSource.LoadParams.Refresh(
+                                    key = null,
+                                    loadSize = 3,
+                                    placeholdersEnabled = false
+                            )
+                    )
+            )
+        }
+
+    @Test
+    fun `Search with an empty hero name, expect an empty list, assert LoadResult_Page`() =
+        runBlocking {
+
+            val source = SearchHeroesSource(api = api, query = "")
+            val loadingResult = source.load(
+                    PagingSource.LoadParams.Refresh(
+                            key = null,
+                            loadSize = 3,
+                            placeholdersEnabled = false
+                    )
+            )
+
+            //API request as we are unable to extract the returned list just from loadingResults
+            val response = api.searchHeroes("").heroes
+
+            assertTrue(actual = response.isEmpty())
+            assertTrue{loadingResult is PagingSource.LoadResult.Page}
+
+        }
 }
