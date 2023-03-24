@@ -16,6 +16,11 @@ abstract class HeroDatabase : RoomDatabase() {
 
     companion object {
 
+       /* RoomDatabase.Builder for a persistent database.
+Creates a RoomDatabase.Builder for an in memory database.
+Information stored in an in memory database disappears when the process is killed
+       * */
+
         fun create(context: Context, useInMemory: Boolean): HeroDatabase {
 
             val databaseBuilder = if (useInMemory) {
@@ -23,7 +28,7 @@ abstract class HeroDatabase : RoomDatabase() {
             } else {
                 Room.databaseBuilder(context, HeroDatabase::class.java, "test_database.db")
             }
-            
+
             return databaseBuilder.fallbackToDestructiveMigration()
                     .build()
         }
