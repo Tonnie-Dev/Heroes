@@ -3,7 +3,7 @@ package com.uxstate.heroes.data.remote
 import com.uxstate.heroes.data.remote.dto.ApiResponseDTO
 import com.uxstate.heroes.domain.model.Hero
 
-class FakeHeroApiTwo: HeroAPI {
+class FakeHeroApiTwo : HeroAPI {
 
     private val heroes: Map<Int, List<Hero>> by lazy {
         mapOf(
@@ -14,6 +14,7 @@ class FakeHeroApiTwo: HeroAPI {
                 5 to page5
         )
     }
+
 
     private var page1 = listOf(
             Hero(
@@ -394,6 +395,7 @@ class FakeHeroApiTwo: HeroAPI {
                     )
             )
     )
+
     override suspend fun getAllHeroes(page: Int): ApiResponseDTO {
 
         require(page in 1..5)
@@ -408,35 +410,44 @@ class FakeHeroApiTwo: HeroAPI {
     }
 
     override suspend fun searchHeroes(name: String): ApiResponseDTO {
-        return ApiResponseDTO(success =false)
+        return ApiResponseDTO(success = false)
     }
 
+    //Used to Test RemoteMediator End of pagination reached
+    fun clearData() {
+        page1 = emptyList()
 
-    private fun calculatePage (page: Int):Map<String,Int?> {
-        var prevPage:Int? = page
-        var nextPage:Int? = page
+    }
 
-        if (page in 1..4){
+    private fun calculatePage(page: Int): Map<String, Int?> {
+        var prevPage: Int? = page
+        var nextPage: Int? = page
+
+        if (page1.isEmpty() ){
+            return mapOf("prevPage" to null, "nextPage" to null)
+        }
+
+        if (page in 1..4) {
 
             nextPage = nextPage?.plus(1)
         }
 
-        if (page in 2..5){
+        if (page in 2..5) {
 
             prevPage = prevPage?.minus(1)
         }
 
-        if (page == 1){
+        if (page == 1) {
 
             prevPage = null
         }
 
-        if (page ==5){
+        if (page == 5) {
 
             nextPage = null
         }
 
-        return  mapOf("prevPage" to prevPage, "nextPage" to nextPage)
+        return mapOf("prevPage" to prevPage, "nextPage" to nextPage)
 
 
     }
