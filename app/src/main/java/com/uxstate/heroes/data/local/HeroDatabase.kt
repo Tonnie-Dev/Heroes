@@ -21,6 +21,8 @@ Creates a RoomDatabase.Builder for an in memory database.
 Information stored in an in memory database disappears when the process is killed
        * */
 
+
+        //The create() is used for testing
         fun create(context: Context, useInMemory: Boolean): HeroDatabase {
 
             val databaseBuilder = if (useInMemory) {
