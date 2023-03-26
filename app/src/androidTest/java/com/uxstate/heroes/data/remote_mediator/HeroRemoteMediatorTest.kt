@@ -1,6 +1,7 @@
 package com.uxstate.heroes.data.remote_mediator
 
 import androidx.paging.*
+import androidx.paging.RemoteMediator.*
 import androidx.test.core.app.ApplicationProvider
 import com.uxstate.heroes.data.local.HeroDatabase
 import com.uxstate.heroes.data.remote.FakeHeroApiTwo
@@ -50,8 +51,48 @@ class HeroRemoteMediatorTest {
 
         val result = mediator.load(LoadType.REFRESH, state = pagingState)
 
-        assertTrue( result is RemoteMediator.MediatorResult.Success)
-        assertFalse((result as RemoteMediator.MediatorResult.Success).endOfPaginationReached)
+        assertTrue(result is MediatorResult.Success)
+        assertFalse((result as MediatorResult.Success).endOfPaginationReached)
     }
 
+    @OptIn(ExperimentalPagingApi::class)
+    @Test
+    fun refreshLoadSuccessAndEndOfPaginationTrueWhenNoMoreData() = runBlocking {
+        val mediator = HeroRemoteMediator(api, database)
+        val state = PagingState<Int, Hero>(
+                pages = listOf(),
+                anchorPosition = null,
+                config = PagingConfig(pageSize = 3),
+                leadingPlaceholderCount = 0
+        )
+
+        //mess with server data - first page
+        api.clearData()
+
+        val result = mediator.load(loadType = LoadType.REFRESH, state = state)
+
+        assertTrue(result is MediatorResult.Success)
+        assertTrue((result as MediatorResult.Success).endOfPaginationReached)
+    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    @Test
+    fun refreshLoadMediatorResultErrorThrowIllegalArgumentException() = runBlocking {
+
+        val mediator = HeroRemoteMediator(api, database)
+        val state = PagingState<Int, Hero>(
+                pages = listOf(),
+                anchorPosition = null,
+                config = PagingConfig(pageSize = 3),
+                leadingPlaceholderCount = 0
+        )
+
+        //mess with api
+        api.addException()
+
+        val result = mediator.load(loadType = LoadType.REFRESH,state = state)
+
+        assertTrue(result is RemoteMediator.MediatorResult.Error)
+
+    }
 }

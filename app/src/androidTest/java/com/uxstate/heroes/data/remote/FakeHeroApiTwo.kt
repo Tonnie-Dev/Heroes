@@ -2,6 +2,7 @@ package com.uxstate.heroes.data.remote
 
 import com.uxstate.heroes.data.remote.dto.ApiResponseDTO
 import com.uxstate.heroes.domain.model.Hero
+import java.lang.IllegalArgumentException
 
 class FakeHeroApiTwo : HeroAPI {
 
@@ -396,8 +397,16 @@ class FakeHeroApiTwo : HeroAPI {
             )
     )
 
+    private var exception = false
+
+    fun addException(){
+
+        exception = true
+    }
+
     override suspend fun getAllHeroes(page: Int): ApiResponseDTO {
 
+        if (exception) throw  IllegalArgumentException()
         require(page in 1..5)
 
         return ApiResponseDTO(
