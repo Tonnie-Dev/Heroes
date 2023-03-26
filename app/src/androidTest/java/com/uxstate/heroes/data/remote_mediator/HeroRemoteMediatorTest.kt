@@ -77,7 +77,7 @@ class HeroRemoteMediatorTest {
 
     @OptIn(ExperimentalPagingApi::class)
     @Test
-    fun refreshLoadMediatorResultErrorThrowIllegalArgumentException() = runBlocking {
+    fun refreshLoadReturnsMediatorResultErrorWhenErrorOccurs() = runBlocking {
 
         val mediator = HeroRemoteMediator(api, database)
         val state = PagingState<Int, Hero>(
