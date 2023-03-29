@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,20 +24,6 @@ import com.uxstate.heroes.R
 import com.uxstate.heroes.presentation.ui.theme.topAppBarBackgroundColor
 import com.uxstate.heroes.presentation.ui.theme.topAppBarContentColor
 import com.uxstate.heroes.util.LocalSpacing
-
-/*
-@Composable
-fun SearchTopBar(
-    text: String,
-    onTextChange: (String) -> Unit,
-    onSearch: (String) -> Unit,
-    onClose: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-
-}
-*/
-
 
 @Composable
 fun SearchWidget(
@@ -48,14 +36,16 @@ fun SearchWidget(
     val spacing = LocalSpacing.current
 
     Surface(
-            modifier = modifier.padding(spacing.spaceSmall),
+            modifier = modifier
+                    .padding(spacing.spaceSmall)
+                    .semantics { contentDescription = "SearchWidget" },
             elevation = AppBarDefaults.TopAppBarElevation,
             color = MaterialTheme.colors.topAppBarBackgroundColor
     ) {
 
 
         TextField(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().semantics { contentDescription = "TextField" },
                 value = text,
                 onValueChange = { onTextChange(it) },
                 placeholder = {
@@ -67,7 +57,8 @@ fun SearchWidget(
                 },
 
                 //TextStyle always take precedence over TextField colors
-                textStyle = TextStyle(color = MaterialTheme.colors.topAppBarContentColor
+                textStyle = TextStyle(
+                        color = MaterialTheme.colors.topAppBarContentColor
                 ),
 
                 //access other colors values for TextField
@@ -106,7 +97,7 @@ fun SearchWidget(
                         }
 
 
-                    }) {
+                    }, modifier = Modifier.semantics { contentDescription = "CloseIcon" }) {
 
                         //trailing icon has full visibility
                         Icon(
