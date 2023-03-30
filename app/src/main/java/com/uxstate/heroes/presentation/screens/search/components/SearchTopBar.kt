@@ -45,7 +45,9 @@ fun SearchWidget(
 
 
         TextField(
-                modifier = Modifier.fillMaxWidth().semantics { contentDescription = "TextField" },
+                modifier = Modifier
+                        .fillMaxWidth()
+                        .semantics { contentDescription = "TextField" },
                 value = text,
                 onValueChange = { onTextChange(it) },
                 placeholder = {
