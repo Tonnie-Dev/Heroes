@@ -87,4 +87,24 @@ class SearchWidgetTest {
                     .assertDoesNotExist()
         }
     }
+
+    @Test
+    fun openSearchWidget_PressCloseButtonOnceWithEmptyText_assertClosedState(){
+        var isSearchWidgetShown by mutableStateOf(true)
+
+        composeTestRule.setContent {
+
+            if (isSearchWidgetShown) {
+                SearchWidget(text = "",
+                        onTextChange = {},
+                        onSearch = {},
+                        onClose = { isSearchWidgetShown = false })
+
+            }
+        }
+        composeTestRule.onNodeWithContentDescription("CloseIcon")
+                .performClick()
+        composeTestRule.onNodeWithContentDescription("SearchWidget")
+                .assertDoesNotExist()
+    }
 }
