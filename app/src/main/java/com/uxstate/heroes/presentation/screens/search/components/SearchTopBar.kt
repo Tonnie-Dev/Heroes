@@ -50,6 +50,9 @@ fun SearchWidget(
                         .semantics { contentDescription = "TextField" },
                 value = text,
                 onValueChange = { onTextChange(it) },
+
+
+
                 placeholder = {
                     Text(
                             text = "Search Here ...",
