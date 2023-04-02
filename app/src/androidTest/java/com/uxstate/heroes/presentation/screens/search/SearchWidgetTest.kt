@@ -47,11 +47,44 @@ class SearchWidgetTest {
         }
         // Perform actions and assertions
 
-        composeTestRule.onNodeWithContentDescription("TextField").performTextInput("Tonnie")
+        composeTestRule.onNodeWithContentDescription("TextField")
+                .performTextInput("Tonnie")
         composeTestRule.onNodeWithContentDescription("CloseIcon")
                 .performClick()
 
         composeTestRule.onNodeWithContentDescription("TextField")
                 .assertTextContains("")
+    }
+
+    @Test
+    fun openSearchWidget_addInputText_pressCloseButtonTwice_assertClosedState() {
+        var text by mutableStateOf("")
+        var isSearchWidgetShown by mutableStateOf(true)
+
+        composeTestRule.setContent {
+
+            if (isSearchWidgetShown) {
+
+                //initialize search widget
+                SearchWidget(
+                        text = text, onTextChange = { text = it }, onSearch = {},
+                        //whenever onClose is triggered you negate isSearchWidgetShown
+                        onClose = { isSearchWidgetShown = false }
+                )
+            }
+
+            composeTestRule.onNodeWithContentDescription("TextField")
+                    .performTextInput("tonnie")
+
+            //to clear text
+            composeTestRule.onNodeWithContentDescription("CloseIcon")
+                    .performClick()
+            //to close the widget
+            composeTestRule.onNodeWithContentDescription("CloseIcon")
+                    .performClick()
+
+            composeTestRule.onNodeWithContentDescription("SearchWidget")
+                    .assertDoesNotExist()
+        }
     }
 }
