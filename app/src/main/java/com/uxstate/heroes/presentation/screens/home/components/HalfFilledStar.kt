@@ -10,6 +10,8 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uxstate.heroes.presentation.ui.theme.LightGray
@@ -25,7 +27,7 @@ fun HalfFilledStar(
 
 
     //Canvas
-    Canvas(modifier = Modifier.size(24.dp), onDraw = {
+    Canvas(modifier = Modifier.size(24.dp).semantics { contentDescription = "HalfFilledStar" }, onDraw = {
 
         scale(scaleFactor) {
             val canvasSize = this.size

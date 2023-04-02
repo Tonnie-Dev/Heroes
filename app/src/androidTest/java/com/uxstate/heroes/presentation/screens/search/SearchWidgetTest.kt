@@ -71,7 +71,7 @@ class SearchWidgetTest {
                         //whenever onClose is triggered you negate isSearchWidgetShown
                         onClose = { isSearchWidgetShown = false }
                 )
-            }
+            }}
 
             composeTestRule.onNodeWithContentDescription("TextField")
                     .performTextInput("tonnie")
@@ -85,7 +85,7 @@ class SearchWidgetTest {
 
             composeTestRule.onNodeWithContentDescription("SearchWidget")
                     .assertDoesNotExist()
-        }
+
     }
 
     @Test
